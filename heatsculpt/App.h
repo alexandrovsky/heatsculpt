@@ -10,48 +10,62 @@
 #define __heatsculpt__CApp__
 
 #include <stdio.h>
+#include <string>
+#include <glm/glm.hpp>
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_opengl.h>
+#include <GLEW/GLEW.h>
 
-#include "Event.h"
+#include "GLFW/glfw3.h"
+#include <OpenGL/glext.h>
+#include <OpenGL/glu.h>
+
+
 #include "Camera.h"
 
-class App :public Event {
-private:
-    bool    Running;
+class App {
+protected:
     
+    glm::vec2 mouse_cursor;
+    
+    bool isRunning;
+    
+    std::string window_title;
     int window_width;
     int window_height;
-    SDL_Window* window;
-    SDL_Renderer* renderer;
-    SDL_RendererInfo displayRendererInfo;
+
+    GLFWwindow* window;
     
     Camera camera;
     
-public:
-    App();
+    virtual void MainLoop();
     
+public:
+    static App* _instance;
+    
+    App(const std::string& window_title, int window_width, int window_height);
+    virtual ~App();
     int OnExecute();
 
+    bool Init();
     
-    bool OnInit();
+    int Start();
     
-    void OnEvent(SDL_Event* Event);
     
-    void OnKeyDown(SDL_Keycode key, SDL_Keymod mod);
+    virtual void Update();
+    virtual void Render();
+    virtual void Cleanup();
+    virtual void Exit();
     
-    void OnKeyUp(SDL_Keycode key, SDL_Keymod mod);
     
-    void OnMouseMove(int mX, int mY, int relX, int relY, bool Left,bool Right,bool Middle);
     
-    void OnExit();
+    virtual void OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int mods);
+    virtual void OnKeyUp(GLFWwindow* window, int key, int scancode, int action, int mods);
+    virtual void OnMouseMove(double mX, double mY);
+    virtual void OnMouseDown(int mouse_btn,int mod);
+    virtual void OnMouseUp(int mouse_btn, int mod);
+
     
-    void OnLoop();
-    
-    void OnRender();
-    
-    void OnCleanup();
+
     
     
 private:

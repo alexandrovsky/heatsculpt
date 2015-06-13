@@ -13,8 +13,8 @@
 
 
 int main(int argc, char* argv[]) {
-    App theApp;
-    return theApp.OnExecute();
+    App app("Heat Sculpt", 800, 600);
+    return app.Start();
 }
 
 

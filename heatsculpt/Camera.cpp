@@ -7,8 +7,8 @@
 //
 
 #include "Camera.h"
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_opengl.h>
+#include <GLEW/GLEW.h>
+
 using namespace std;
 
 Camera::Camera() {
@@ -165,25 +165,27 @@ void Camera::ChangeHeading(float degrees) {
 void Camera::Move2D(int x, int y) {
     //compute the mouse delta from the previous mouse position
     glm::vec3 mouse_delta = mouse_position - glm::vec3(x, y, 0);
+
     //if the camera is moving, meaning that the mouse was clicked and dragged, change the pitch and heading
-//    if (move_camera) {
+    if (move_camera) {
     
         ChangeHeading(.008f * mouse_delta.x);
         ChangePitch(.008f * mouse_delta.y);
-//    }
+    }
     mouse_position = glm::vec3(x, y, 0);
 }
 
 void Camera::SetPos(int button, int state, int x, int y) {
-//    if (button && state) {
-//        camera_position_delta += camera_up * .05f;
-//    } else if (button == 4 && state == GLUT_DOWN) {
-//        camera_position_delta -= camera_up * .05f;
-//    } else if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-//        move_camera = true;
-//    } else if (button == GLUT_LEFT_BUTTON && state == GLUT_UP) {
-//        move_camera = false;
-//    }
+    
+    if (button && state) {
+        camera_position_delta += camera_up * .05f;
+    } else if (button == 1 && state == 1) {
+        camera_position_delta -= camera_up * .05f;
+    } else if (button == 0 && state == 1) {
+        move_camera = true;
+    } else if (button == 0 && state == 0) {
+        move_camera = false;
+    }
     mouse_position = glm::vec3(x, y, 0);
 }
 
