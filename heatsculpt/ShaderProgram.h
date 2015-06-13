@@ -42,7 +42,9 @@ public:
     // Destructor
     ~ShaderProgram();
     
-    
+    inline GLuint id(){
+        return programId;
+    }
     
     // Method to attach a shader to the shader program
     void attachShader(Shader shader);
@@ -58,6 +60,7 @@ public:
     
     // Method to disable the shader program
     void disable();
+    
     
     
     // Returns the bound location of a named attribute

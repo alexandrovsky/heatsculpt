@@ -15,6 +15,7 @@
 		368E60811B2C4ED800A04AB6 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E607F1B2C4ED800A04AB6 /* ShaderProgram.cpp */; };
 		368E60851B2C650300A04AB6 /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 368E60841B2C650300A04AB6 /* libGLEW.a */; };
 		368E60911B2C77AA00A04AB6 /* libglfw.3.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 368E60901B2C77AA00A04AB6 /* libglfw.3.1.dylib */; };
+		368E60941B2C90EE00A04AB6 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E60921B2C90EE00A04AB6 /* Mesh.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +44,8 @@
 		368E60801B2C4ED800A04AB6 /* ShaderProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderProgram.h; sourceTree = "<group>"; };
 		368E60841B2C650300A04AB6 /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLEW.a; path = ../../../../usr/local/Cellar/glew/1.11.0/lib/libGLEW.a; sourceTree = "<group>"; };
 		368E60901B2C77AA00A04AB6 /* libglfw.3.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libglfw.3.1.dylib; sourceTree = "<group>"; };
+		368E60921B2C90EE00A04AB6 /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
+		368E60931B2C90EE00A04AB6 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +93,8 @@
 				368E607D1B2C4CCE00A04AB6 /* Shader.h */,
 				368E607F1B2C4ED800A04AB6 /* ShaderProgram.cpp */,
 				368E60801B2C4ED800A04AB6 /* ShaderProgram.h */,
+				368E60921B2C90EE00A04AB6 /* Mesh.cpp */,
+				368E60931B2C90EE00A04AB6 /* Mesh.h */,
 			);
 			path = heatsculpt;
 			sourceTree = "<group>";
@@ -150,6 +155,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				368E60941B2C90EE00A04AB6 /* Mesh.cpp in Sources */,
 				360A6F251B2B76D200A3CEFC /* main.cpp in Sources */,
 				368E607B1B2B8D1C00A04AB6 /* Camera.cpp in Sources */,
 				368E60811B2C4ED800A04AB6 /* ShaderProgram.cpp in Sources */,
