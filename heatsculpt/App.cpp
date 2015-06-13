@@ -9,10 +9,10 @@
 #include "App.h"
 #include <OpenGL/glu.h>
 
-App::App():width(800),height(600) {
+App::App():window_width(800),window_height(600) {
     
-    displayWindow = NULL;
-    displayRenderer = NULL;
+    window = NULL;
+    renderer = NULL;
     
     Running = true;
 }
@@ -39,6 +39,18 @@ int App::OnExecute() {
 }
 
 bool App::InitOpenGL(){
+    
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+    
+    /* Turn on double buffering with a 24bit Z buffer.
+     * You may need to change this to 16 or 32 for your system */
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+    
+    /* This makes our buffer swap syncronized with the monitor's vertical refresh */
+    SDL_GL_SetSwapInterval(1);
+    
     
     /* Enable smooth shading */
     glShadeModel( GL_SMOOTH );
@@ -69,10 +81,10 @@ bool App::OnInit() {
         return false;
     }
     
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     
-    SDL_CreateWindowAndRenderer(width, height, SDL_WINDOW_OPENGL, &displayWindow, &displayRenderer);
-    SDL_GetRendererInfo(displayRenderer, &displayRendererInfo);
+    
+    SDL_CreateWindowAndRenderer(window_width, window_height, SDL_WINDOW_OPENGL, &window, &renderer);
+    SDL_GetRendererInfo(renderer, &displayRendererInfo);
     /*TODO: Check that we have OpenGL */
     if ((displayRendererInfo.flags & SDL_RENDERER_ACCELERATED) == 0 ||
         (displayRendererInfo.flags & SDL_RENDERER_TARGETTEXTURE) == 0) {
@@ -89,7 +101,7 @@ bool App::OnInit() {
     
     camera.SetMode(FREE);	//Two Modes FREE and ORTHO
     camera.SetPosition(glm::vec3(0, 0, -10));
-    camera.SetViewport(0, 0, width, height);
+    camera.SetViewport(0, 0, window_width, window_height);
     camera.SetLookAt(glm::vec3(0, 0, 0));
     camera.SetClipping(.01, 1000);
     camera.SetFOV(45);
@@ -137,12 +149,13 @@ void App::OnEvent(SDL_Event* Event) {
 }
 
 void App::OnLoop() {
-    
+    camera.Update();
 }
 
 void App::OnRender() {
     
-    camera.Update();
+    SDL_GL_SwapWindow(window);
+
     
     /* Make sure we're chaning the model view and not the projection */
     glMatrixMode( GL_MODELVIEW );
@@ -164,10 +177,12 @@ void App::OnRender() {
     glVertex3f( -1.0f, -1.0f, 0.0f ); /* Bottom Left */
     glEnd( );                           /* Done Drawing The Quad */
     
-    SDL_RenderPresent(displayRenderer);
+    SDL_RenderPresent(renderer);
 }
 
 void App::OnCleanup() {
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
     SDL_Quit();
 }
 

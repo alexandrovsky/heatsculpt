@@ -21,10 +21,10 @@ class App :public Event {
 private:
     bool    Running;
     
-    int width;
-    int height;
-    SDL_Window* displayWindow;
-    SDL_Renderer* displayRenderer;
+    int window_width;
+    int window_height;
+    SDL_Window* window;
+    SDL_Renderer* renderer;
     SDL_RendererInfo displayRendererInfo;
     
     Camera camera;
