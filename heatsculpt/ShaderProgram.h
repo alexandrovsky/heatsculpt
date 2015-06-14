@@ -13,7 +13,7 @@
 
 #include <iostream>
 #include <map>
-
+#include <vector>
 #include "Shader.h"
 
 using std::map;
@@ -26,13 +26,13 @@ class ShaderProgram
 {
 private:
     GLuint programId;   // The unique ID / handle for the shader program
-    GLuint shaderCount; // How many shaders are attached to the shader program
     
     // Map of attributes and their binding locations
     std::map<string,int> attributeLocList;
     
     // Map of uniforms and their binding locations
     std::map<string,int> uniformLocList;
+    std::vector<Shader> shaders;
     
 public:
     // Constructor

@@ -172,15 +172,15 @@ bool App::Init() {
     //vertex:
     const char* vertexShaderSrc =
                         GLSL(
-                             in vec2 pos;
+                             in vec3 pos;
                              in vec3 color;
-                             in float sides;
+                             in int sides;
                              
                              out vec3 vColor;
-                             out float vSides;
+                             out int vSides;
                              
                              void main() {
-                                 gl_Position = vec4(pos, 0.0, 1.0);
+                                 gl_Position = vec4(pos, 1.0);
                                  vColor = color;
                                  vSides = sides;
                              }
@@ -195,9 +195,8 @@ bool App::Init() {
     const char* fragmentShaderSrc =
     GLSL(
          out vec4 outColor;
-         
          void main() {
-             outColor = vec4(1.0, 0.0, 0.0, 1.0);
+             outColor = vec4(1.0, 0.5, 0.0, 1.0);
          }
     );
     
@@ -214,7 +213,7 @@ bool App::Init() {
          layout(line_strip, max_vertices = 64) out;
          
          in vec3 vColor[];
-         in float vSides[];
+         in int vSides[];
          
          out vec3 fColor;
          
@@ -255,7 +254,6 @@ bool App::Init() {
     shaderProgram->use();
     
     
-    glGenBuffers(1, &vbo);
     
     float points[] = {
         //  Coordinates  Color             Sides
@@ -265,30 +263,80 @@ bool App::Init() {
         -0.45f, -0.45f, 1.0f, 1.0f, 0.0f, 32.0f
     };
     
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STATIC_DRAW);
+    
+    vector<vec3> v;
+    v.push_back({-0.45f,  0.45f, 0.0f});
+    v.push_back({ 0.45f,  0.45f, 0.0f});
+    v.push_back({ 0.45f, -0.45f, 0.0f});
+    v.push_back({-0.45f, -0.45f, 0.0f});
+    
+    vector<vec3> c;
+    c.push_back({1.0, 1.0, 0.0});
+    c.push_back({1.0, 1.0, 0.0});
+    c.push_back({1.0, 0.0, 0.0});
+    c.push_back({1.0, 0.0, 0.0});
+    
+    vector<uint> sides;
+    sides.push_back(4.0f);
+    sides.push_back(8.0f);
+    sides.push_back(16.0f);
+    sides.push_back(32.0f);
     
     
-    // Create Vertex Array Object
-    GLuint vao;
-    glGenVertexArrays(1, &vao);
-    glBindVertexArray(vao);
+
     
-    // Specify layout of point data
-    GLint posAttrib= shaderProgram->addAttribute("pos");
-    glEnableVertexAttribArray(posAttrib);
-    glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE,
-                          6 * sizeof(float), 0);
     
-    GLint colAttrib = shaderProgram->addAttribute("color");
-    glEnableVertexAttribArray(colAttrib);
-    glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE,
-                          6 * sizeof(float), (void*) (2 * sizeof(float)));
+    GLuint sidesVbo;
+    mesh = new Mesh();
     
-    GLint sidesAttrib = shaderProgram->addAttribute("sides");
-    glEnableVertexAttribArray(sidesAttrib);
-    glVertexAttribPointer(sidesAttrib, 1, GL_FLOAT, GL_FALSE,
-                          6 * sizeof(float), (void*) (5 * sizeof(float)));
+    mesh->shaderProgram = shaderProgram;
+    
+    mesh->setVertices(v, "pos");
+    mesh->setColors(c, "color");
+    mesh->setVBO(sides, sidesVbo, string("sides"));
+    
+
+    // generate vbo
+//    glGenBuffers(1, &sidesVbo);
+//    
+//    size_t bytes = sizeof(sides[0]) * sides.size();
+//    
+//    // add data to vbo
+//    glBindBuffer(GL_ARRAY_BUFFER, sidesVbo);
+//    glBufferData(GL_ARRAY_BUFFER, bytes, sides.data(), GL_STATIC_DRAW);
+//    
+//    GLint sidesAttrib = shaderProgram->addAttribute("sides");
+//    glEnableVertexAttribArray(sidesAttrib);
+//    glVertexAttribPointer(sidesAttrib, 1, GL_FLOAT, GL_FALSE, 0, 0);
+    
+//    glGenBuffers(1, &vbo);
+//    
+//    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+//    glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STATIC_DRAW);
+//    
+//    
+//    
+//    
+//    // Create Vertex Array Object
+//    GLuint vao;
+//    glGenVertexArrays(1, &vao);
+//    glBindVertexArray(vao);
+//    
+//    // Specify layout of point data
+//    GLint posAttrib= shaderProgram->addAttribute("pos");
+//    glEnableVertexAttribArray(posAttrib);
+//    glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE,
+//                          6 * sizeof(float), 0);
+//    
+//    GLint colAttrib = shaderProgram->addAttribute("color");
+//    glEnableVertexAttribArray(colAttrib);
+//    glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE,
+//                          6 * sizeof(float), (void*) (2 * sizeof(float)));
+//    
+//    GLint sidesAttrib = shaderProgram->addAttribute("sides");
+//    glEnableVertexAttribArray(sidesAttrib);
+//    glVertexAttribPointer(sidesAttrib, 1, GL_FLOAT, GL_FALSE,
+//                          6 * sizeof(float), (void*) (5 * sizeof(float)));
     
     
     return true;
@@ -359,8 +407,10 @@ void App::Render() {
     /* Move Left 1.5 Units And Into The Screen 6.0 */
     glLoadIdentity();
 
+    mesh->Draw();
 
-    glDrawArrays(GL_POINTS, 0, 4);
+//    glDrawArrays(GL_POINTS, 0, 4);
+
     
     
 //    glBegin( GL_QUADS );                /* Draw A Quad */

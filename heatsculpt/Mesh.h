@@ -27,15 +27,24 @@ public:
     Mesh();
     virtual ~Mesh();
     
+    mat4x4 transform;
+    
     GLuint vertexArrayObject;   //vao
     
     GLuint vertexBufferObject;  //vbo
     GLuint colorBufferObject;   //vbo
     GLuint indexBufferObject;   //vbo
     
+    
+    
+    
+    template<typename T>GLuint setVBO(vector<T> data, GLuint vbo, string attributeName);
+    
     GLuint setVertices(vector<vec3> vertices, string attributeName);
     GLuint setColors(vector<vec3> colors, string attributeName);
     GLuint setIndices(vector<GLuint> indices, string attributeName);
+    
+    void Draw();
     
 //    vector<vec3> vertices;
 //    vector<vec3> colors;
@@ -44,7 +53,7 @@ public:
     ShaderProgram* shaderProgram;
     
 private:
-    template<typename T>GLuint setVBO(vector<T> data, GLuint vbo, string attributeName);
+    vector<GLuint> vbos;
     
 };
 #endif /* defined(__heatsculpt__Mesh__) */

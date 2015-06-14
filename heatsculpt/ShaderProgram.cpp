@@ -17,7 +17,6 @@ ShaderProgram::ShaderProgram()
     programId = glCreateProgram();
     
     // Initially, we have zero shaders attached to the program
-    shaderCount = 0;
 }
 
 
@@ -26,6 +25,10 @@ ShaderProgram::~ShaderProgram()
 {
     // Delete the shader program from the graphics card memory to
     // free all the resources it's been using
+    for (int i = 0; i < shaders.size(); i++) {
+        glDetachShader(programId, shaders[i].getId());
+    }
+    
     glDeleteProgram(programId);
 }
 
@@ -33,12 +36,11 @@ ShaderProgram::~ShaderProgram()
     // Method to attach a shader to the shader program
 void ShaderProgram::attachShader(Shader shader)
 {
+    
+    shaders.push_back(shader);
     // Attach the shader to the program
     // Note: We identify the shader by its unique Id value
     glAttachShader( programId, shader.getId() );
-    
-    // Increment the number of shaders we have associated with the program
-    shaderCount++;
 }
 
 
@@ -46,7 +48,7 @@ void ShaderProgram::attachShader(Shader shader)
 bool ShaderProgram::linkProgram()
 {
     // If we have at least two shaders (like a vertex shader and a fragment shader)...
-    if (shaderCount >= 2)
+    if (shaders.size() >= 2)
     {
         // Perform the linking process
         glLinkProgram(programId);
@@ -66,7 +68,7 @@ bool ShaderProgram::linkProgram()
     }
     else
     {
-        cout << "Can't link shaders - you need at least 2, but attached shader count is only: " << shaderCount << endl;
+        cout << "Can't link shaders - you need at least 2, but attached shader count is only: " << shaders.size() << endl;
         return false;
     }
     return true;

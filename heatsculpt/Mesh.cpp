@@ -13,6 +13,8 @@ Mesh::Mesh(){
     
     glGenVertexArrays(1, &vertexArrayObject);
     glBindVertexArray(vertexArrayObject);
+    
+    transform = mat4x4();
 }
 
 Mesh::~Mesh(){
@@ -33,6 +35,23 @@ GLuint Mesh::setColors(vector<vec3> colors,  string attributeName){
 
 GLuint Mesh::setIndices(vector<GLuint> indices,  string attributeName){
     return setVBO(indices, indexBufferObject, attributeName);
+}
+
+void Mesh::Draw(){
+    shaderProgram->use();
+    glEnableVertexAttribArray(vertexArrayObject);
+    
+    int nBufferSize = 0;
+    
+//    glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE, &nBufferSize);
+    
+    int originalVertexArraySize = ( nBufferSize / sizeof(vec3) );
+    
+    glDrawArrays(GL_POINTS, 1, 3);
+    
+    glDisableVertexAttribArray(vertexArrayObject);
+    
+    shaderProgram->disable();
 }
 
 
@@ -62,7 +81,7 @@ template<typename T> GLuint Mesh::setVBO(vector<T> vector, GLuint vbo, string at
     glEnableVertexAttribArray(attribute);
     
     // add vbo to vao
-    glVertexAttribPointer(attribute, 3, GL_FLOAT, GL_FALSE,0, 0);
+    glVertexAttribPointer(attribute, 3, GL_FLOAT, GL_FALSE, 0, 0);
     
     return vbo;
 }

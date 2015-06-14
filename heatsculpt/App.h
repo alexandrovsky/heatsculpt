@@ -21,6 +21,7 @@
 
 
 #include "Camera.h"
+#include "Mesh.h"
 
 class App {
 protected:
@@ -36,7 +37,7 @@ protected:
     GLFWwindow* window;
     
     Camera camera;
-    
+    Mesh* mesh;
     virtual void MainLoop();
     
 public:

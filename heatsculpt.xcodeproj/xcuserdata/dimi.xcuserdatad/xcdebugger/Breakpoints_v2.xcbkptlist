@@ -74,12 +74,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "heatsculpt/App.cpp"
-            timestampString = "455904886.958427"
+            timestampString = "455934159.901511"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "325"
-            endingLineNumber = "325"
-            landmarkName = "App::OnMouseMove(double mX, double mY)"
+            startingLineNumber = "423"
+            endingLineNumber = "423"
+            landmarkName = "App::Render()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "heatsculpt/Mesh.cpp"
+            timestampString = "455934184.250466"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "Mesh::Draw()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
