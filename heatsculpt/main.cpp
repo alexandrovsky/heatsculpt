@@ -7,14 +7,21 @@
 //
 
 #include <iostream>
-#include "App.h"
+
+//#include "TestApp.h"
+#include "MeshTestApp.h"
 
 
 
 
 int main(int argc, char* argv[]) {
-    App app("Heat Sculpt", 800, 600);
-    return app.Start();
+    
+//    TestApp tApp("Geometry Shader Test", 800, 600);
+//    return tApp.Start();
+    
+    MeshTestApp mtApp("Mesh Test", 800, 600);
+    return mtApp.Start();
+    
 }
 
 

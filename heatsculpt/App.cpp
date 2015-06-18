@@ -43,15 +43,6 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 }
 
 
-Shader* vertexShader;
-Shader* geometryShader;
-Shader* fragmentShader;
-
-ShaderProgram* shaderProgram;
-
-string vertexsource, fragmentsource;
-GLuint vbo;
-
 
 App::App(const std::string& window_title, int width, int height) {
     
@@ -167,178 +158,7 @@ bool App::Init() {
     camera.SetClipping(.01, 1000);
     camera.SetFOV(45);
     
-    
-    // setup shader
-    //vertex:
-    const char* vertexShaderSrc =
-                        GLSL(
-                             in vec3 pos;
-                             in vec3 color;
-                             in int sides;
-                             
-                             out vec3 vColor;
-                             out int vSides;
-                             
-                             void main() {
-                                 gl_Position = vec4(pos, 1.0);
-                                 vColor = color;
-                                 vSides = sides;
-                             }
-                            );
-    
-    vertexShader = new Shader(GL_VERTEX_SHADER);
-    vertexShader->loadFromString(vertexShaderSrc);
-    vertexShader->compile();
 
-    
-    // fragment:
-    const char* fragmentShaderSrc =
-    GLSL(
-         out vec4 outColor;
-         void main() {
-             outColor = vec4(1.0, 0.5, 0.0, 1.0);
-         }
-    );
-    
-    
-    fragmentShader = new Shader(GL_FRAGMENT_SHADER);
-    fragmentShader->loadFromString(fragmentShaderSrc);
-    fragmentShader->compile();
-    
-    
-    // geometry
-    const char* geometryShaderSrc =
-    GLSL(
-         layout(points) in;
-         layout(line_strip, max_vertices = 64) out;
-         
-         in vec3 vColor[];
-         in int vSides[];
-         
-         out vec3 fColor;
-         
-         const float PI = 3.1415926;
-         
-         void main() {
-             fColor = vColor[0];
-             
-             for (int i = 0; i <= vSides[0]; i++) {
-                 // Angle between each side in radians
-                 float ang = PI * 2.0 / vSides[0] * i;
-                 
-                 // Offset from center of point (0.3 to accomodate for aspect ratio)
-                 vec4 offset = vec4(cos(ang) * 0.3, -sin(ang) * 0.4, 0.0, 0.0);
-                 gl_Position = gl_in[0].gl_Position + offset;
-                 
-                 EmitVertex();
-             }
-             
-             EndPrimitive();
-         }
-         );
-    
-    
-    geometryShader = new Shader(GL_GEOMETRY_SHADER_ARB);
-    geometryShader->loadFromString(geometryShaderSrc);
-    geometryShader->compile();
-    
-    
-    
-    
-    
-    shaderProgram = new ShaderProgram();
-    shaderProgram->attachShader(*vertexShader);
-    shaderProgram->attachShader(*fragmentShader);
-    shaderProgram->attachShader(*geometryShader);
-    shaderProgram->linkProgram();
-    shaderProgram->use();
-    
-    
-    
-    float points[] = {
-        //  Coordinates  Color             Sides
-        -0.45f,  0.45f, 1.0f, 0.0f, 0.0f,  4.0f,
-        0.45f,  0.45f, 0.0f, 1.0f, 0.0f,  8.0f,
-        0.45f, -0.45f, 0.0f, 0.0f, 1.0f, 16.0f,
-        -0.45f, -0.45f, 1.0f, 1.0f, 0.0f, 32.0f
-    };
-    
-    
-    vector<vec3> v;
-    v.push_back({-0.45f,  0.45f, 0.0f});
-    v.push_back({ 0.45f,  0.45f, 0.0f});
-    v.push_back({ 0.45f, -0.45f, 0.0f});
-    v.push_back({-0.45f, -0.45f, 0.0f});
-    
-    vector<vec3> c;
-    c.push_back({1.0, 1.0, 0.0});
-    c.push_back({1.0, 1.0, 0.0});
-    c.push_back({1.0, 0.0, 0.0});
-    c.push_back({1.0, 0.0, 0.0});
-    
-    vector<uint> sides;
-    sides.push_back(4.0f);
-    sides.push_back(8.0f);
-    sides.push_back(16.0f);
-    sides.push_back(32.0f);
-    
-    
-
-    
-    
-    GLuint sidesVbo;
-    mesh = new Mesh();
-    
-    mesh->shaderProgram = shaderProgram;
-    
-    mesh->setVertices(v, "pos");
-    mesh->setColors(c, "color");
-    mesh->setVBO(sides, sidesVbo, string("sides"));
-    
-
-    // generate vbo
-//    glGenBuffers(1, &sidesVbo);
-//    
-//    size_t bytes = sizeof(sides[0]) * sides.size();
-//    
-//    // add data to vbo
-//    glBindBuffer(GL_ARRAY_BUFFER, sidesVbo);
-//    glBufferData(GL_ARRAY_BUFFER, bytes, sides.data(), GL_STATIC_DRAW);
-//    
-//    GLint sidesAttrib = shaderProgram->addAttribute("sides");
-//    glEnableVertexAttribArray(sidesAttrib);
-//    glVertexAttribPointer(sidesAttrib, 1, GL_FLOAT, GL_FALSE, 0, 0);
-    
-//    glGenBuffers(1, &vbo);
-//    
-//    glBindBuffer(GL_ARRAY_BUFFER, vbo);
-//    glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STATIC_DRAW);
-//    
-//    
-//    
-//    
-//    // Create Vertex Array Object
-//    GLuint vao;
-//    glGenVertexArrays(1, &vao);
-//    glBindVertexArray(vao);
-//    
-//    // Specify layout of point data
-//    GLint posAttrib= shaderProgram->addAttribute("pos");
-//    glEnableVertexAttribArray(posAttrib);
-//    glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE,
-//                          6 * sizeof(float), 0);
-//    
-//    GLint colAttrib = shaderProgram->addAttribute("color");
-//    glEnableVertexAttribArray(colAttrib);
-//    glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE,
-//                          6 * sizeof(float), (void*) (2 * sizeof(float)));
-//    
-//    GLint sidesAttrib = shaderProgram->addAttribute("sides");
-//    glEnableVertexAttribArray(sidesAttrib);
-//    glVertexAttribPointer(sidesAttrib, 1, GL_FLOAT, GL_FALSE,
-//                          6 * sizeof(float), (void*) (5 * sizeof(float)));
-    
-    
     return true;
 }
 
@@ -400,26 +220,12 @@ void App::Render() {
     glMatrixMode( GL_MODELVIEW );
     
     /* Set the background black */
-    glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
+    glClearColor( 0.0f, 0.15f, 0.3f, 0.0f );
     /* Clear The Screen And The Depth Buffer */
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     
     /* Move Left 1.5 Units And Into The Screen 6.0 */
     glLoadIdentity();
-
-    mesh->Draw();
-
-//    glDrawArrays(GL_POINTS, 0, 4);
-
-    
-    
-//    glBegin( GL_QUADS );                /* Draw A Quad */
-//    glVertex3f( -1.0f,  1.0f, 0.0f ); /* Top Left */
-//    glVertex3f(  1.0f,  1.0f, 0.0f ); /* Top Right */
-//    glVertex3f(  1.0f, -1.0f, 0.0f ); /* Bottom Right */
-//    glVertex3f( -1.0f, -1.0f, 0.0f ); /* Bottom Left */
-//    glEnd( );                           /* Done Drawing The Quad */
-    
 
 }
 

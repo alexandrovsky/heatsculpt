@@ -11,19 +11,13 @@
 
 #include <OpenGL/glext.h>
 
-Shader::Shader(const GLenum &type)
-{
+Shader::Shader(const GLenum &type){
     // Get the type of the shader
-    if (type == GL_VERTEX_SHADER)
-    {
+    if (type == GL_VERTEX_SHADER){
         typeString = "Vertex";
-    }
-    else if (type == GL_FRAGMENT_SHADER)
-    {
+    }else if (type == GL_FRAGMENT_SHADER){
         typeString = "Fragment";
-    }
-    else
-    {
+    }else{
         typeString = "Geometry";
     }
     
@@ -35,8 +29,7 @@ Shader::~Shader(){
     glDeleteShader(id);
 }
     // Method to load the shader contents from a file
-bool Shader::loadFromString(const string &sourceString)
-{
+bool Shader::loadFromString(const string &sourceString){
     // Keep hold of a copy of the source
     source = sourceString;
     
@@ -49,8 +42,7 @@ bool Shader::loadFromString(const string &sourceString)
 }
 
     // Method to load the shader contents from a string
-bool Shader::loadFromFile(const string &filename)
-{
+bool Shader::loadFromFile(const string &filename){
     std::ifstream file;
     
     file.open( filename.c_str() );
@@ -84,8 +76,7 @@ bool Shader::loadFromFile(const string &filename)
 
 
     // Method to compile a shader and display any problems if compilation fails
-bool Shader::compile()
-{
+bool Shader::compile(){
     // Compile the shader
     glCompileShader(id);
     

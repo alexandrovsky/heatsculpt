@@ -17,7 +17,7 @@
 #include <fstream>
 
 #include <GLFW/glfw3.h>
-#define GLSL(src) "#version 150 core\n" #src
+#define GLSL(src) "#version 330 core\n" #src
 
 using std::cout;
 using std::endl;

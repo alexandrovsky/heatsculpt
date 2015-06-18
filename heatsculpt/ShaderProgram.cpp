@@ -56,15 +56,17 @@ bool ShaderProgram::linkProgram()
         // Check the status
         GLint linkStatus;
         glGetProgramiv(programId, GL_LINK_STATUS, &linkStatus);
-        if (linkStatus == GL_FALSE)
-        {
+        if (linkStatus == GL_FALSE){
             std::cout << "Shader program linking failed." << std::endl;
             return false;
-        }
-        else
-        {
+        }else {
             cout << "Shader program linking OK." << endl;
         }
+        
+        for (int i = 0; i < shaders.size(); i++) {
+            glDeleteShader(shaders[i].getId());
+        }
+        
     }
     else
     {
@@ -106,12 +108,9 @@ GLuint ShaderProgram::attribute(const string &attribute)
     std::map<string, int>::iterator it = attributeLocList.find(attribute);
     
     // Found it? Great -return the bound location! Didn't find it? Alert user and halt.
-    if ( it != attributeLocList.end() )
-    {
+    if ( it != attributeLocList.end() ) {
         return attributeLocList[attribute];
-    }
-    else
-    {
+    }else{
         std::cout << "Could not find attribute in shader program: " << attribute << std::endl;
         exit(-1);
     }
@@ -131,12 +130,9 @@ GLuint ShaderProgram::uniform(const string &uniform)
     std::map<string, int>::iterator it = uniformLocList.find(uniform);
     
     // Found it? Great - pass it back! Didn't find it? Alert user and halt.
-    if ( it != uniformLocList.end() )
-    {
+    if ( it != uniformLocList.end() ) {
         return uniformLocList[uniform];
-    }
-    else
-    {
+    }else {
         std::cout << "Could not find uniform in shader program: " << uniform << std::endl;
         exit(-1);
     }

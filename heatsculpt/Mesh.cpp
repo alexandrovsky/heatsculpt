@@ -7,50 +7,77 @@
 //
 
 #include "Mesh.h"
+#include <glm/gtc/type_ptr.hpp>
 
-
-Mesh::Mesh(){
+Mesh::Mesh(ShaderProgram* shader, const vector<Vertex>& vertices){
     
-    glGenVertexArrays(1, &vertexArrayObject);
-    glBindVertexArray(vertexArrayObject);
+    shaderProgram = shader;
     
     transform = mat4x4();
+    drawCount = (GLsizei)vertices.size();
+    
+    
+    //shaderProgram->use();
+    
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+    
+    glGenBuffers(NUM_BUFFERS, vbos);
+
+    glBindBuffer(GL_ARRAY_BUFFER, vbos[POSITION_VERTEX_BUFFER]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[0]) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
+
+
+    // attributes:
+    GLint posAttrib = shaderProgram->addAttribute("pos");
+    glEnableVertexAttribArray(posAttrib);
+    glVertexAttribPointer(posAttrib, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    
+    
+    // uniforms:
+    GLuint model = shaderProgram->addUniform("model");
+    glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(transform));
+    
+    
+    
+    glBindVertexArray(0);
+    shaderProgram->disable();
 }
 
-Mesh::~Mesh(){
-    glDeleteVertexArrays(1, &vertexArrayObject);
-    glDeleteBuffers(1, &vertexBufferObject);
-    glDeleteBuffers(1, &colorBufferObject);
-    glDeleteBuffers(1, &indexBufferObject);
-}
-
-GLuint Mesh::setVertices(vector<vec3> vertices,  string attributeName){
-    return setVBO(vertices, vertexBufferObject, attributeName);
+Mesh::~Mesh() {
+    glDeleteVertexArrays(1, &vao);
+    glDeleteBuffers(NUM_BUFFERS, vbos);
 }
 
 
-GLuint Mesh::setColors(vector<vec3> colors,  string attributeName){
-    return setVBO(colors, colorBufferObject, attributeName);
-}
-
-GLuint Mesh::setIndices(vector<GLuint> indices,  string attributeName){
-    return setVBO(indices, indexBufferObject, attributeName);
-}
-
-void Mesh::Draw(){
+void Mesh::Update(){
+    
     shaderProgram->use();
-    glEnableVertexAttribArray(vertexArrayObject);
+    GLuint model = shaderProgram->uniform("model");
+    glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(transform));
     
-    int nBufferSize = 0;
     
-//    glGetBufferParameteriv(GL_ARRAY_BUFFER, GL_BUFFER_SIZE, &nBufferSize);
+    shaderProgram->disable();
     
-    int originalVertexArraySize = ( nBufferSize / sizeof(vec3) );
+}
+
+void Mesh::Draw() {
     
-    glDrawArrays(GL_POINTS, 1, 3);
     
-    glDisableVertexAttribArray(vertexArrayObject);
+    shaderProgram->use();
+    glBindVertexArray(vao);
     
+    glEnableVertexAttribArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, vbos[POSITION_VERTEX_BUFFER]);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    
+        // Draw the triangle !
+    glDrawArrays(GL_TRIANGLES, 0, drawCount); // Starting from vertex 0; 3 vertices total -> 1 triangle
+        
+    glDisableVertexAttribArray(0);
+    
+    
+    glBindVertexArray(0);
     shaderProgram->disable();
 }
 
@@ -61,8 +88,8 @@ template<typename T> GLuint Mesh::setVBO(vector<T> vector, GLuint vbo, string at
     GLint current_vao;
     glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &current_vao);
     
-    if(current_vao != vertexArrayObject){
-        glBindVertexArray(vertexArrayObject);
+    if(current_vao != vao){
+        glBindVertexArray(vao);
     }
     
     // generate vbo
@@ -71,7 +98,7 @@ template<typename T> GLuint Mesh::setVBO(vector<T> vector, GLuint vbo, string at
     size_t bytes = sizeof(T) * vector.size();
     
     // add data to vbo
-    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBindBufferARB(GL_ARRAY_BUFFER, vbo);
     glBufferData(GL_ARRAY_BUFFER, bytes, vector.data(), GL_STATIC_DRAW);
     
     

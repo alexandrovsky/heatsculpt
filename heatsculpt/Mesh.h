@@ -18,42 +18,39 @@
 
 #include "ShaderProgram.h"
 
+#include "Vertex.h"
+
 using namespace std;
 using namespace glm;
 
 
 class Mesh{
 public:
-    Mesh();
+    Mesh(ShaderProgram* shader, const vector<Vertex>& vertices);
     virtual ~Mesh();
     
     mat4x4 transform;
-    
-    GLuint vertexArrayObject;   //vao
-    
-    GLuint vertexBufferObject;  //vbo
-    GLuint colorBufferObject;   //vbo
-    GLuint indexBufferObject;   //vbo
-    
-    
-    
-    
-    template<typename T>GLuint setVBO(vector<T> data, GLuint vbo, string attributeName);
-    
-    GLuint setVertices(vector<vec3> vertices, string attributeName);
-    GLuint setColors(vector<vec3> colors, string attributeName);
-    GLuint setIndices(vector<GLuint> indices, string attributeName);
-    
+    void Update();
     void Draw();
     
-//    vector<vec3> vertices;
-//    vector<vec3> colors;
-//    vector<GLuint> indices;
+
     
     ShaderProgram* shaderProgram;
     
 private:
-    vector<GLuint> vbos;
+    
+    enum {
+       POSITION_VERTEX_BUFFER,
+        NUM_BUFFERS // must be last element in enum
+    };
+    
+    GLuint vao;
+    GLuint vbos[NUM_BUFFERS];
+    
+    template<typename T>GLuint setVBO(vector<T> data, GLuint vbo, string attributeName);
+    
+    GLsizei drawCount;
+
     
 };
 #endif /* defined(__heatsculpt__Mesh__) */

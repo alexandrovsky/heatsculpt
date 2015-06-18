@@ -21,7 +21,6 @@
 
 
 #include "Camera.h"
-#include "Mesh.h"
 
 class App {
 protected:
@@ -37,7 +36,6 @@ protected:
     GLFWwindow* window;
     
     Camera camera;
-    Mesh* mesh;
     virtual void MainLoop();
     
 public:
@@ -45,16 +43,18 @@ public:
     
     App(const std::string& window_title, int window_width, int window_height);
     virtual ~App();
-    int OnExecute();
 
-    bool Init();
+
+    virtual bool Init();
     
-    int Start();
-    
+    virtual int Start();
     
     virtual void Update();
+    
     virtual void Render();
+    
     virtual void Cleanup();
+    
     virtual void Exit();
     
     

@@ -16,6 +16,10 @@
 		368E60851B2C650300A04AB6 /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 368E60841B2C650300A04AB6 /* libGLEW.a */; };
 		368E60911B2C77AA00A04AB6 /* libglfw.3.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 368E60901B2C77AA00A04AB6 /* libglfw.3.1.dylib */; };
 		368E60941B2C90EE00A04AB6 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E60921B2C90EE00A04AB6 /* Mesh.cpp */; };
+		368E609A1B2EC7E900A04AB6 /* TestApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E60981B2EC7E900A04AB6 /* TestApp.cpp */; };
+		368E609D1B2ED76500A04AB6 /* Vertex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E609B1B2ED76500A04AB6 /* Vertex.cpp */; };
+		368E60A01B317F2B00A04AB6 /* MeshTestApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E609E1B317F2B00A04AB6 /* MeshTestApp.cpp */; };
+		368E60A41B32366400A04AB6 /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E60A21B32366400A04AB6 /* Debug.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,6 +50,14 @@
 		368E60901B2C77AA00A04AB6 /* libglfw.3.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libglfw.3.1.dylib; sourceTree = "<group>"; };
 		368E60921B2C90EE00A04AB6 /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
 		368E60931B2C90EE00A04AB6 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
+		368E60981B2EC7E900A04AB6 /* TestApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestApp.cpp; sourceTree = "<group>"; };
+		368E60991B2EC7E900A04AB6 /* TestApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestApp.h; sourceTree = "<group>"; };
+		368E609B1B2ED76500A04AB6 /* Vertex.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vertex.cpp; sourceTree = "<group>"; };
+		368E609C1B2ED76500A04AB6 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
+		368E609E1B317F2B00A04AB6 /* MeshTestApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MeshTestApp.cpp; sourceTree = "<group>"; };
+		368E609F1B317F2B00A04AB6 /* MeshTestApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeshTestApp.h; sourceTree = "<group>"; };
+		368E60A21B32366400A04AB6 /* Debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Debug.cpp; sourceTree = "<group>"; };
+		368E60A31B32366400A04AB6 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Debug.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,19 +96,59 @@
 		360A6F231B2B76D200A3CEFC /* heatsculpt */ = {
 			isa = PBXGroup;
 			children = (
+				368E60A11B32364500A04AB6 /* utils */,
+				368E60971B2EC7C400A04AB6 /* test */,
+				368E60961B2EC51000A04AB6 /* rendering */,
+				368E60951B2EC4F300A04AB6 /* object */,
 				360A6F241B2B76D200A3CEFC /* main.cpp */,
 				360A6F2D1B2B786200A3CEFC /* App.cpp */,
 				360A6F2E1B2B786200A3CEFC /* App.h */,
 				368E60791B2B8D1C00A04AB6 /* Camera.cpp */,
 				368E607A1B2B8D1C00A04AB6 /* Camera.h */,
+			);
+			path = heatsculpt;
+			sourceTree = "<group>";
+		};
+		368E60951B2EC4F300A04AB6 /* object */ = {
+			isa = PBXGroup;
+			children = (
+				368E60921B2C90EE00A04AB6 /* Mesh.cpp */,
+				368E60931B2C90EE00A04AB6 /* Mesh.h */,
+				368E609B1B2ED76500A04AB6 /* Vertex.cpp */,
+				368E609C1B2ED76500A04AB6 /* Vertex.h */,
+			);
+			name = object;
+			sourceTree = "<group>";
+		};
+		368E60961B2EC51000A04AB6 /* rendering */ = {
+			isa = PBXGroup;
+			children = (
 				368E607C1B2C4CCE00A04AB6 /* Shader.cpp */,
 				368E607D1B2C4CCE00A04AB6 /* Shader.h */,
 				368E607F1B2C4ED800A04AB6 /* ShaderProgram.cpp */,
 				368E60801B2C4ED800A04AB6 /* ShaderProgram.h */,
-				368E60921B2C90EE00A04AB6 /* Mesh.cpp */,
-				368E60931B2C90EE00A04AB6 /* Mesh.h */,
 			);
-			path = heatsculpt;
+			name = rendering;
+			sourceTree = "<group>";
+		};
+		368E60971B2EC7C400A04AB6 /* test */ = {
+			isa = PBXGroup;
+			children = (
+				368E60981B2EC7E900A04AB6 /* TestApp.cpp */,
+				368E60991B2EC7E900A04AB6 /* TestApp.h */,
+				368E609E1B317F2B00A04AB6 /* MeshTestApp.cpp */,
+				368E609F1B317F2B00A04AB6 /* MeshTestApp.h */,
+			);
+			name = test;
+			sourceTree = "<group>";
+		};
+		368E60A11B32364500A04AB6 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				368E60A21B32366400A04AB6 /* Debug.cpp */,
+				368E60A31B32366400A04AB6 /* Debug.h */,
+			);
+			name = utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,11 +208,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				368E60941B2C90EE00A04AB6 /* Mesh.cpp in Sources */,
+				368E60A41B32366400A04AB6 /* Debug.cpp in Sources */,
+				368E60A01B317F2B00A04AB6 /* MeshTestApp.cpp in Sources */,
+				368E609D1B2ED76500A04AB6 /* Vertex.cpp in Sources */,
 				360A6F251B2B76D200A3CEFC /* main.cpp in Sources */,
 				368E607B1B2B8D1C00A04AB6 /* Camera.cpp in Sources */,
 				368E60811B2C4ED800A04AB6 /* ShaderProgram.cpp in Sources */,
 				360A6F2F1B2B786200A3CEFC /* App.cpp in Sources */,
 				368E607E1B2C4CCE00A04AB6 /* Shader.cpp in Sources */,
+				368E609A1B2EC7E900A04AB6 /* TestApp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
