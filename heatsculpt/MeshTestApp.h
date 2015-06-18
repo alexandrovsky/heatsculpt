@@ -43,10 +43,8 @@ public:
          out vec3 vColor;
          
          void main() {
-             mat4 mvp = //projection *
-                        //view *
-                        model;
-             gl_Position = vec4(pos, 1.0);
+             mat4 mvp = projection * view * model;
+             gl_Position = mvp * vec4(pos, 1.0);
              vColor = color;
          }
     );

@@ -26,7 +26,13 @@ Camera::~Camera() {
 }
 
 void Camera::Reset() {
-    camera_up = glm::vec3(0, 1, 0);
+    
+    SetMode(FREE);	//Two Modes FREE and ORTHO
+    SetPosition(glm::vec3(0, 0, -10));
+    SetViewport(0, 0, window_width, window_height);
+    SetLookAt(glm::vec3(0, 0, 0));
+    SetClipping(.01, 1000);
+    SetFOV(45);
 }
 
 void Camera::Update() {

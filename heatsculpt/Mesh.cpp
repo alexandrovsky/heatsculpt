@@ -13,7 +13,10 @@ Mesh::Mesh(ShaderProgram* shader, const vector<Vertex>& vertices){
     
     shaderProgram = shader;
     
-    transform = mat4x4();
+    modelMatrix = mat4x4();
+    viewMatrix = mat4x4();
+    projectionMatrix = mat4x4();
+    
     drawCount = (GLsizei)vertices.size();
     
     
@@ -36,7 +39,13 @@ Mesh::Mesh(ShaderProgram* shader, const vector<Vertex>& vertices){
     
     // uniforms:
     GLuint model = shaderProgram->addUniform("model");
-    glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(transform));
+    glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+    
+    GLuint view = shaderProgram->addUniform("view");
+    glUniformMatrix4fv(view, 1, GL_FALSE, glm::value_ptr(viewMatrix));
+    
+    GLuint projection = shaderProgram->addUniform("projection");
+    glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
     
     
     
@@ -52,12 +61,17 @@ Mesh::~Mesh() {
 
 void Mesh::Update(){
     
-    shaderProgram->use();
-    GLuint model = shaderProgram->uniform("model");
-    glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(transform));
+    shaderProgram->use();{
+        GLuint model = shaderProgram->uniform("model");
+        glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+        
+        GLuint view = shaderProgram->uniform("view");
+        glUniformMatrix4fv(view, 1, GL_FALSE, glm::value_ptr(viewMatrix));
+        
+        GLuint projection = shaderProgram->uniform("projection");
+        glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
     
-    
-    shaderProgram->disable();
+    }shaderProgram->disable();
     
 }
 

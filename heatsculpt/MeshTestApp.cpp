@@ -48,9 +48,9 @@ bool MeshTestApp::Init(){
     
     
     
-    vertices.push_back(Vertex(glm::vec3(-1.0f, -1.0f, 0.0f)));
-    vertices.push_back(Vertex(glm::vec3( 1.0f, -1.0f, 0.0f)));
-    vertices.push_back(Vertex(glm::vec3( 0.0f,  1.0f, 0.0f)));
+    vertices.push_back(Vertex(glm::vec3(-0.5f, -0.5f, 0.0f)));
+    vertices.push_back(Vertex(glm::vec3( 0.5f, -0.5f, 0.0f)));
+    vertices.push_back(Vertex(glm::vec3( 0.0f,  0.5f, 0.0f)));
 
     
     mesh = new Mesh(shaderProgram, vertices);
@@ -62,10 +62,14 @@ bool MeshTestApp::Init(){
 
 void MeshTestApp::Update(){
     App::Update();
-    
     glm::mat4 model;
-    model = glm::rotate(model, 10.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+    model = glm::rotate(model, glm::radians(40.0f) * (float)glfwGetTime(), glm::vec3(0.0f, 1.0f, 0.0f));
     
+    //model = glm::translate(model, vec3(0.5f, 0.0f, 0.0f));
+    
+    mesh->modelMatrix = model;
+    mesh->viewMatrix = camera.view;
+    mesh->projectionMatrix = camera.projection;
     mesh->Update();
     
 }

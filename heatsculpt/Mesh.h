@@ -29,7 +29,10 @@ public:
     Mesh(ShaderProgram* shader, const vector<Vertex>& vertices);
     virtual ~Mesh();
     
-    mat4x4 transform;
+    mat4x4 modelMatrix;
+    mat4x4 viewMatrix;
+    mat4x4 projectionMatrix;
+    
     void Update();
     void Draw();
     

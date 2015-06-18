@@ -151,13 +151,11 @@ bool App::Init() {
     glfwSetCursorPosCallback(window, cursor_position_callback);
     glfwSetMouseButtonCallback(window, mouse_button_callback);
     
-    camera.SetMode(FREE);	//Two Modes FREE and ORTHO
-    camera.SetPosition(glm::vec3(0, 0, -10));
-    camera.SetViewport(0, 0, window_width, window_height);
-    camera.SetLookAt(glm::vec3(0, 0, 0));
-    camera.SetClipping(.01, 1000);
-    camera.SetFOV(45);
-    
+
+    camera.window_width = window_width;
+    camera.window_height = window_height;
+
+    camera.Reset();
 
     return true;
 }
