@@ -7,7 +7,91 @@
 //
 
 #include "MeshTestApp.h"
-#include "Vertex.h"
+
+
+
+void createTetraedron(vector<vec3>& vertices, vector<GLuint>& indices){
+    
+    vertices.push_back(glm::vec3(  1.0,  1.0,  1.0));
+    vertices.push_back(glm::vec3( -1.0, -1.0,  1.0));
+    vertices.push_back(glm::vec3( -1.0,  1.0, -1.0));
+    vertices.push_back(glm::vec3(  1.0, -1.0, -1.0));
+    
+    
+    indices.push_back(0);
+    indices.push_back(1);
+    indices.push_back(3);
+    
+    indices.push_back(1);
+    indices.push_back(2);
+    indices.push_back(3);
+    
+    indices.push_back(2);
+    indices.push_back(0);
+    indices.push_back(3);
+    
+    indices.push_back(0);
+    indices.push_back(2);
+    indices.push_back(1);
+    
+}
+
+void createIcosphere(vector<vec3>& vertices, vector<GLuint>& indices){
+    GLfloat t = (1.0f + sqrtf(5.0)) /2.0f;
+    
+    // create 12 vertices of a icosahedron
+    
+    vertices.push_back(vec3(-1,  t,  0));
+    vertices.push_back(vec3( 1,  t,  0));
+    vertices.push_back(vec3(-1, -t,  0));
+    vertices.push_back(vec3( 1, -t,  0));
+    
+    vertices.push_back(vec3( 0, -1,  t));
+    vertices.push_back(vec3( 0,  1,  t));
+    vertices.push_back(vec3( 0, -1, -t));
+    vertices.push_back(vec3( 0,  1, -t));
+    
+    vertices.push_back(vec3( t,  0, -1));
+    vertices.push_back(vec3( t,  0,  1));
+    vertices.push_back(vec3(-t,  0, -1));
+    vertices.push_back(vec3(-t,  0,  1));
+    
+    // create 20 triangles of the icosahedron
+
+
+    
+    // 5 faces around point 0
+    indices.push_back(0); indices.push_back(11); indices.push_back(5);
+    indices.push_back(0); indices.push_back(5); indices.push_back(1);
+    indices.push_back(0); indices.push_back(1); indices.push_back(7);
+    indices.push_back(0); indices.push_back(7); indices.push_back(10);
+    indices.push_back(0); indices.push_back(10); indices.push_back(11);
+
+    
+    // 5 adjacent faces
+    indices.push_back(1); indices.push_back(5); indices.push_back(9);
+    indices.push_back(5); indices.push_back(11); indices.push_back(4);
+    indices.push_back(11); indices.push_back(10); indices.push_back(2);
+    indices.push_back(10); indices.push_back(7); indices.push_back(6);
+    indices.push_back(7); indices.push_back(1); indices.push_back(8);
+
+    
+    // 5 faces around point 3
+    indices.push_back(3); indices.push_back(9); indices.push_back(4);
+    indices.push_back(3); indices.push_back(4); indices.push_back(2);
+    indices.push_back(3); indices.push_back(2); indices.push_back(6);
+    indices.push_back(3); indices.push_back(6); indices.push_back(8);
+    indices.push_back(3); indices.push_back(8); indices.push_back(9);
+
+    
+//    // 5 adjacent faces
+    indices.push_back(4); indices.push_back(9); indices.push_back(5);
+    indices.push_back(2); indices.push_back(4); indices.push_back(11);
+    indices.push_back(6); indices.push_back(2); indices.push_back(10);
+    indices.push_back(8); indices.push_back(6); indices.push_back(7);
+    indices.push_back(9); indices.push_back(8); indices.push_back(1);
+
+}
 
 
 MeshTestApp::MeshTestApp(const std::string& window_title, int window_width, int window_height):
@@ -43,17 +127,13 @@ bool MeshTestApp::Init(){
     shaderProgram->linkProgram();
     shaderProgram->use();
     
-    vector<Vertex> vertices;
+    vector<vec3> vertices;
+    vector<GLuint> indices;
     
+    //createTetraedron(vertices, indices);
+    createIcosphere(vertices, indices);
     
-    
-    
-    vertices.push_back(Vertex(glm::vec3(-0.5f, -0.5f, 0.0f)));
-    vertices.push_back(Vertex(glm::vec3( 0.5f, -0.5f, 0.0f)));
-    vertices.push_back(Vertex(glm::vec3( 0.0f,  0.5f, 0.0f)));
-
-    
-    mesh = new Mesh(shaderProgram, vertices);
+    mesh = new Mesh(shaderProgram, vertices, indices);
     
     
     
@@ -63,7 +143,7 @@ bool MeshTestApp::Init(){
 void MeshTestApp::Update(){
     App::Update();
     glm::mat4 model;
-    model = glm::rotate(model, glm::radians(40.0f) * (float)glfwGetTime(), glm::vec3(0.0f, 1.0f, 0.0f));
+    model = glm::rotate(model, glm::radians(45.0f) * (float)glfwGetTime(), glm::vec3(1.0f, 1.0f, 0.0f));
     
     //model = glm::translate(model, vec3(0.5f, 0.0f, 0.0f));
     

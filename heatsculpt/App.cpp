@@ -7,7 +7,7 @@
 //
 
 #include "App.h"
-
+#include <GLEW/GLEW.h>
 
 #include "Shader.h"
 #include "ShaderProgram.h"
@@ -123,7 +123,7 @@ bool App::Init() {
     }
     
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     
@@ -175,6 +175,10 @@ void App::OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int m
         case GLFW_KEY_DOWN:
             camera.Move(BACK);
             break;
+        case GLFW_KEY_P:
+            drawWireFrame = !drawWireFrame;
+        case GLFW_KEY_R:
+            camera.Reset();
         default:
             break;
     }
@@ -224,6 +228,13 @@ void App::Render() {
     
     /* Move Left 1.5 Units And Into The Screen 6.0 */
     glLoadIdentity();
+    
+    
+    if (drawWireFrame) {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    }else{
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    }
 
 }
 

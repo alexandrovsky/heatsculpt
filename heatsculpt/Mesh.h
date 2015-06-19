@@ -18,7 +18,6 @@
 
 #include "ShaderProgram.h"
 
-#include "Vertex.h"
 
 using namespace std;
 using namespace glm;
@@ -26,7 +25,7 @@ using namespace glm;
 
 class Mesh{
 public:
-    Mesh(ShaderProgram* shader, const vector<Vertex>& vertices);
+    Mesh(ShaderProgram* shader, const vector<vec3>& vertices, const vector<GLuint>& indices);
     virtual ~Mesh();
     
     mat4x4 modelMatrix;
@@ -43,13 +42,15 @@ public:
 private:
     
     enum {
-       POSITION_VERTEX_BUFFER,
+        POSITION_VERTEX_BUFFER,
+        COLOR_VERTEX_BUFFER,
+        ELEMENT_ARRAY_BUFFER,
         NUM_BUFFERS // must be last element in enum
     };
     
     GLuint vao;
     GLuint vbos[NUM_BUFFERS];
-    
+
     template<typename T>GLuint setVBO(vector<T> data, GLuint vbo, string attributeName);
     
     GLsizei drawCount;

@@ -67,7 +67,7 @@ public:
     virtual void OnMouseUp(int mouse_btn, int mod);
 
     
-
+    bool drawWireFrame;
     
     
 private:

@@ -9,7 +9,7 @@
 #include "Mesh.h"
 #include <glm/gtc/type_ptr.hpp>
 
-Mesh::Mesh(ShaderProgram* shader, const vector<Vertex>& vertices){
+Mesh::Mesh(ShaderProgram* shader, const vector<vec3>& vertices, const vector<GLuint>& indices){
     
     shaderProgram = shader;
     
@@ -27,14 +27,47 @@ Mesh::Mesh(ShaderProgram* shader, const vector<Vertex>& vertices){
     
     glGenBuffers(NUM_BUFFERS, vbos);
 
-    glBindBuffer(GL_ARRAY_BUFFER, vbos[POSITION_VERTEX_BUFFER]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[0]) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
+    
 
 
     // attributes:
+    
+    // --position:
+    glBindBuffer(GL_ARRAY_BUFFER, vbos[POSITION_VERTEX_BUFFER]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[0]) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
+    
     GLint posAttrib = shaderProgram->addAttribute("pos");
     glEnableVertexAttribArray(posAttrib);
     glVertexAttribPointer(posAttrib, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    
+    // --color:
+    vector<vec3> colors;
+    for (int i = 0; i < vertices.size(); i++) {
+        float r = ((float)rand() / RAND_MAX) + 1;
+        float g = ((float)rand() / RAND_MAX) + 1;
+        float b = ((float)rand() / RAND_MAX) + 1;
+        colors.push_back(glm::vec3(r, g, b));
+    }
+    
+    
+    glBindBuffer(GL_ARRAY_BUFFER, vbos[COLOR_VERTEX_BUFFER]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(colors[0]) * colors.size(), colors.data(), GL_STATIC_DRAW);
+    
+    GLint colorAttrib = shaderProgram->addAttribute("color");
+    glEnableVertexAttribArray(colorAttrib);
+    glVertexAttribPointer(colorAttrib, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    
+    // -----
+    
+    
+    
+    // indices:
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbos[ELEMENT_ARRAY_BUFFER]);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices[0]) * indices.size(), indices.data(), GL_STATIC_DRAW);
+#warning resize drawCount
+    drawCount = (GLsizei)indices.size(); //
+    
+    // -----
     
     
     // uniforms:
@@ -80,14 +113,17 @@ void Mesh::Draw() {
     
     shaderProgram->use();
     glBindVertexArray(vao);
-    
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, vbos[POSITION_VERTEX_BUFFER]);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+
     
-        // Draw the triangle !
-    glDrawArrays(GL_TRIANGLES, 0, drawCount); // Starting from vertex 0; 3 vertices total -> 1 triangle
-        
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbos[ELEMENT_ARRAY_BUFFER]);
+//    glDrawElements(GL_TRIANGLE_STRIP, drawCount, GL_UNSIGNED_INT, 0);
+
+    glDrawElements(GL_TRIANGLES, drawCount, GL_UNSIGNED_INT, 0);
+    
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glDisableVertexAttribArray(0);
     
     
