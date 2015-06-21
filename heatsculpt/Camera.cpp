@@ -195,6 +195,13 @@ void Camera::SetPos(int button, int state, int x, int y) {
     mouse_position = glm::vec3(x, y, 0);
 }
 
+
+void Camera::RotateAround(glm::vec3 center, float angle){
+#warning TODO
+    
+}
+
+
 CameraType Camera::GetMode() {
     return camera_mode;
 }

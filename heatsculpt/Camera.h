@@ -63,6 +63,9 @@ public:
     void SetDistance(double cam_dist);
     void SetPos(int button, int state, int x, int y);
     
+    void RotateAround(glm::vec3 center, float angle);
+    
+    
     //Getting Functions
     CameraType GetMode();
     void GetViewport(int &loc_x, int &loc_y, int &width, int &height);

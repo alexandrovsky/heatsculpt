@@ -8,6 +8,7 @@
 
 #include "Mesh.h"
 #include <glm/gtc/type_ptr.hpp>
+#include "ColorUtils.h"
 
 Mesh::Mesh(ShaderProgram* shader, const vector<vec3>& vertices, const vector<GLuint>& indices){
     
@@ -42,10 +43,32 @@ Mesh::Mesh(ShaderProgram* shader, const vector<vec3>& vertices, const vector<GLu
     
     // --color:
     vector<vec3> colors;
+    
+    GLuint h = 0, s = 255, v = 255;
+    unsigned char r_255 = 0, g_255 = 0, b_255 = 0;
+    unsigned char maxBrightnes = 255;
+    
+    
+    GLfloat r, g, b;
     for (int i = 0; i < vertices.size(); i++) {
-        float r = ((float)rand() / RAND_MAX) + 1;
-        float g = ((float)rand() / RAND_MAX) + 1;
-        float b = ((float)rand() / RAND_MAX) + 1;
+        
+//        r = (GLfloat)r_255/255.0f;
+//        g = (GLfloat)g_255/255.0f;
+//        b = (GLfloat)b_255/255.0f;
+        
+        if (i % 3 == 0) {
+            hsv2rgb(h, s, v, &r_255, &g_255, &b_255, maxBrightnes);
+            r = (GLfloat)r_255/255.0f;
+            g = (GLfloat)g_255/255.0f;
+            b = (GLfloat)b_255/255.0f;
+            
+            h += 360 / (vertices.size()/3);
+            //h = h % 360;
+        }
+        
+//        r = 1.0f;//((GLfloat)rand() / RAND_MAX) + 1;
+//        g = 1.0f;//((GLfloat)rand() / RAND_MAX) + 1;
+//        b = 1.0f;//((GLfloat)rand() / RAND_MAX) + 1;
         colors.push_back(glm::vec3(r, g, b));
     }
     
@@ -113,15 +136,28 @@ void Mesh::Draw() {
     
     shaderProgram->use();
     glBindVertexArray(vao);
-    glEnableVertexAttribArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, vbos[POSITION_VERTEX_BUFFER]);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    
+    GLint posAttrib = shaderProgram->attribute("pos");
+    glEnableVertexAttribArray(posAttrib);
+    
+    
+    GLint colorAttrib = shaderProgram->attribute("color");
+    glEnableVertexAttribArray(colorAttrib);
+    
+//    glBindBuffer(GL_ARRAY_BUFFER, vbos[POSITION_VERTEX_BUFFER]);
+//    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+
 
     
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbos[ELEMENT_ARRAY_BUFFER]);
-//    glDrawElements(GL_TRIANGLE_STRIP, drawCount, GL_UNSIGNED_INT, 0);
 
+
+    
+    glPointSize(5.0);
+    glDrawElements(GL_POINTS, drawCount, GL_UNSIGNED_INT, 0);
+//    glDrawElements(GL_LINES, drawCount, GL_UNSIGNED_INT, 0);
     glDrawElements(GL_TRIANGLES, drawCount, GL_UNSIGNED_INT, 0);
+
     
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glDisableVertexAttribArray(0);
@@ -132,33 +168,4 @@ void Mesh::Draw() {
 }
 
 
-template<typename T> GLuint Mesh::setVBO(vector<T> vector, GLuint vbo, string attributeName){
-    
-    // check current vao
-    GLint current_vao;
-    glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &current_vao);
-    
-    if(current_vao != vao){
-        glBindVertexArray(vao);
-    }
-    
-    // generate vbo
-    glGenBuffers(1, &vbo);
-    
-    size_t bytes = sizeof(T) * vector.size();
-    
-    // add data to vbo
-    glBindBufferARB(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, bytes, vector.data(), GL_STATIC_DRAW);
-    
-    
-    // add attribute to shader
-    GLint attribute = shaderProgram->addAttribute(attributeName);
 
-    glEnableVertexAttribArray(attribute);
-    
-    // add vbo to vao
-    glVertexAttribPointer(attribute, 3, GL_FLOAT, GL_FALSE, 0, 0);
-    
-    return vbo;
-}

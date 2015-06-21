@@ -23,6 +23,8 @@ using namespace std;
 using namespace glm;
 
 
+
+
 class Mesh{
 public:
     Mesh(ShaderProgram* shader, const vector<vec3>& vertices, const vector<GLuint>& indices);
@@ -51,7 +53,6 @@ private:
     GLuint vao;
     GLuint vbos[NUM_BUFFERS];
 
-    template<typename T>GLuint setVBO(vector<T> data, GLuint vbo, string attributeName);
     
     GLsizei drawCount;
 

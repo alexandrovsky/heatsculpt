@@ -19,6 +19,7 @@
 		368E609A1B2EC7E900A04AB6 /* TestApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E60981B2EC7E900A04AB6 /* TestApp.cpp */; };
 		368E60A01B317F2B00A04AB6 /* MeshTestApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E609E1B317F2B00A04AB6 /* MeshTestApp.cpp */; };
 		368E60A41B32366400A04AB6 /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E60A21B32366400A04AB6 /* Debug.cpp */; };
+		368E60A71B3592BD00A04AB6 /* ColorUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E60A51B3592BD00A04AB6 /* ColorUtils.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -55,6 +56,8 @@
 		368E609F1B317F2B00A04AB6 /* MeshTestApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeshTestApp.h; sourceTree = "<group>"; };
 		368E60A21B32366400A04AB6 /* Debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Debug.cpp; sourceTree = "<group>"; };
 		368E60A31B32366400A04AB6 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Debug.h; sourceTree = "<group>"; };
+		368E60A51B3592BD00A04AB6 /* ColorUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColorUtils.cpp; sourceTree = "<group>"; };
+		368E60A61B3592BD00A04AB6 /* ColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorUtils.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +145,8 @@
 			children = (
 				368E60A21B32366400A04AB6 /* Debug.cpp */,
 				368E60A31B32366400A04AB6 /* Debug.h */,
+				368E60A51B3592BD00A04AB6 /* ColorUtils.cpp */,
+				368E60A61B3592BD00A04AB6 /* ColorUtils.h */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -207,6 +212,7 @@
 				368E60A01B317F2B00A04AB6 /* MeshTestApp.cpp in Sources */,
 				360A6F251B2B76D200A3CEFC /* main.cpp in Sources */,
 				368E607B1B2B8D1C00A04AB6 /* Camera.cpp in Sources */,
+				368E60A71B3592BD00A04AB6 /* ColorUtils.cpp in Sources */,
 				368E60811B2C4ED800A04AB6 /* ShaderProgram.cpp in Sources */,
 				360A6F2F1B2B786200A3CEFC /* App.cpp in Sources */,
 				368E607E1B2C4CCE00A04AB6 /* Shader.cpp in Sources */,
