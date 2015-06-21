@@ -10,6 +10,7 @@
 		360A6F251B2B76D200A3CEFC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 360A6F241B2B76D200A3CEFC /* main.cpp */; };
 		360A6F2F1B2B786200A3CEFC /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 360A6F2D1B2B786200A3CEFC /* App.cpp */; };
 		360A6F331B2B7C7200A3CEFC /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 360A6F321B2B7C7200A3CEFC /* OpenGL.framework */; };
+		361DA9941B37445500E4B3BB /* MeshUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 361DA9921B37445500E4B3BB /* MeshUtils.cpp */; };
 		368E607B1B2B8D1C00A04AB6 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E60791B2B8D1C00A04AB6 /* Camera.cpp */; };
 		368E607E1B2C4CCE00A04AB6 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E607C1B2C4CCE00A04AB6 /* Shader.cpp */; };
 		368E60811B2C4ED800A04AB6 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E607F1B2C4ED800A04AB6 /* ShaderProgram.cpp */; };
@@ -40,6 +41,8 @@
 		360A6F2D1B2B786200A3CEFC /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
 		360A6F2E1B2B786200A3CEFC /* App.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = App.h; sourceTree = "<group>"; };
 		360A6F321B2B7C7200A3CEFC /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		361DA9921B37445500E4B3BB /* MeshUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MeshUtils.cpp; sourceTree = "<group>"; };
+		361DA9931B37445500E4B3BB /* MeshUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeshUtils.h; sourceTree = "<group>"; };
 		368E60791B2B8D1C00A04AB6 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		368E607A1B2B8D1C00A04AB6 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		368E607C1B2C4CCE00A04AB6 /* Shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shader.cpp; sourceTree = "<group>"; };
@@ -147,6 +150,8 @@
 				368E60A31B32366400A04AB6 /* Debug.h */,
 				368E60A51B3592BD00A04AB6 /* ColorUtils.cpp */,
 				368E60A61B3592BD00A04AB6 /* ColorUtils.h */,
+				361DA9921B37445500E4B3BB /* MeshUtils.cpp */,
+				361DA9931B37445500E4B3BB /* MeshUtils.h */,
 			);
 			name = utils;
 			sourceTree = "<group>";
@@ -210,6 +215,7 @@
 				368E60941B2C90EE00A04AB6 /* Mesh.cpp in Sources */,
 				368E60A41B32366400A04AB6 /* Debug.cpp in Sources */,
 				368E60A01B317F2B00A04AB6 /* MeshTestApp.cpp in Sources */,
+				361DA9941B37445500E4B3BB /* MeshUtils.cpp in Sources */,
 				360A6F251B2B76D200A3CEFC /* main.cpp in Sources */,
 				368E607B1B2B8D1C00A04AB6 /* Camera.cpp in Sources */,
 				368E60A71B3592BD00A04AB6 /* ColorUtils.cpp in Sources */,
