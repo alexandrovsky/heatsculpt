@@ -66,7 +66,9 @@ void createTetraedron(vector<vec3>& vertices, vector<GLuint>& indices){
     
 }
 
-void createIcosphere(vector<vec3>& vertices, vector<GLuint>& indices, GLuint subdivisions=3){
+
+void createIcosahedron(vector<vec3>& vertices, vector<GLuint>& indices){
+    
     GLfloat t = (1.0f + sqrtf(5.0)) /2.0f;
     
     // create 12 vertices of a icosahedron
@@ -87,8 +89,8 @@ void createIcosphere(vector<vec3>& vertices, vector<GLuint>& indices, GLuint sub
     vertices.push_back(vec3(-t,  0,  1));
     
     // create 20 triangles of the icosahedron
-
-
+    
+    
     
     
     
@@ -99,7 +101,7 @@ void createIcosphere(vector<vec3>& vertices, vector<GLuint>& indices, GLuint sub
     indices.push_back(0); indices.push_back(1); indices.push_back(7);
     indices.push_back(0); indices.push_back(7); indices.push_back(10);
     indices.push_back(0); indices.push_back(10); indices.push_back(11);
-
+    
     
     // 5 adjacent faces
     indices.push_back(1); indices.push_back(5); indices.push_back(9);
@@ -107,7 +109,7 @@ void createIcosphere(vector<vec3>& vertices, vector<GLuint>& indices, GLuint sub
     indices.push_back(11); indices.push_back(10); indices.push_back(2);
     indices.push_back(10); indices.push_back(7); indices.push_back(6);
     indices.push_back(7); indices.push_back(1); indices.push_back(8);
-
+    
     
     // 5 faces around point 3
     indices.push_back(3); indices.push_back(9); indices.push_back(4);
@@ -115,15 +117,19 @@ void createIcosphere(vector<vec3>& vertices, vector<GLuint>& indices, GLuint sub
     indices.push_back(3); indices.push_back(2); indices.push_back(6);
     indices.push_back(3); indices.push_back(6); indices.push_back(8);
     indices.push_back(3); indices.push_back(8); indices.push_back(9);
-
     
-//    // 5 adjacent faces
+    
+    //    // 5 adjacent faces
     indices.push_back(4); indices.push_back(9); indices.push_back(5);
     indices.push_back(2); indices.push_back(4); indices.push_back(11);
     indices.push_back(6); indices.push_back(2); indices.push_back(10);
     indices.push_back(8); indices.push_back(6); indices.push_back(7);
     indices.push_back(9); indices.push_back(8); indices.push_back(1);
+}
+
+void createIcosphere(vector<vec3>& vertices, vector<GLuint>& indices, GLuint subdivisions=3){
     
+    createIcosahedron(vertices, indices);
     
     //-------------
     
