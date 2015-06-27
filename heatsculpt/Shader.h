@@ -11,19 +11,41 @@
 #define SHADER_HPP
 
 
+#ifndef GL_TESS_CONTROL_SHADER
+    #define GL_TESS_CONTROL_SHADER 0x00008e88
+#endif
+#ifndef GL_TESS_EVALUATION_SHADER
+    #define GL_TESS_EVALUATION_SHADER 0x00008e87
+#endif
+#ifndef GL_PATCHES
+    #define GL_PATCHES 0x0000000e
+#endif
+#ifndef GL_PATCH_VERTICES
+    #define GL_PATCH_VERTICES 0x8E72
+#endif
+
+
+
+
+
+
+
 #include <iostream>
 #include <string>
 #include <sstream>
 #include <fstream>
 
 #include <GLFW/glfw3.h>
-#define GLSL(src) "#version 330 core\n" #src
+#define GLSL(src) "#version 400 core\n" #src
 
 using std::cout;
 using std::endl;
 using std::string;
 using std::stringstream;
 using std::ifstream;
+
+
+
 
 class Shader
 {

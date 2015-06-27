@@ -13,7 +13,7 @@
 #include <string>
 #include <glm/glm.hpp>
 
-#include <GLEW/GLEW.h>
+#include <gl/glew.h>
 
 #include "GLFW/glfw3.h"
 #include <OpenGL/glext.h>

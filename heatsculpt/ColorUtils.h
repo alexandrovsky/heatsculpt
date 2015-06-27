@@ -10,9 +10,14 @@
 #define __heatsculpt__ColorUtils__
 
 #include <stdio.h>
-
-
+#include <vector>
+#include <glm/glm.hpp>
+using namespace std;
+using namespace glm;
 void hsv2rgb(unsigned int hue, unsigned int sat, unsigned int val, \
              unsigned char * r, unsigned char * g, unsigned char * b, unsigned char maxBrightness );
+
+void generateColors(unsigned int num_of_colors, vector<vec3>& colors);
+
 
 #endif /* defined(__heatsculpt__ColorUtils__) */

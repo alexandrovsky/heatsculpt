@@ -26,6 +26,7 @@ MeshTestApp::~MeshTestApp()
 
 
 bool MeshTestApp::Init(){
+    
     bool res = App::Init();
     if (!res) { return res; }
     
@@ -46,12 +47,39 @@ bool MeshTestApp::Init(){
     
     vector<vec3> vertices;
     vector<GLuint> indices;
+    vector<Attribute>attributes;
+    
+    Attribute positionAttrib;
+    positionAttrib.name = "Position";
+    positionAttrib.num_of_components = 3;
+    positionAttrib.type = GL_FLOAT;
+    positionAttrib.buffertype = GL_ARRAY_BUFFER;
+    attributes.push_back(positionAttrib);
+    
+    Attribute colorAttrib;
+    colorAttrib.name = "Color";
+    colorAttrib.num_of_components = 3;
+    colorAttrib.type = GL_FLOAT;
+    colorAttrib.buffertype = GL_ARRAY_BUFFER;
+    attributes.push_back(colorAttrib);
+    
     
     //createTetraedron(vertices, indices);
     createIcosphere(vertices, indices);
     
-    mesh = new Mesh(shaderProgram, vertices, indices);
+    mesh = new Mesh(shaderProgram, attributes,  vertices, indices);
+//    mesh = new Mesh(shaderProgram, vertices, indices);
     
+    shaderProgram->use();
+    GLuint model = shaderProgram->addUniform("model");
+    glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(mesh->modelMatrix));
+    GLuint view = shaderProgram->addUniform("view");
+    glUniformMatrix4fv(view, 1, GL_FALSE, glm::value_ptr(mesh->viewMatrix));
+    GLuint projection = shaderProgram->addUniform("projection");
+    glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(mesh->projectionMatrix));
+    shaderProgram->disable();
+        
+
     
     
     return res;
@@ -65,6 +93,9 @@ void MeshTestApp::Update(){
     //model = glm::translate(model, vec3(0.5f, 0.0f, 0.0f));
     
     mesh->modelMatrix = model;
+    
+    
+    
     mesh->viewMatrix = camera.view;
     mesh->projectionMatrix = camera.projection;
     mesh->Update();

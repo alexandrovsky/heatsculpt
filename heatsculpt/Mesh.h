@@ -13,7 +13,7 @@
 #include <vector>
 #include <glm/glm.hpp>
 
-#include <GLEW/GLEW.h>
+#include <gl/glew.h>
 #include <OpenGL/OpenGL.h>
 
 #include "ShaderProgram.h"
@@ -24,10 +24,26 @@ using namespace glm;
 
 
 
+struct Attribute{
+    string name;
+    GLuint num_of_components;
+    GLuint type;
+    GLuint vbo; // is set by the mesh
+    GLuint buffertype;
+};
+
+
+struct Uniform{
+    string name;
+    GLuint num_of_components;
+    GLuint type;
+};
+
 
 class Mesh{
 public:
     Mesh(ShaderProgram* shader, const vector<vec3>& vertices, const vector<GLuint>& indices);
+    Mesh(ShaderProgram* shader, vector<Attribute> attributes, const vector<vec3>& vertices, const vector<GLuint>& indices);
     virtual ~Mesh();
     
     mat4x4 modelMatrix;
@@ -37,11 +53,20 @@ public:
     void Update();
     void Draw();
     
+    template<typename T> GLuint addVBO(vector<T> vector, GLuint vbo, string attributeName, GLuint type=GL_ARRAY_BUFFER);
 
     
     ShaderProgram* shaderProgram;
+    vector<Attribute> attributes;
+
+    inline GLsizei getDrawCount(){
+        return drawCount;
+    }
     
 private:
+    
+    
+    
     
     enum {
         POSITION_VERTEX_BUFFER,
@@ -53,8 +78,11 @@ private:
     GLuint vao;
     GLuint vbos[NUM_BUFFERS];
 
-    
+    Attribute indicesAttrib;
     GLsizei drawCount;
+    
+    bool use_vbo_array; 
+    
 
     
 };

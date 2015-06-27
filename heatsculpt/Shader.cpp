@@ -12,12 +12,19 @@
 #include <OpenGL/glext.h>
 
 Shader::Shader(const GLenum &type){
+    
+
+    
     // Get the type of the shader
     if (type == GL_VERTEX_SHADER){
         typeString = "Vertex";
     }else if (type == GL_FRAGMENT_SHADER){
         typeString = "Fragment";
-    }else{
+    }else if(type == GL_TESS_CONTROL_SHADER){
+        typeString = "Tesselation Control";
+    }else if(type == GL_TESS_EVALUATION_SHADER){
+        typeString = "Tesselation Evaluation";
+    }else if(type == GL_GEOMETRY_SHADER_EXT){
         typeString = "Geometry";
     }
     

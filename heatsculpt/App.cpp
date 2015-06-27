@@ -7,7 +7,8 @@
 //
 
 #include "App.h"
-#include <GLEW/GLEW.h>
+
+#include <gl/glew.h>
 
 #include "Shader.h"
 #include "ShaderProgram.h"

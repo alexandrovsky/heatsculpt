@@ -60,3 +60,29 @@ void hsv2rgb(unsigned int hue, unsigned int sat, unsigned int val, \
     *g = *g * maxBrightness/255;
     *b = *b * maxBrightness/255;
 }
+
+
+void generateColors(unsigned int num_of_colors, vector<vec3>& colors){
+    
+    unsigned int h = 0, s = 255, v = 255;
+    unsigned char r_255 = 0, g_255 = 0, b_255 = 0;
+    unsigned char maxBrightnes = 255;
+    
+    
+    float r, g, b;
+    for (int i = 0; i < num_of_colors; i++) {
+        
+        if (i % 3 == 0) {
+            hsv2rgb(h, s, v, &r_255, &g_255, &b_255, maxBrightnes);
+            r = (float)r_255/255.0f;
+            g = (float)g_255/255.0f;
+            b = (float)b_255/255.0f;
+            
+            h += 360 / (num_of_colors/3);
+        }
+        
+        colors.push_back(glm::vec3(r, g, b));
+
+
+    }
+}

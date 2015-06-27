@@ -28,57 +28,21 @@ Mesh::Mesh(ShaderProgram* shader, const vector<vec3>& vertices, const vector<GLu
     
     glGenBuffers(NUM_BUFFERS, vbos);
 
-    
-
 
     // attributes:
     
     // --position:
-    glBindBuffer(GL_ARRAY_BUFFER, vbos[POSITION_VERTEX_BUFFER]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices[0]) * vertices.size(), vertices.data(), GL_STATIC_DRAW);
     
-    GLint posAttrib = shaderProgram->addAttribute("pos");
-    glEnableVertexAttribArray(posAttrib);
-    glVertexAttribPointer(posAttrib, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    addVBO(vertices, vbos[POSITION_VERTEX_BUFFER], "Position");
     
     // --color:
+    unsigned int num_of_colors = (unsigned int)vertices.size();
     vector<vec3> colors;
+    colors.reserve(num_of_colors);
+    generateColors(num_of_colors, colors);
     
-    GLuint h = 0, s = 255, v = 255;
-    unsigned char r_255 = 0, g_255 = 0, b_255 = 0;
-    unsigned char maxBrightnes = 255;
-    
-    
-    GLfloat r, g, b;
-    for (int i = 0; i < vertices.size(); i++) {
-        
-//        r = (GLfloat)r_255/255.0f;
-//        g = (GLfloat)g_255/255.0f;
-//        b = (GLfloat)b_255/255.0f;
-        
-        if (i % 3 == 0) {
-            hsv2rgb(h, s, v, &r_255, &g_255, &b_255, maxBrightnes);
-            r = (GLfloat)r_255/255.0f;
-            g = (GLfloat)g_255/255.0f;
-            b = (GLfloat)b_255/255.0f;
-            
-            h += 360 / (vertices.size()/3);
-            //h = h % 360;
-        }
-        
-//        r = 1.0f;//((GLfloat)rand() / RAND_MAX) + 1;
-//        g = 1.0f;//((GLfloat)rand() / RAND_MAX) + 1;
-//        b = 1.0f;//((GLfloat)rand() / RAND_MAX) + 1;
-        colors.push_back(glm::vec3(r, g, b));
-    }
-    
-    
-    glBindBuffer(GL_ARRAY_BUFFER, vbos[COLOR_VERTEX_BUFFER]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(colors[0]) * colors.size(), colors.data(), GL_STATIC_DRAW);
-    
-    GLint colorAttrib = shaderProgram->addAttribute("color");
-    glEnableVertexAttribArray(colorAttrib);
-    glVertexAttribPointer(colorAttrib, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+    addVBO(colors, vbos[COLOR_VERTEX_BUFFER], "Color");
+
     
     // -----
     
@@ -107,7 +71,65 @@ Mesh::Mesh(ShaderProgram* shader, const vector<vec3>& vertices, const vector<GLu
     
     glBindVertexArray(0);
     shaderProgram->disable();
+    
+    
+    use_vbo_array = true;
 }
+
+
+
+Mesh::Mesh(ShaderProgram* shader, vector<Attribute> attributes, const vector<vec3>& vertices, const vector<GLuint>& indices){
+    
+    
+    
+    this->shaderProgram = shader;
+    this->attributes = attributes;
+    
+    this->modelMatrix = mat4x4();
+    this->viewMatrix = mat4x4();
+    this->projectionMatrix = mat4x4();
+    
+    drawCount = (GLsizei)vertices.size();
+    
+    
+    //shaderProgram->use();
+    
+    glGenVertexArrays(1, &vao);
+    glBindVertexArray(vao);
+    
+    GLuint vbosHandle[this->attributes.size()];
+    
+    glGenBuffers((GLsizei)this->attributes.size(), vbosHandle);
+    for (int i = 0; i < attributes.size(); i++) {
+#warning set the right array instead of vertices
+        this->attributes[i].vbo = addVBO(vertices, vbosHandle[i], this->attributes[i].name);
+    }
+    
+
+
+    indicesAttrib.name = "Index";
+    indicesAttrib.num_of_components = 1;
+    indicesAttrib.type = GL_UNSIGNED_INT;
+    indicesAttrib.buffertype = GL_ELEMENT_ARRAY_BUFFER;
+    
+    
+    glGenBuffers(1, &indicesAttrib.vbo);
+    // indices:
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indicesAttrib.vbo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices[0]) * indices.size(), indices.data(), GL_STATIC_DRAW);
+#warning resize drawCount
+    drawCount = (GLsizei)indices.size(); //
+    
+    // -----
+    
+    glBindVertexArray(0);
+    shaderProgram->disable();
+    
+    use_vbo_array = false;
+}
+
+
+
 
 Mesh::~Mesh() {
     glDeleteVertexArrays(1, &vao);
@@ -118,14 +140,24 @@ Mesh::~Mesh() {
 void Mesh::Update(){
     
     shaderProgram->use();{
-        GLuint model = shaderProgram->uniform("model");
+        
+        mat4 modelview = viewMatrix * modelMatrix;
+        GLuint model = shaderProgram->uniform("Modelview");
         glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(modelMatrix));
         
-        GLuint view = shaderProgram->uniform("view");
-        glUniformMatrix4fv(view, 1, GL_FALSE, glm::value_ptr(viewMatrix));
-        
-        GLuint projection = shaderProgram->uniform("projection");
+
+        GLuint projection = shaderProgram->uniform("Projection");
         glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
+
+        
+//        GLuint model = shaderProgram->uniform("model");
+//        glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+//        
+//        GLuint view = shaderProgram->uniform("view");
+//        glUniformMatrix4fv(view, 1, GL_FALSE, glm::value_ptr(viewMatrix));
+//        
+//        GLuint projection = shaderProgram->uniform("projection");
+//        glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
     
     }shaderProgram->disable();
     
@@ -137,20 +169,37 @@ void Mesh::Draw() {
     shaderProgram->use();
     glBindVertexArray(vao);
     
-    GLint posAttrib = shaderProgram->attribute("pos");
-    glEnableVertexAttribArray(posAttrib);
     
-    
-    GLint colorAttrib = shaderProgram->attribute("color");
-    glEnableVertexAttribArray(colorAttrib);
-    
-//    glBindBuffer(GL_ARRAY_BUFFER, vbos[POSITION_VERTEX_BUFFER]);
-//    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 
+    if (use_vbo_array) {
+        GLint posAttrib = shaderProgram->attribute("Position");
+        glBindBuffer(GL_ARRAY_BUFFER, vbos[POSITION_VERTEX_BUFFER]);
+        glEnableVertexAttribArray(posAttrib);
+        
+        
+        GLint colorAttrib = shaderProgram->attribute("Color");
+        glBindBuffer(GL_ARRAY_BUFFER, vbos[COLOR_VERTEX_BUFFER]);
+        glEnableVertexAttribArray(colorAttrib);
+        
+        
+        
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbos[ELEMENT_ARRAY_BUFFER]);
+    }else{
+        
+            for (int i = 0; i < attributes.size(); i++) {
+                Attribute attrib = attributes[i];
+                glBindBuffer(GL_ARRAY_BUFFER, attributes[i].vbo);
+                glEnableVertexAttribArray(shaderProgram->attribute(attrib.name));
+            }
+        
+        
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indicesAttrib.vbo);
+    }
     
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbos[ELEMENT_ARRAY_BUFFER]);
-
+    
+    
+    
 
     
     glPointSize(5.0);
@@ -168,4 +217,32 @@ void Mesh::Draw() {
 }
 
 
+template<typename T> GLuint Mesh::addVBO(vector<T> vector, GLuint vbo, string attributeName, GLuint type){
+    
+    // check current vao
+    GLint current_vao;
+    glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &current_vao);
+    
+    if(current_vao != vao){
+        glBindVertexArray(vao);
+    }
+    
+    
+    size_t bytes = sizeof(T) * vector.size();
+    
+    // add data to vbo
+    glBindBufferARB(type, vbo);
+    glBufferData(type, bytes, vector.data(), GL_STATIC_DRAW);
+    
+    
+    // add attribute to shader
+    GLint attribute = shaderProgram->addAttribute(attributeName);
+    
+    glEnableVertexAttribArray(attribute);
+    
+    // add vbo to vao
+    glVertexAttribPointer(attribute, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    
+    return vbo;
+}
 

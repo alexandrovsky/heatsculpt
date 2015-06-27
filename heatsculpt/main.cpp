@@ -10,7 +10,7 @@
 
 //#include "TestApp.h"
 #include "MeshTestApp.h"
-
+//#include "TessMeshTestApp.h"
 
 
 
@@ -21,6 +21,10 @@ int main(int argc, char* argv[]) {
     
     MeshTestApp mtApp("Mesh Test", 800, 600);
     return mtApp.Start();
+    
+    
+//    TessMeshTestApp mtApp("Mesh Test", 800, 600);
+//    return mtApp.Start();
     
 }
 

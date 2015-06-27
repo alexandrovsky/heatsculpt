@@ -7,7 +7,7 @@
 //
 
 #include "Camera.h"
-#include <GLEW/GLEW.h>
+#include <gl/glew.h>
 
 using namespace std;
 
