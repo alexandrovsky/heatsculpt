@@ -102,15 +102,20 @@ Mesh::Mesh(ShaderProgram* shader, vector<Attribute> attributes, const vector<vec
     glGenBuffers((GLsizei)this->attributes.size(), vbosHandle);
     for (int i = 0; i < attributes.size(); i++) {
 #warning set the right array instead of vertices
-        this->attributes[i].vbo = addVBO(vertices, vbosHandle[i], this->attributes[i].name);
+        this->attributes[i].vbo = vbosHandle[i];
+//        addVBO(vertices, this->attributes[i].vbo, this->attributes[i].name);
+        
+        
+        addVBO(vertices, this->attributes[i]);
+        ;
     }
     
 
 
     indicesAttrib.name = "Index";
     indicesAttrib.num_of_components = 1;
-    indicesAttrib.type = GL_UNSIGNED_INT;
-    indicesAttrib.buffertype = GL_ELEMENT_ARRAY_BUFFER;
+    indicesAttrib.data_type = GL_UNSIGNED_INT;
+    indicesAttrib.buffer_type = GL_ELEMENT_ARRAY_BUFFER;
     
     
     glGenBuffers(1, &indicesAttrib.vbo);
@@ -141,23 +146,23 @@ void Mesh::Update(){
     
     shaderProgram->use();{
         
-        mat4 modelview = viewMatrix * modelMatrix;
-        GLuint model = shaderProgram->uniform("Modelview");
-        glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(modelMatrix));
-        
-
-        GLuint projection = shaderProgram->uniform("Projection");
-        glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
-
-        
-//        GLuint model = shaderProgram->uniform("model");
+//        mat4 modelview = viewMatrix * modelMatrix;
+//        GLuint model = shaderProgram->uniform("Modelview");
 //        glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(modelMatrix));
 //        
-//        GLuint view = shaderProgram->uniform("view");
-//        glUniformMatrix4fv(view, 1, GL_FALSE, glm::value_ptr(viewMatrix));
-//        
-//        GLuint projection = shaderProgram->uniform("projection");
+//
+//        GLuint projection = shaderProgram->uniform("Projection");
 //        glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
+
+        
+        GLuint model = shaderProgram->uniform("model");
+        glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+        
+        GLuint view = shaderProgram->uniform("view");
+        glUniformMatrix4fv(view, 1, GL_FALSE, glm::value_ptr(viewMatrix));
+        
+        GLuint projection = shaderProgram->uniform("projection");
+        glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
     
     }shaderProgram->disable();
     
@@ -229,7 +234,7 @@ template<typename T> GLuint Mesh::addVBO(vector<T> vector, GLuint vbo, string at
     
     
     size_t bytes = sizeof(T) * vector.size();
-    
+    glGenBuffers(1, &vbo);
     // add data to vbo
     glBindBufferARB(type, vbo);
     glBufferData(type, bytes, vector.data(), GL_STATIC_DRAW);
@@ -244,5 +249,36 @@ template<typename T> GLuint Mesh::addVBO(vector<T> vector, GLuint vbo, string at
     glVertexAttribPointer(attribute, 3, GL_FLOAT, GL_FALSE, 0, 0);
     
     return vbo;
+}
+
+
+
+template<typename T> GLuint Mesh::addVBO(vector<T> vector, Attribute& attribute){
+    
+    // check current vao
+    GLint current_vao;
+    glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &current_vao);
+    
+    if(current_vao != vao){
+        glBindVertexArray(vao);
+    }
+    
+    
+    attribute.bytes = sizeof(T) * vector.size();
+    glGenBuffers(1, &attribute.vbo);
+    // add data to vbo
+    glBindBufferARB(attribute.buffer_type, attribute.vbo);
+    glBufferData(attribute.buffer_type, attribute.bytes, vector.data(), GL_STATIC_DRAW);
+    
+    
+    // add attribute to shader
+    attribute.id = shaderProgram->addAttribute(attribute.name);
+    
+    glEnableVertexAttribArray(attribute.id);
+    
+    // add vbo to vao
+    glVertexAttribPointer(attribute.id, attribute.num_of_components, GL_FLOAT, GL_FALSE, 0, 0);
+    
+    return attribute.vbo;
 }
 

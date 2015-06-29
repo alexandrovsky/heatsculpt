@@ -26,10 +26,12 @@ using namespace glm;
 
 struct Attribute{
     string name;
+    GLuint id;
     GLuint num_of_components;
-    GLuint type;
+    GLuint data_type;
     GLuint vbo; // is set by the mesh
-    GLuint buffertype;
+    size_t bytes;
+    GLuint buffer_type;
 };
 
 
@@ -55,6 +57,8 @@ public:
     
     template<typename T> GLuint addVBO(vector<T> vector, GLuint vbo, string attributeName, GLuint type=GL_ARRAY_BUFFER);
 
+    template<typename T> GLuint addVBO(vector<T> vector, Attribute& attribute);
+    
     
     ShaderProgram* shaderProgram;
     vector<Attribute> attributes;

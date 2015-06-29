@@ -52,15 +52,15 @@ bool MeshTestApp::Init(){
     Attribute positionAttrib;
     positionAttrib.name = "Position";
     positionAttrib.num_of_components = 3;
-    positionAttrib.type = GL_FLOAT;
-    positionAttrib.buffertype = GL_ARRAY_BUFFER;
+    positionAttrib.data_type = GL_FLOAT;
+    positionAttrib.buffer_type = GL_ARRAY_BUFFER;
     attributes.push_back(positionAttrib);
     
     Attribute colorAttrib;
     colorAttrib.name = "Color";
     colorAttrib.num_of_components = 3;
-    colorAttrib.type = GL_FLOAT;
-    colorAttrib.buffertype = GL_ARRAY_BUFFER;
+    colorAttrib.data_type = GL_FLOAT;
+    colorAttrib.buffer_type = GL_ARRAY_BUFFER;
     attributes.push_back(colorAttrib);
     
     

@@ -304,8 +304,8 @@ bool TessMeshTestApp::Init(){
     Attribute positionAttrib;
     positionAttrib.name = "Position";
     positionAttrib.num_of_components = 3;
-    positionAttrib.type = GL_FLOAT;
-    positionAttrib.buffertype = GL_ARRAY_BUFFER;
+    positionAttrib.data_type = GL_FLOAT;
+    positionAttrib.buffer_type = GL_ARRAY_BUFFER;
     attributes.push_back(positionAttrib);
 
     
