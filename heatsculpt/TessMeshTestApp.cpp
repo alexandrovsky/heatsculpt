@@ -331,8 +331,6 @@ void TessMeshTestApp::Update(){
     //model = glm::translate(model, vec3(0.5f, 0.0f, 0.0f));
     
     mesh->modelMatrix = model;
-    mesh->viewMatrix = camera.view;
-    mesh->projectionMatrix = camera.projection;
     
     NormalMatrix = mat3();
     

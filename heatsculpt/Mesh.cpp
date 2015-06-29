@@ -8,6 +8,7 @@
 
 #include "Mesh.h"
 #include <glm/gtc/type_ptr.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include "ColorUtils.h"
 
 Mesh::Mesh(ShaderProgram* shader, const vector<vec3>& vertices, const vector<GLuint>& indices){
@@ -15,8 +16,6 @@ Mesh::Mesh(ShaderProgram* shader, const vector<vec3>& vertices, const vector<GLu
     shaderProgram = shader;
     
     modelMatrix = mat4x4();
-    viewMatrix = mat4x4();
-    projectionMatrix = mat4x4();
     
     drawCount = (GLsizei)vertices.size();
     
@@ -57,15 +56,15 @@ Mesh::Mesh(ShaderProgram* shader, const vector<vec3>& vertices, const vector<GLu
     // -----
     
     
-    // uniforms:
-    GLuint model = shaderProgram->addUniform("model");
-    glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(modelMatrix));
-    
-    GLuint view = shaderProgram->addUniform("view");
-    glUniformMatrix4fv(view, 1, GL_FALSE, glm::value_ptr(viewMatrix));
-    
-    GLuint projection = shaderProgram->addUniform("projection");
-    glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
+//    // uniforms:
+//    GLuint model = shaderProgram->addUniform("model");
+//    glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+//    
+//    GLuint view = shaderProgram->addUniform("view");
+//    glUniformMatrix4fv(view, 1, GL_FALSE, glm::value_ptr(viewMatrix));
+//    
+//    GLuint projection = shaderProgram->addUniform("projection");
+//    glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
     
     
     
@@ -84,30 +83,18 @@ Mesh::Mesh(ShaderProgram* shader, vector<Attribute> attributes, const vector<vec
     
     this->shaderProgram = shader;
     this->attributes = attributes;
-    
     this->modelMatrix = mat4x4();
-    this->viewMatrix = mat4x4();
-    this->projectionMatrix = mat4x4();
     
     drawCount = (GLsizei)vertices.size();
-    
-    
-    //shaderProgram->use();
+
     
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
     
-    GLuint vbosHandle[this->attributes.size()];
-    
-    glGenBuffers((GLsizei)this->attributes.size(), vbosHandle);
+
     for (int i = 0; i < attributes.size(); i++) {
 #warning set the right array instead of vertices
-        this->attributes[i].vbo = vbosHandle[i];
-//        addVBO(vertices, this->attributes[i].vbo, this->attributes[i].name);
-        
-        
         addVBO(vertices, this->attributes[i]);
-        ;
     }
     
 
@@ -143,28 +130,7 @@ Mesh::~Mesh() {
 
 
 void Mesh::Update(){
-    
-    shaderProgram->use();{
-        
-//        mat4 modelview = viewMatrix * modelMatrix;
-//        GLuint model = shaderProgram->uniform("Modelview");
-//        glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(modelMatrix));
-//        
-//
-//        GLuint projection = shaderProgram->uniform("Projection");
-//        glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
-
-        
-        GLuint model = shaderProgram->uniform("model");
-        glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(modelMatrix));
-        
-        GLuint view = shaderProgram->uniform("view");
-        glUniformMatrix4fv(view, 1, GL_FALSE, glm::value_ptr(viewMatrix));
-        
-        GLuint projection = shaderProgram->uniform("projection");
-        glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(projectionMatrix));
-    
-    }shaderProgram->disable();
+    modelMatrix = glm::rotate( mat4(), glm::radians(10.0f) * (float)glfwGetTime(), glm::vec3(1.0f, 1.0f, 0.0f));
     
 }
 

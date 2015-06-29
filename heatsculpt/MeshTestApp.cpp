@@ -74,9 +74,9 @@ bool MeshTestApp::Init(){
     GLuint model = shaderProgram->addUniform("model");
     glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(mesh->modelMatrix));
     GLuint view = shaderProgram->addUniform("view");
-    glUniformMatrix4fv(view, 1, GL_FALSE, glm::value_ptr(mesh->viewMatrix));
+    glUniformMatrix4fv(view, 1, GL_FALSE, glm::value_ptr(camera.view));
     GLuint projection = shaderProgram->addUniform("projection");
-    glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(mesh->projectionMatrix));
+    glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(camera.projection));
     shaderProgram->disable();
         
 
@@ -87,18 +87,23 @@ bool MeshTestApp::Init(){
 
 void MeshTestApp::Update(){
     App::Update();
-    glm::mat4 model;
-    model = glm::rotate(model, glm::radians(0.0f) * (float)glfwGetTime(), glm::vec3(1.0f, 1.0f, 0.0f));
+
     
-    //model = glm::translate(model, vec3(0.5f, 0.0f, 0.0f));
-    
-    mesh->modelMatrix = model;
-    
-    
-    
-    mesh->viewMatrix = camera.view;
-    mesh->projectionMatrix = camera.projection;
     mesh->Update();
+    
+    shaderProgram->use();
+    
+            GLuint m = shaderProgram->uniform("model");
+            glUniformMatrix4fv(m, 1, GL_FALSE, glm::value_ptr(mesh->modelMatrix));
+    
+            GLuint v = shaderProgram->uniform("view");
+            glUniformMatrix4fv(v, 1, GL_FALSE, glm::value_ptr(camera.view));
+    
+            GLuint p = shaderProgram->uniform("projection");
+            glUniformMatrix4fv(p, 1, GL_FALSE, glm::value_ptr(camera.projection));
+
+    
+    shaderProgram->disable();
     
 }
 

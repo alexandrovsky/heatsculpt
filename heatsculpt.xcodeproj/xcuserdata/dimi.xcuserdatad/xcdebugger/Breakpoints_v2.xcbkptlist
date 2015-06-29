@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "heatsculpt/Mesh.cpp"
-            timestampString = "457310719.755976"
+            timestampString = "457312155.304443"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "Mesh::Draw()"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,27 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "heatsculpt/Mesh.cpp"
-            timestampString = "457310719.755976"
+            timestampString = "457312155.304443"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "Mesh::Mesh(ShaderProgram* shader, vector&lt;Attribute&gt; attributes, const vector&lt;vec3&gt;&amp; vertices, const vector&lt;GLuint&gt;&amp; indices)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "heatsculpt/Mesh.cpp"
-            timestampString = "457310719.755976"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
             landmarkName = "Mesh::addVBO(vector&lt;T&gt; vector, GLuint vbo, string attributeName, GLuint type)"
             landmarkType = "5">
          </BreakpointContent>
@@ -170,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "heatsculpt/Mesh.cpp"
-            timestampString = "457310732.595922"
+            timestampString = "457312013.072909"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "Mesh::Mesh(ShaderProgram* shader, vector&lt;Attribute&gt; attributes, const vector&lt;vec3&gt;&amp; vertices, const vector&lt;GLuint&gt;&amp; indices)"
             landmarkType = "5">
          </BreakpointContent>
@@ -186,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "heatsculpt/Mesh.cpp"
-            timestampString = "457310794.479818"
+            timestampString = "457311759.914222"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "Mesh::Mesh(ShaderProgram* shader, vector&lt;Attribute&gt; attributes, const vector&lt;vec3&gt;&amp; vertices, const vector&lt;GLuint&gt;&amp; indices)"
             landmarkType = "5">
          </BreakpointContent>
@@ -202,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "heatsculpt/Mesh.cpp"
-            timestampString = "457310848.195265"
+            timestampString = "457312155.304443"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "259"
-            endingLineNumber = "259"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
             landmarkName = "Mesh::addVBO(vector&lt;T&gt; vector, Attribute&amp; attribute)"
             landmarkType = "5">
          </BreakpointContent>
