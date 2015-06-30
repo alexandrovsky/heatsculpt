@@ -31,39 +31,29 @@ bool MeshTestApp::Init(){
     if (!res) { return res; }
     
     vertexShader = new Shader(GL_VERTEX_SHADER);
-    vertexShader->loadFromString(vertexShaderSrc);
+    vertexShader->loadFromFile("shaders/simple.vert");
     vertexShader->compile();
     
     fragmentShader = new Shader(GL_FRAGMENT_SHADER);
-    fragmentShader->loadFromString(fragmentShaderSrc);
+    fragmentShader->loadFromFile("shaders/simple.frag");
     fragmentShader->compile();
     
+    geometryShader = new Shader(GL_GEOMETRY_SHADER);
+    geometryShader->loadFromString(geometryShaderSrc);
+    geometryShader->compile();
     
     shaderProgram = new ShaderProgram();
     shaderProgram->attachShader(*vertexShader);
     shaderProgram->attachShader(*fragmentShader);
+//    shaderProgram->attachShader(*geometryShader);
     shaderProgram->linkProgram();
     shaderProgram->use();
+    
     
     vector<vec3> vertices;
     vector<vec3> colors;
     vector<GLuint> indices;
-    vector<Attribute>attributes;
-    
-    Attribute positionAttrib;
-    positionAttrib.name = "Position";
-    positionAttrib.num_of_components = 3;
-    positionAttrib.data_type = GL_FLOAT;
-    positionAttrib.buffer_type = GL_ARRAY_BUFFER;
-    attributes.push_back(positionAttrib);
-    
-    Attribute colorAttrib;
-    colorAttrib.name = "Color";
-    colorAttrib.num_of_components = 3;
-    colorAttrib.data_type = GL_FLOAT;
-    colorAttrib.buffer_type = GL_ARRAY_BUFFER;
-    attributes.push_back(colorAttrib);
-    
+//    vector<Attribute>attributes;
     
     
     
@@ -80,6 +70,14 @@ bool MeshTestApp::Init(){
     mesh = new Mesh();
     // position:
     {
+        Attribute positionAttrib;
+        positionAttrib.name = "Position";
+        positionAttrib.num_of_components = 3;
+        positionAttrib.data_type = GL_FLOAT;
+        positionAttrib.buffer_type = GL_ARRAY_BUFFER;
+
+        
+        
         mesh->addVBO(vertices, positionAttrib);
         shaderProgram->use();
         positionAttrib.id = shaderProgram->addAttribute(positionAttrib.name);
@@ -91,6 +89,14 @@ bool MeshTestApp::Init(){
     
     // color:
     {
+        Attribute colorAttrib;
+        colorAttrib.name = "Color";
+        colorAttrib.num_of_components = 3;
+        colorAttrib.data_type = GL_FLOAT;
+        colorAttrib.buffer_type = GL_ARRAY_BUFFER;
+
+        
+        
         mesh->addVBO(colors, colorAttrib);
         shaderProgram->use();
         colorAttrib.id = shaderProgram->addAttribute(colorAttrib.name);

@@ -25,10 +25,12 @@ public:
     
     
     Shader* vertexShader;
+    Shader* geometryShader;
     Shader* fragmentShader;
     
     ShaderProgram* shaderProgram;
     Mesh* mesh;
+
     
     const string vertexShaderSrc =
     GLSL(
@@ -41,6 +43,7 @@ public:
          in vec3 Color;
          
          out vec3 vColor;
+
          
          void main() {
              mat4 mvp = projection * view * model;
@@ -48,6 +51,23 @@ public:
              vColor = Color;
          }
     );
+    
+    // fragment:
+    const char* geometryShaderSrc =
+    GLSL(
+         //#extension GL_EXT_geometry_shader4 : enable
+         in vec3 vColor[];
+         in float vSides[];
+         
+         out vec3 fColor;
+         
+         void main() {
+             fColor = vColor[0];
+
+         }
+
+    );
+    
     
     // fragment:
     const char* fragmentShaderSrc =
