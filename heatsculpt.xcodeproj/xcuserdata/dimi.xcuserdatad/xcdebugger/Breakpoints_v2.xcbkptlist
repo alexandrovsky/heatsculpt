@@ -105,38 +105,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "heatsculpt/Mesh.cpp"
-            timestampString = "457312155.304443"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
-            landmarkName = "Mesh::Draw()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "heatsculpt/Mesh.cpp"
-            timestampString = "457312155.304443"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
-            landmarkName = "Mesh::addVBO(vector&lt;T&gt; vector, GLuint vbo, string attributeName, GLuint type)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "heatsculpt/ShaderProgram.cpp"
             timestampString = "457309910.602221"
             startingColumnNumber = "9223372036854775807"
@@ -154,12 +122,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "heatsculpt/Mesh.cpp"
-            timestampString = "457312013.072909"
+            timestampString = "457316850.360927"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "Mesh::Mesh(ShaderProgram* shader, vector&lt;Attribute&gt; attributes, const vector&lt;vec3&gt;&amp; vertices, const vector&lt;GLuint&gt;&amp; indices)"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "Mesh::Draw()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -169,29 +137,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "heatsculpt/Mesh.cpp"
-            timestampString = "457311759.914222"
+            filePath = "heatsculpt/MeshTestApp.cpp"
+            timestampString = "457315295.623323"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "Mesh::Mesh(ShaderProgram* shader, vector&lt;Attribute&gt; attributes, const vector&lt;vec3&gt;&amp; vertices, const vector&lt;GLuint&gt;&amp; indices)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "heatsculpt/Mesh.cpp"
-            timestampString = "457312155.304443"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
-            landmarkName = "Mesh::addVBO(vector&lt;T&gt; vector, Attribute&amp; attribute)"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "MeshTestApp::Init()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -11,7 +11,6 @@
 		360A6F2F1B2B786200A3CEFC /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 360A6F2D1B2B786200A3CEFC /* App.cpp */; };
 		360A6F331B2B7C7200A3CEFC /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 360A6F321B2B7C7200A3CEFC /* OpenGL.framework */; };
 		361DA9941B37445500E4B3BB /* MeshUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 361DA9921B37445500E4B3BB /* MeshUtils.cpp */; };
-		361DA9971B3749CA00E4B3BB /* TessMeshTestApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 361DA9951B3749CA00E4B3BB /* TessMeshTestApp.cpp */; };
 		368E607B1B2B8D1C00A04AB6 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E60791B2B8D1C00A04AB6 /* Camera.cpp */; };
 		368E607E1B2C4CCE00A04AB6 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E607C1B2C4CCE00A04AB6 /* Shader.cpp */; };
 		368E60811B2C4ED800A04AB6 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E607F1B2C4ED800A04AB6 /* ShaderProgram.cpp */; };
@@ -44,8 +43,6 @@
 		360A6F321B2B7C7200A3CEFC /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		361DA9921B37445500E4B3BB /* MeshUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MeshUtils.cpp; sourceTree = "<group>"; };
 		361DA9931B37445500E4B3BB /* MeshUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeshUtils.h; sourceTree = "<group>"; };
-		361DA9951B3749CA00E4B3BB /* TessMeshTestApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TessMeshTestApp.cpp; sourceTree = "<group>"; };
-		361DA9961B3749CA00E4B3BB /* TessMeshTestApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TessMeshTestApp.h; sourceTree = "<group>"; };
 		368E60791B2B8D1C00A04AB6 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		368E607A1B2B8D1C00A04AB6 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		368E607C1B2C4CCE00A04AB6 /* Shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shader.cpp; sourceTree = "<group>"; };
@@ -142,8 +139,6 @@
 				368E60991B2EC7E900A04AB6 /* TestApp.h */,
 				368E609E1B317F2B00A04AB6 /* MeshTestApp.cpp */,
 				368E609F1B317F2B00A04AB6 /* MeshTestApp.h */,
-				361DA9951B3749CA00E4B3BB /* TessMeshTestApp.cpp */,
-				361DA9961B3749CA00E4B3BB /* TessMeshTestApp.h */,
 			);
 			name = test;
 			sourceTree = "<group>";
@@ -218,7 +213,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				368E60941B2C90EE00A04AB6 /* Mesh.cpp in Sources */,
-				361DA9971B3749CA00E4B3BB /* TessMeshTestApp.cpp in Sources */,
 				368E60A41B32366400A04AB6 /* Debug.cpp in Sources */,
 				368E60A01B317F2B00A04AB6 /* MeshTestApp.cpp in Sources */,
 				361DA9941B37445500E4B3BB /* MeshUtils.cpp in Sources */,
