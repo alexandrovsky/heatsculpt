@@ -70,11 +70,14 @@ void Mesh::Draw() {
     glBindBuffer(indicesAttrib.buffer_type, indicesAttrib.vbo);
 
     
-    glPointSize(5.0);
-    glDrawElements(GL_POINTS, drawCount, indicesAttrib.data_type, 0);
+//    glPointSize(5.0);
+//    glDrawElements(GL_POINTS, drawCount, indicesAttrib.data_type, 0);
 //    glDrawElements(GL_LINES, drawCount, GL_UNSIGNED_INT, 0);
-    glDrawElements(GL_TRIANGLES, drawCount, indicesAttrib.data_type, 0);
-
+    
+    
+//    glDrawElements(GL_TRIANGLES, drawCount, indicesAttrib.data_type, 0);
+    glPatchParameteri(GL_PATCH_VERTICES, 3);
+    glDrawElements(GL_PATCHES, drawCount, indicesAttrib.data_type, 0);
     
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glDisableVertexAttribArray(0);

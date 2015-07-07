@@ -1,17 +1,18 @@
 //
-//  MeshTestApp.cpp
+//  TessMeshApp.cpp
 //  heatsculpt
 //
-//  Created by Dmitry Alexandrovsky on 17.06.15.
+//  Created by Dmitry Alexandrovsky on 07.07.15.
 //  Copyright (c) 2015 Dmitry Alexandrovsky. All rights reserved.
 //
 
-#include "MeshTestApp.h"
+#include "TessMeshApp.h"
+
 #include "MeshUtils.h"
 #include "ColorUtils.h"
 
 
-MeshTestApp::MeshTestApp(const std::string& window_title, int window_width, int window_height):
+TessMeshApp::TessMeshApp(const std::string& window_title, int window_width, int window_height):
 App::App(window_title, window_width, window_height)
 {
     
@@ -19,33 +20,44 @@ App::App(window_title, window_width, window_height)
 
 
 
-MeshTestApp::~MeshTestApp()
+TessMeshApp::~TessMeshApp()
 {
     delete mesh;
 }
 
 
-bool MeshTestApp::Init(){
+bool TessMeshApp::Init(){
     
     bool res = App::Init();
     if (!res) { return res; }
     
     vertexShader = new Shader(GL_VERTEX_SHADER);
-    vertexShader->loadFromFile("shaders/example1.vert");
+    vertexShader->loadFromFile("shaders/tess.vert");
     vertexShader->compile();
     
     fragmentShader = new Shader(GL_FRAGMENT_SHADER);
-    fragmentShader->loadFromFile("shaders/example1.frag");
+    fragmentShader->loadFromFile("shaders/tess.frag");
     fragmentShader->compile();
     
     geometryShader = new Shader(GL_GEOMETRY_SHADER);
-    geometryShader->loadFromFile("shaders/example1.geom");
+    geometryShader->loadFromFile("shaders/tess.geom");
     geometryShader->compile();
+    
+    tesselationControlShader = new Shader(GL_TESS_CONTROL_SHADER);
+    tesselationControlShader->loadFromFile("shaders/tess.tcs");
+    tesselationControlShader->compile();
+    
+    
+    tesselationEvaluationShader = new Shader(GL_TESS_EVALUATION_SHADER);
+    tesselationEvaluationShader->loadFromFile("shaders/tess.tes");
+    tesselationEvaluationShader->compile();
     
     shaderProgram = new ShaderProgram();
     shaderProgram->attachShader(*vertexShader);
     shaderProgram->attachShader(*fragmentShader);
     shaderProgram->attachShader(*geometryShader);
+    shaderProgram->attachShader(*tesselationControlShader);
+    shaderProgram->attachShader(*tesselationEvaluationShader);
     shaderProgram->linkProgram();
     shaderProgram->use();
     
@@ -53,7 +65,7 @@ bool MeshTestApp::Init(){
     vector<vec3> vertices;
     vector<vec3> colors;
     vector<GLuint> indices;
-//    vector<Attribute>attributes;
+    //    vector<Attribute>attributes;
     
     
     
@@ -62,7 +74,7 @@ bool MeshTestApp::Init(){
     
     
     unsigned int num_of_colors = (unsigned int)vertices.size();
-
+    
     colors.reserve(num_of_colors);
     generateColors(num_of_colors, colors);
     
@@ -75,7 +87,7 @@ bool MeshTestApp::Init(){
         positionAttrib.num_of_components = 3;
         positionAttrib.data_type = GL_FLOAT;
         positionAttrib.buffer_type = GL_ARRAY_BUFFER;
-
+        
         
         
         mesh->addVBO(vertices, positionAttrib);
@@ -94,7 +106,7 @@ bool MeshTestApp::Init(){
         colorAttrib.num_of_components = 3;
         colorAttrib.data_type = GL_FLOAT;
         colorAttrib.buffer_type = GL_ARRAY_BUFFER;
-
+        
         
         
         mesh->addVBO(colors, colorAttrib);
@@ -130,36 +142,36 @@ bool MeshTestApp::Init(){
     }
     
     
-        
-
+    
+    
     
     
     return res;
 }
 
-void MeshTestApp::Update(){
+void TessMeshApp::Update(){
     App::Update();
-
+    
     
     mesh->Update();
     
     shaderProgram->use();
     
-            GLuint m = shaderProgram->uniform("model");
-            glUniformMatrix4fv(m, 1, GL_FALSE, glm::value_ptr(mesh->modelMatrix));
+    GLuint m = shaderProgram->uniform("model");
+    glUniformMatrix4fv(m, 1, GL_FALSE, glm::value_ptr(mesh->modelMatrix));
     
-            GLuint v = shaderProgram->uniform("view");
-            glUniformMatrix4fv(v, 1, GL_FALSE, glm::value_ptr(camera.view));
+    GLuint v = shaderProgram->uniform("view");
+    glUniformMatrix4fv(v, 1, GL_FALSE, glm::value_ptr(camera.view));
     
-            GLuint p = shaderProgram->uniform("projection");
-            glUniformMatrix4fv(p, 1, GL_FALSE, glm::value_ptr(camera.projection));
-
+    GLuint p = shaderProgram->uniform("projection");
+    glUniformMatrix4fv(p, 1, GL_FALSE, glm::value_ptr(camera.projection));
+    
     
     shaderProgram->disable();
     
 }
 
-void MeshTestApp::Render(){
+void TessMeshApp::Render(){
     App::Render();
     shaderProgram->use();
     mesh->Draw();
