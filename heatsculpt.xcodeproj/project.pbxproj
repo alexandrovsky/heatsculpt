@@ -162,11 +162,11 @@
 		3667109D1B4C18F1004B3EF0 /* simpleTess */ = {
 			isa = PBXGroup;
 			children = (
-				366710A31B4C1991004B3EF0 /* tess.frag */,
-				366710A41B4C1991004B3EF0 /* tess.geom */,
+				366710A71B4C1991004B3EF0 /* tess.vert */,
 				366710A51B4C1991004B3EF0 /* tess.tcs */,
 				366710A61B4C1991004B3EF0 /* tess.tes */,
-				366710A71B4C1991004B3EF0 /* tess.vert */,
+				366710A41B4C1991004B3EF0 /* tess.geom */,
+				366710A31B4C1991004B3EF0 /* tess.frag */,
 			);
 			name = simpleTess;
 			sourceTree = "<group>";

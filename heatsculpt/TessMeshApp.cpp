@@ -138,7 +138,26 @@ bool TessMeshApp::Init(){
         glUniformMatrix4fv(view, 1, GL_FALSE, glm::value_ptr(camera.view));
         GLuint projection = shaderProgram->addUniform("projection");
         glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(camera.projection));
+        
+        
+        GLuint light0 = shaderProgram->addUniform("lightPosition");
+        vec3 lightPosition(0.25f, 0.25f, 1.0f);
+        glUniform3fv(light0, 1, glm::value_ptr(lightPosition));
+        
+        
+        GLuint ambient = shaderProgram->addUniform("ambientMaterial");
+        vec3 ambientMaterial(0.04f, 0.04f, 0.04f);
+        glUniform3fv(ambient, 1, glm::value_ptr(ambientMaterial));
+        
+
+        GLuint diffuse = shaderProgram->addUniform("diffuseMaterial");
+        vec3 diffuseMaterial(0.0f, 0.75f, 0.75f);
+        glUniform3fv(diffuse, 1, glm::value_ptr(diffuseMaterial));
+        
         shaderProgram->disable();
+        
+        
+        
     }
     
     

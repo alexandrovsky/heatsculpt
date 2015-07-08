@@ -51,7 +51,7 @@ Mesh::~Mesh() {
 
 
 void Mesh::Update(){
-    modelMatrix = glm::rotate( mat4(), glm::radians(10.0f) * (float)glfwGetTime(), glm::vec3(1.0f, 1.0f, 0.0f));
+    modelMatrix = glm::rotate( mat4(), glm::radians(0.0f) * (float)glfwGetTime(), glm::vec3(1.0f, 1.0f, 0.0f));
     
 }
 
