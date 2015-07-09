@@ -23,14 +23,15 @@ public:
  
 private:
     
-    Shader* vertexShader;
-    Shader* geometryShader;
-    Shader* fragmentShader;
-    Shader* tesselationControlShader;
-    Shader* tesselationEvaluationShader;
+    void initMeshShader();
+    void initMesh();
     
-    ShaderProgram* shaderProgram;
+    ShaderProgram* meshShaderProgram;
+    ShaderProgram* mouseShaderProgram;
+    
     Mesh* mesh;
+    Mesh* mouse;
+    
 };
 
 #endif /* defined(__heatsculpt__TessMeshApp__) */

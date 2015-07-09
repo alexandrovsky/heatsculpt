@@ -11,6 +11,9 @@
 		360A6F2F1B2B786200A3CEFC /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 360A6F2D1B2B786200A3CEFC /* App.cpp */; };
 		360A6F331B2B7C7200A3CEFC /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 360A6F321B2B7C7200A3CEFC /* OpenGL.framework */; };
 		361DA9941B37445500E4B3BB /* MeshUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 361DA9921B37445500E4B3BB /* MeshUtils.cpp */; };
+		362C3B851B4D7DE100666F95 /* mouse.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 369A90481B4D33D9000D94C1 /* mouse.vert */; };
+		362C3B861B4D7DE100666F95 /* mouse.geom in CopyFiles */ = {isa = PBXBuildFile; fileRef = 369A904A1B4D33F1000D94C1 /* mouse.geom */; };
+		362C3B871B4D7DE100666F95 /* mouse.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 369A90491B4D33E7000D94C1 /* mouse.frag */; };
 		3667109C1B4C1788004B3EF0 /* TessMeshApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3667109A1B4C1788004B3EF0 /* TessMeshApp.cpp */; };
 		366710A81B4C1B2D004B3EF0 /* tess.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 366710A31B4C1991004B3EF0 /* tess.frag */; };
 		366710A91B4C1B2D004B3EF0 /* tess.geom in CopyFiles */ = {isa = PBXBuildFile; fileRef = 366710A41B4C1991004B3EF0 /* tess.geom */; };
@@ -38,6 +41,9 @@
 			dstPath = shaders;
 			dstSubfolderSpec = 16;
 			files = (
+				362C3B851B4D7DE100666F95 /* mouse.vert in CopyFiles */,
+				362C3B861B4D7DE100666F95 /* mouse.geom in CopyFiles */,
+				362C3B871B4D7DE100666F95 /* mouse.frag in CopyFiles */,
 				366710A81B4C1B2D004B3EF0 /* tess.frag in CopyFiles */,
 				366710A91B4C1B2D004B3EF0 /* tess.geom in CopyFiles */,
 				366710AA1B4C1B2D004B3EF0 /* tess.tcs in CopyFiles */,
@@ -83,6 +89,9 @@
 		368E60A31B32366400A04AB6 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Debug.h; sourceTree = "<group>"; };
 		368E60A51B3592BD00A04AB6 /* ColorUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColorUtils.cpp; sourceTree = "<group>"; };
 		368E60A61B3592BD00A04AB6 /* ColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorUtils.h; sourceTree = "<group>"; };
+		369A90481B4D33D9000D94C1 /* mouse.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = mouse.vert; sourceTree = "<group>"; };
+		369A90491B4D33E7000D94C1 /* mouse.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = mouse.frag; sourceTree = "<group>"; };
+		369A904A1B4D33F1000D94C1 /* mouse.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = mouse.geom; sourceTree = "<group>"; };
 		36FDAEF11B43214800A15BA0 /* simple.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = simple.vert; sourceTree = "<group>"; };
 		36FDAEF21B43215F00A15BA0 /* simple.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = simple.frag; sourceTree = "<group>"; };
 		36FDAEFD1B432CAE00A15BA0 /* example1.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = example1.frag; path = "../../../Library/Developer/Xcode/DerivedData/heatsculpt-frtolbhmmkjpepfrabmcgoonetbu/Build/Products/Debug/shaders/example1.frag"; sourceTree = "<group>"; };
@@ -217,9 +226,20 @@
 			name = utils;
 			sourceTree = "<group>";
 		};
+		369A90471B4D33C1000D94C1 /* mouse */ = {
+			isa = PBXGroup;
+			children = (
+				369A90481B4D33D9000D94C1 /* mouse.vert */,
+				369A904A1B4D33F1000D94C1 /* mouse.geom */,
+				369A90491B4D33E7000D94C1 /* mouse.frag */,
+			);
+			name = mouse;
+			sourceTree = "<group>";
+		};
 		36FDAEF01B4320EC00A15BA0 /* shaders */ = {
 			isa = PBXGroup;
 			children = (
+				369A90471B4D33C1000D94C1 /* mouse */,
 				3667109D1B4C18F1004B3EF0 /* simpleTess */,
 				366710981B4C0CA7004B3EF0 /* example1 */,
 				366710991B4C0CB2004B3EF0 /* simple */,

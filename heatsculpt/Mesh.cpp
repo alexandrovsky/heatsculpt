@@ -55,14 +55,14 @@ void Mesh::Update(){
     
 }
 
-void Mesh::Draw() {
+void Mesh::Draw(GLuint type) {
 
     glBindVertexArray(vao);
 
 
     for (int i = 0; i < attributes.size(); i++) {
         Attribute attrib = attributes[i];
-        glBindBuffer(GL_ARRAY_BUFFER, attributes[i].vbo);
+        glBindBuffer(attributes[i].buffer_type, attributes[i].vbo);
         glEnableVertexAttribArray(attrib.id);
     }
     
@@ -76,9 +76,21 @@ void Mesh::Draw() {
     
     
 //    glDrawElements(GL_TRIANGLES, drawCount, indicesAttrib.data_type, 0);
-    glPatchParameteri(GL_PATCH_VERTICES, 3);
-    glDrawElements(GL_PATCHES, drawCount, indicesAttrib.data_type, 0);
     
+    switch (type) {
+        case GL_PATCHES:
+            glPatchParameteri(GL_PATCH_VERTICES, 3);
+            break;
+        case GL_POINTS:
+            glPointSize(5.0);
+            break;
+        default:
+            break;
+    }
+
+    glDrawElements(type, drawCount, indicesAttrib.data_type, 0);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glDisableVertexAttribArray(0);
     

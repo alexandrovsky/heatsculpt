@@ -15,6 +15,7 @@ in vec3 gFacetNormal;
 in vec3 gTriDistance;
 in vec3 gPatchDistance;
 
+in vec4 gColor;
 
 float amplify(float d, float scale, float offset)
 {
@@ -38,5 +39,5 @@ void main(void)
     float d2 = min(min(gPatchDistance.x, gPatchDistance.y), gPatchDistance.z);
     color = amplify(d1, 40, -0.5) * amplify(d2, 60, -0.5) * color;
     
-    fragColor = vec4(color, 1.0); // vec4(1.0,1.0,1.0,1.0);
+    fragColor = gColor * vec4(color, 1.0); // vec4(1.0,1.0,1.0,1.0);
 }

@@ -64,7 +64,7 @@ bool ShaderProgram::linkProgram()
         }
         
         for (int i = 0; i < shaders.size(); i++) {
-            glDeleteShader(shaders[i].getId());
+            shaders[i].deleteShader();
         }
         
     }

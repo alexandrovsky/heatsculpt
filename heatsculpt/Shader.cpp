@@ -33,7 +33,7 @@ Shader::Shader(const GLenum &type){
     id = glCreateShader(type);
 }
 Shader::~Shader(){
-    glDeleteShader(id);
+    deleteShader();
 }
     // Method to load the shader contents from a file
 bool Shader::loadFromString(const string &sourceString){
@@ -107,6 +107,10 @@ bool Shader::compile(){
     
     cout << typeString << " shader compilation OK" << endl;
     return true;
+}
+
+void Shader::deleteShader(){
+    glDeleteShader(id);
 }
 
 

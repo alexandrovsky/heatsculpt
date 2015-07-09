@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "heatsculpt/Camera.cpp"
-            timestampString = "456352460.87631"
+            timestampString = "458042708.139574"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "51"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "heatsculpt/Camera.cpp"
-            timestampString = "456352460.87631"
+            timestampString = "458042708.139574"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "178"
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "heatsculpt/App.cpp"
-            timestampString = "456618405.852273"
+            timestampString = "458153019.609652"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "239"
-            endingLineNumber = "239"
+            startingLineNumber = "242"
+            endingLineNumber = "242"
             landmarkName = "App::Render()"
             landmarkType = "5">
          </BreakpointContent>
@@ -118,16 +118,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "heatsculpt/Mesh.cpp"
-            timestampString = "457316850.360927"
+            filePath = "heatsculpt/TessMeshApp.cpp"
+            timestampString = "458152428.2562"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "Mesh::Draw()"
+            startingLineNumber = "344"
+            endingLineNumber = "344"
+            landmarkName = "TessMeshApp::Update()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -137,13 +137,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "heatsculpt/MeshTestApp.cpp"
-            timestampString = "457385835.776255"
+            filePath = "heatsculpt/TessMeshApp.cpp"
+            timestampString = "458151702.494342"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "MeshTestApp::Init()"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
+            landmarkName = "TessMeshApp::Init()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

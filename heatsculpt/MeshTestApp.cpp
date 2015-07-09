@@ -162,6 +162,6 @@ void MeshTestApp::Update(){
 void MeshTestApp::Render(){
     App::Render();
     shaderProgram->use();
-    mesh->Draw();
+    mesh->Draw(GL_TRIANGLES);
     shaderProgram->disable();
 }

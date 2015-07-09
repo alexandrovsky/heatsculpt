@@ -129,10 +129,14 @@ bool App::Init() {
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-
     
+    //fullscreen
+    GLFWmonitor* monitor =  glfwGetPrimaryMonitor();
+//    const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+//    window_width = mode->width;
+//    window_height = mode->height;
 
-    this->window = glfwCreateWindow(window_width, window_height, window_title.c_str(), NULL, NULL);
+    this->window = glfwCreateWindow(window_width, window_height, window_title.c_str(), monitor, NULL);
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1);
     
@@ -146,7 +150,6 @@ bool App::Init() {
     if (!InitOpenGL()) {
         return false;
     }
-    
     
     glfwSetKeyCallback(window, key_callback);
     glfwSetCursorPosCallback(window, cursor_position_callback);
@@ -206,6 +209,7 @@ void App::OnMouseUp(int mouse_btn, int mode){
 
 void App::Exit(){
     isRunning = false;
+    glfwDestroyWindow(window);
 }
 
 
@@ -230,7 +234,6 @@ void App::Render() {
     /* Move Left 1.5 Units And Into The Screen 6.0 */
     glLoadIdentity();
     
-    
     if (drawWireFrame) {
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     }else{
@@ -240,7 +243,6 @@ void App::Render() {
 }
 
 void App::Cleanup() {
-    glfwDestroyWindow(window);
     glfwTerminate();
 }
 

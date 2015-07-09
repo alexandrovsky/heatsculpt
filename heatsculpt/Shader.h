@@ -78,6 +78,8 @@ public:
     
     // Method to compile a shader and display any problems if compilation fails
     bool compile();
+    
+    void deleteShader();
 };
 
 

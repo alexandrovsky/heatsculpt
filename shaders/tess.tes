@@ -3,7 +3,11 @@
 layout(triangles, equal_spacing, cw) in;
 
 in vec3 tcPosition[];
+in vec4 tcColor[];
+
 out vec3 tePosition;
+out vec4 teColor;
+
 out vec3 tePatchDistance;
 
 uniform mat4 model;
@@ -14,6 +18,9 @@ uniform mat4 projection;
 
 void main()
 {
+
+    teColor = tcColor[0];
+
     mat4 mvp = projection * view * model;
 
     vec3 p0 = gl_TessCoord.x * tcPosition[0];

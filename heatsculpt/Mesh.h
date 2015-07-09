@@ -49,7 +49,7 @@ public:
 
     
     void Update();
-    void Draw();
+    void Draw(GLuint type);
     
     void addIndices(vector<GLuint> indices);
     template<typename T> GLuint addVBO(vector<T> vector, Attribute& attribute);
