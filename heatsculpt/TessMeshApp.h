@@ -13,7 +13,7 @@
 
 class TessMeshApp : public App {
 public:
-    TessMeshApp(const std::string& window_title, int window_width, int window_height);
+    TessMeshApp(const std::string& window_title, bool fullscreen);
     virtual ~TessMeshApp();
     
     

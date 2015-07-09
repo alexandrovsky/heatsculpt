@@ -45,12 +45,13 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 
 
 
-App::App(const std::string& window_title, int width, int height) {
+App::App(const std::string& window_title, bool fullscreen) {
     
     _instance = this;
-    this->window_width = width;
-    this->window_height = height;
+    this->window_width = 0;
+    this->window_height = 0;
     this->isRunning = true;
+    this->isFullScreen = fullscreen;
 }
 
 
@@ -132,11 +133,15 @@ bool App::Init() {
     
     //fullscreen
     GLFWmonitor* monitor =  glfwGetPrimaryMonitor();
-//    const GLFWvidmode* mode = glfwGetVideoMode(monitor);
-//    window_width = mode->width;
-//    window_height = mode->height;
+    const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+    this->window_width = mode->width;
+    this->window_height = mode->height;
 
-    this->window = glfwCreateWindow(window_width, window_height, window_title.c_str(), monitor, NULL);
+    this->window = glfwCreateWindow(window_width,
+                                    window_height,
+                                    window_title.c_str(),
+                                    isFullScreen ? monitor : NULL,
+                                    NULL);
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1);
     
@@ -181,8 +186,15 @@ void App::OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int m
             break;
         case GLFW_KEY_P:
             drawWireFrame = !drawWireFrame;
+            break;
         case GLFW_KEY_R:
             camera.Reset();
+            break;
+            
+        case GLFW_KEY_ESCAPE:
+            Exit();
+            break;
+        
         default:
             break;
     }

@@ -12,8 +12,8 @@
 #include "ColorUtils.h"
 
 
-TessMeshApp::TessMeshApp(const std::string& window_title, int window_width, int window_height):
-App::App(window_title, window_width, window_height)
+TessMeshApp::TessMeshApp(const std::string& window_title, bool fullscreen):
+App::App(window_title, fullscreen)
 ,mesh(NULL)
 ,mouse(NULL)
 ,meshShaderProgram(NULL)

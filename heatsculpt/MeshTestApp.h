@@ -15,7 +15,7 @@
 
 class MeshTestApp : public App{
 public:
-    MeshTestApp(const std::string& window_title, int window_width, int window_height);
+    MeshTestApp(const std::string& window_title);
     virtual ~MeshTestApp();
     
     

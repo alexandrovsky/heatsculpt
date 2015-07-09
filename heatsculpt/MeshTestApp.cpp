@@ -11,8 +11,8 @@
 #include "ColorUtils.h"
 
 
-MeshTestApp::MeshTestApp(const std::string& window_title, int window_width, int window_height):
-App::App(window_title, window_width, window_height)
+MeshTestApp::MeshTestApp(const std::string& window_title):
+App::App(window_title, true)
 {
     
 }

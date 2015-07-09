@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
 //    MeshTestApp mtApp("Mesh Test", 800, 600);
 //    return mtApp.Start();
     
-    TessMeshApp tessApp("tess", 800, 600);
+    TessMeshApp tessApp("tess", true);
     return tessApp.Start();
     
 }
