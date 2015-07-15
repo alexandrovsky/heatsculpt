@@ -10,7 +10,8 @@
 
 //#include "TestApp.h"
 //#include "MeshTestApp.h"
-#include "TessMeshApp.h"
+//#include "TessMeshApp.h"
+#include "TransformFeedbackApp.h"
 
 
 
@@ -22,10 +23,14 @@ int main(int argc, char* argv[]) {
 //    MeshTestApp mtApp("Mesh Test", 800, 600);
 //    return mtApp.Start();
     
-    TessMeshApp tessApp("tess", true);
-    return tessApp.Start();
+//    TessMeshApp tessApp("tess", true);
+//    return tessApp.Start();
+    
+    TransformFeedbackApp tfApp("transform feedback", true);
+    return tfApp.Start();
     
 }
+
 
 
 
