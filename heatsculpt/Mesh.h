@@ -8,7 +8,7 @@
 
 #ifndef __heatsculpt__Mesh__
 #define __heatsculpt__Mesh__
-
+#include <string>
 #include <stdio.h>
 #include <vector>
 #include <glm/glm.hpp>
@@ -16,7 +16,7 @@
 #include <gl/glew.h>
 #include <OpenGL/OpenGL.h>
 
-#include "ShaderProgram.h"
+//#include "ShaderProgram.h"
 
 
 using namespace std;
@@ -35,9 +35,6 @@ struct Attribute{
 };
 
 
-
-
-
 class Mesh{
 public:
     Mesh();
@@ -48,27 +45,32 @@ public:
     mat4x4 modelMatrix;
 
     
-    void Update();
+    void Update(GLfloat deltaTime);
     void Draw(GLuint type);
     
     void addIndices(vector<GLuint> indices);
-    template<typename T> GLuint addVBO(vector<T> vector, Attribute& attribute);
+    template<typename T> GLuint addVBO(vector<T> vector, Attribute& attribute, GLuint used_vao);
     
-    
+    void setupAttribute(GLuint vao, Attribute attribute);
 
     vector<Attribute> attributes;
 
+    
     inline GLsizei getDrawCount(){
         return drawCount;
     }
     
+    inline GLuint getVAO(){
+        return vao;
+    }
+protected:
+    Attribute indicesAttrib;
+    GLsizei drawCount;
+    GLuint vao;
 private:
     
     
-    GLuint vao;
     
-    Attribute indicesAttrib;
-    GLsizei drawCount;
     
 
     

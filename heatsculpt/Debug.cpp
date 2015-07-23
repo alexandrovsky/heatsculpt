@@ -7,3 +7,14 @@
 //
 
 #include "Debug.h"
+
+#include <OpenGL/glu.h>
+void checkGlErrors( void )
+{
+    GLenum e = glGetError();
+    while ( e != GL_NO_ERROR )
+    {
+        fprintf( stderr, "GL error: %s!\n", gluErrorString(e) );
+        e = glGetError();
+    }
+}

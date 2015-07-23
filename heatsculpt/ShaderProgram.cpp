@@ -7,7 +7,7 @@
 //
 
 #include "ShaderProgram.h"
-
+#include <OpenGL/OpenGL.h>
 
 ShaderProgram::ShaderProgram()
 {
@@ -157,6 +157,9 @@ int ShaderProgram::addAttribute(const string &attributeName)
     
     return attributeLocList[attributeName];
 }
+
+
+
 
 
     // Method to add a uniform to the shader and return the bound location

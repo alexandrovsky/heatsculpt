@@ -12,6 +12,11 @@
 #include <vector>
 
 #include <stdio.h>
+
+
+void checkGlErrors( void );
+
+
 class Debug{
     
 //    void GetFirstNMessages(GLuint numMsgs)

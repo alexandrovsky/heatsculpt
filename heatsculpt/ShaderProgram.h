@@ -22,6 +22,9 @@ using std::cout;
 using std::endl;
 
 
+
+
+
 class ShaderProgram
 {
 private:
@@ -77,6 +80,8 @@ public:
     
     // Method to add a uniform to the shader and return the bound location
     int addUniform(const string &uniformName);
+    
+
     
 };
 

@@ -10,24 +10,27 @@
 
 //#include "TestApp.h"
 //#include "MeshTestApp.h"
-//#include "TessMeshApp.h"
-#include "TransformFeedbackApp.h"
-
+#include "TessMeshApp.h"
+//#include "TransformFeedbackApp.h"
+#include "TransformFeedbackTessApp.h"
 
 
 int main(int argc, char* argv[]) {
     
-//    TestApp tApp("Geometry Shader Test", 800, 600);
+//    TestApp tApp("Geometry Shader Test");
 //    return tApp.Start();
     
-//    MeshTestApp mtApp("Mesh Test", 800, 600);
+//    MeshTestApp mtApp("Mesh Test");
 //    return mtApp.Start();
     
-//    TessMeshApp tessApp("tess", true);
-//    return tessApp.Start();
+    TessMeshApp tessApp("tess", true);
+    return tessApp.Start();
     
-    TransformFeedbackApp tfApp("transform feedback", true);
-    return tfApp.Start();
+//    TransformFeedbackApp tfApp("transform feedback", true);
+//    return tfApp.Start();
+    
+//    TransformFeedbackTessApp tfTessApp("transform feedback tesselation", true);
+//    return tfTessApp.Start();
     
 }
 

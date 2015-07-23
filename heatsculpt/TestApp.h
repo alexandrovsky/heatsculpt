@@ -15,7 +15,7 @@
 
 class TestApp : public App{
 public:
-    TestApp(const std::string& window_title, int window_width, int window_height);
+    TestApp(const std::string& window_title);
     virtual ~TestApp();
 
     

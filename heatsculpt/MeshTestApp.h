@@ -10,7 +10,7 @@
 #define __heatsculpt__MeshTestApp__
 #include "App.h"
 #include "Mesh.h"
-
+#include "ShaderProgram.h"
 
 
 class MeshTestApp : public App{

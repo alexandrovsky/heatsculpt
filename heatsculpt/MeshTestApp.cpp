@@ -78,7 +78,7 @@ bool MeshTestApp::Init(){
 
         
         
-        mesh->addVBO(vertices, positionAttrib);
+        mesh->addVBO(vertices, positionAttrib, mesh->getVAO());
         shaderProgram->use();
         positionAttrib.id = shaderProgram->addAttribute(positionAttrib.name);
         glEnableVertexAttribArray(positionAttrib.id);
@@ -97,7 +97,7 @@ bool MeshTestApp::Init(){
 
         
         
-        mesh->addVBO(colors, colorAttrib);
+        mesh->addVBO(colors, colorAttrib, mesh->getVAO());
         shaderProgram->use();
         colorAttrib.id = shaderProgram->addAttribute(colorAttrib.name);
         glEnableVertexAttribArray(colorAttrib.id);
@@ -141,7 +141,7 @@ void MeshTestApp::Update(){
     App::Update();
 
     
-    mesh->Update();
+    mesh->Update(glfwGetTime());
     
     shaderProgram->use();
     

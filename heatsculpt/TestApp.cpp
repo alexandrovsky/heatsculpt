@@ -15,7 +15,7 @@
 
 
 
-TestApp::TestApp(const std::string& window_title, int window_width, int window_height):
+TestApp::TestApp(const std::string& window_title):
     App::App(window_title, true)
 {
 

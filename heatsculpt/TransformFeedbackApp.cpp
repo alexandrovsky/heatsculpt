@@ -13,92 +13,94 @@
 
 // the vertex shader simply passes through data
 std::string vertex_source =
-"#version 330\n"
-"layout(location = 0) in vec4 vposition;\n"
-"void main() {\n"
-"   gl_Position = vposition;\n"
-"}\n";
+GLSL(
+layout(location = 0) in vec4 vposition;
+void main() {
+   gl_Position = vposition;
+});
 
 // the geometry shader creates the billboard quads
-std::string geometry_source =
-"#version 330\n"
-"uniform mat4 View;\n"
-"uniform mat4 Projection;\n"
-"layout (points) in;\n"
-"layout (triangle_strip, max_vertices = 4) out;\n"
-"out vec2 txcoord;\n"
-"void main() {\n"
-"   vec4 pos = View*gl_in[0].gl_Position;\n"
-"   txcoord = vec2(-1,-1);\n"
-"   gl_Position = Projection*(pos+0.2*vec4(txcoord,0,0));\n"
-"   EmitVertex();\n"
-"   txcoord = vec2( 1,-1);\n"
-"   gl_Position = Projection*(pos+0.2*vec4(txcoord,0,0));\n"
-"   EmitVertex();\n"
-"   txcoord = vec2(-1, 1);\n"
-"   gl_Position = Projection*(pos+0.2*vec4(txcoord,0,0));\n"
-"   EmitVertex();\n"
-"   txcoord = vec2( 1, 1);\n"
-"   gl_Position = Projection*(pos+0.2*vec4(txcoord,0,0));\n"
-"   EmitVertex();\n"
-"}\n";
+
+
+
+std::string geometry_source = GLSL(
+                                   uniform mat4 View;
+                                   uniform mat4 Projection;
+                                   layout (points) in;
+                                   layout (triangle_strip, max_vertices = 4) out;
+                                   out vec2 txcoord;
+                                   void main() {
+                                       vec4 pos = View*gl_in[0].gl_Position;
+                                       txcoord = vec2(-1,-1);
+                                       gl_Position = Projection*(pos+0.2*vec4(txcoord,0,0));
+                                       EmitVertex();
+                                       txcoord = vec2( 1,-1);
+                                       gl_Position = Projection*(pos+0.2*vec4(txcoord,0,0));
+                                       EmitVertex();
+                                       txcoord = vec2(-1, 1);
+                                       gl_Position = Projection*(pos+0.2*vec4(txcoord,0,0));
+                                       EmitVertex();
+                                       txcoord = vec2( 1, 1);
+                                       gl_Position = Projection*(pos+0.2*vec4(txcoord,0,0));
+                                       EmitVertex();
+                                   });
 
 // the fragment shader creates a bell like radial color distribution
 std::string fragment_source =
-"#version 330\n"
-"in vec2 txcoord;\n"
-"layout(location = 0) out vec4 FragColor;\n"
-"void main() {\n"
-"   float s = 0.2*(1/(1+15.*dot(txcoord, txcoord))-1/16.);\n"
-"   FragColor = s*vec4(0.3,0.3,1.0,1);\n"
-"}\n";
+GLSL(
+in vec2 txcoord;
+layout(location = 0) out vec4 FragColor;
+void main() {
+   float s = 0.2*(1/(1+15.*dot(txcoord, txcoord))-1/16.);
+   FragColor = s*vec4(0.3,0.3,1.0,1);
+});
 
 // the transform feedback shader only has a vertex shader
 std::string transform_vertex_source =
-"#version 330\n"
-"uniform vec3 center[3];\n"
-"uniform float radius[3];\n"
-"uniform vec3 g;\n"
-"uniform float dt;\n"
-"uniform float bounce;\n"
-"uniform int seed;\n"
-"layout(location = 0) in vec3 inposition;\n"
-"layout(location = 1) in vec3 invelocity;\n"
-"out vec3 outposition;\n"
-"out vec3 outvelocity;\n"
+GLSL(
+uniform vec3 center[3];
+uniform float radius[3];
+uniform vec3 g;
+uniform float dt;
+uniform float bounce;
+uniform int seed;
+layout(location = 0) in vec3 inposition;
+layout(location = 1) in vec3 invelocity;
+out vec3 outposition;
+out vec3 outvelocity;
 
-"float hash(int x) {\n"
-"   x = x*1235167 + gl_VertexID*948737 + seed*9284365;\n"
-"   x = (x >> 13) ^ x;\n"
-"   return ((x * (x * x * 60493 + 19990303) + 1376312589) & 0x7fffffff)/float(0x7fffffff-1);\n"
-"}\n"
+float hash(int x) {
+   x = x*1235167 + gl_VertexID*948737 + seed*9284365;
+   x = (x >> 13) ^ x;
+   return ((x * (x * x * 60493 + 19990303) + 1376312589) & 0x7fffffff)/float(0x7fffffff-1);
+}
 
-"void main() {\n"
-"   outvelocity = invelocity;\n"
-"   for(int j = 0;j<3;++j) {\n"
-"       vec3 diff = inposition-center[j];\n"
-"       float dist = length(diff);\n"
-"       float vdot = dot(diff, invelocity);\n"
-"       if(dist<radius[j] && vdot<0.0)\n"
-"           outvelocity -= bounce*diff*vdot/(dist*dist);\n"
-"   }\n"
-"   outvelocity += dt*g;\n"
-"   outposition = inposition + dt*outvelocity;\n"
-"   if(outposition.y < -30.0)\n"
-"   {\n"
-"       outvelocity = vec3(0,0,0);\n"
-"       outposition = 0.5-vec3(hash(3*gl_VertexID+0),hash(3*gl_VertexID+1),hash(3*gl_VertexID+2));\n"
-"       outposition = vec3(0,20,0) + 5.0*outposition;\n"
-"   }\n"
-"}\n";
+void main() {
+   outvelocity = invelocity;
+   for(int j = 0;j<3;++j) {
+       vec3 diff = inposition-center[j];
+       float dist = length(diff);
+       float vdot = dot(diff, invelocity);
+       if(dist<radius[j] && vdot<0.0)
+           outvelocity -= bounce*diff*vdot/(dist*dist);
+   }
+   outvelocity += dt*g;
+   outposition = inposition + dt*outvelocity;
+   if(outposition.y < -30.0)
+   {
+       outvelocity = vec3(0,0,0);
+       outposition = 0.5-vec3(hash(3*gl_VertexID+0),hash(3*gl_VertexID+1),hash(3*gl_VertexID+2));
+       outposition = vec3(0,20,0) + 5.0*outposition;
+   }
+});
 
 
 std::string transform_fragment_source =
-"#version 330\n"
-"out vec4 outColor;\n"
-"void main() {\n"
-"    outColor = vec4(0.8, 0.2, 0.2, 1.0);\n"
-"}\n";
+GLSL(
+out vec4 outColor;
+void main() {
+    outColor = vec4(0.8, 0.2, 0.2, 1.0);
+});
 
 TransformFeedbackApp::TransformFeedbackApp(const std::string& window_title, bool fullscreen):App::App(window_title, fullscreen){
 }
@@ -189,7 +191,7 @@ bool TransformFeedbackApp::Init(){
         vertexData[2*i+1] = glm::vec3(0,0,0);
     }
     
-    
+
     glGenVertexArrays(buffercount, vao);
     glGenBuffers(buffercount, vbo);
     
@@ -226,10 +228,7 @@ bool TransformFeedbackApp::Init(){
     return true;
 }
 void TransformFeedbackApp::Update(){
-
-}
-void TransformFeedbackApp::Render(){
-    
+    App::Update();
     
     // define spheres for the particles to bounce off
     const int spheres = 3;
@@ -254,7 +253,7 @@ void TransformFeedbackApp::Render(){
     
     
     
-
+    
     // use the transform shader program
     transformfeedbackShader->use();
     
@@ -264,7 +263,8 @@ void TransformFeedbackApp::Render(){
     glUniform3fv(g_location, 1, glm::value_ptr(g));
     glUniform1f(dt_location, dt);
     glUniform1f(bounce_location, bounce);
-    glUniform1i(seed_location, std::rand());
+    //    glUniform1i(seed_location, std::rand());
+    glUniform1i(seed_location, 0);
     
     // bind the current vao
     glBindVertexArray(vao[(current_buffer+1)%buffercount]);
@@ -280,6 +280,9 @@ void TransformFeedbackApp::Render(){
     glEndTransformFeedback();
     
     glDisable(GL_RASTERIZER_DISCARD);
+}
+void TransformFeedbackApp::Render(){
+    App::Render();
     
     // clear first
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -294,8 +297,8 @@ void TransformFeedbackApp::Render(){
     glm::mat4 View = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -30.0f));
     
     // make the camera rotate around the origin
-    View = glm::rotate(View, 30.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-    View = glm::rotate(View, -22.5f*t, glm::vec3(0.0f, 1.0f, 0.0f));
+//    View = glm::rotate(View, 30.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+//    View = glm::rotate(View, -22.5f*t, glm::vec3(0.0f, 1.0f, 0.0f));
     
     // set the uniform
     glUniformMatrix4fv(View_location, 1, GL_FALSE, glm::value_ptr(View));
@@ -306,15 +309,6 @@ void TransformFeedbackApp::Render(){
     
     // draw
     glDrawArrays(GL_POINTS, 0, particles);
-    
-    // check for errors
-    GLenum error = glGetError();
-    if(error != GL_NO_ERROR) {
-        std::cerr << error << std::endl;
-    }
-    
-    // finally swap buffers
-    glfwSwapBuffers(window);
     
     // advance buffer index
     current_buffer = (current_buffer + 1) % buffercount;

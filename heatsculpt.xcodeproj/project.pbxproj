@@ -21,6 +21,7 @@
 		366710AB1B4C1B2D004B3EF0 /* tess.tes in CopyFiles */ = {isa = PBXBuildFile; fileRef = 366710A61B4C1991004B3EF0 /* tess.tes */; };
 		366710AC1B4C1B2D004B3EF0 /* tess.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 366710A71B4C1991004B3EF0 /* tess.vert */; };
 		36744AA81B56697000B2D49C /* TransformFeedbackApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36744AA61B56697000B2D49C /* TransformFeedbackApp.cpp */; };
+		367517631B604E30000643BF /* TransformFeedbackMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 367517611B604E30000643BF /* TransformFeedbackMesh.cpp */; };
 		368E607B1B2B8D1C00A04AB6 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E60791B2B8D1C00A04AB6 /* Camera.cpp */; };
 		368E607E1B2C4CCE00A04AB6 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E607C1B2C4CCE00A04AB6 /* Shader.cpp */; };
 		368E60811B2C4ED800A04AB6 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E607F1B2C4ED800A04AB6 /* ShaderProgram.cpp */; };
@@ -31,6 +32,9 @@
 		368E60A01B317F2B00A04AB6 /* MeshTestApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E609E1B317F2B00A04AB6 /* MeshTestApp.cpp */; };
 		368E60A41B32366400A04AB6 /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E60A21B32366400A04AB6 /* Debug.cpp */; };
 		368E60A71B3592BD00A04AB6 /* ColorUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E60A51B3592BD00A04AB6 /* ColorUtils.cpp */; };
+		36F7BE071B5CFAB2008A64A8 /* TransformFeedbackTessApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36F7BE051B5CFAB2008A64A8 /* TransformFeedbackTessApp.cpp */; };
+		36F7BE0B1B5D0DF1008A64A8 /* tfsimple.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36F7BE091B5D0DD1008A64A8 /* tfsimple.vert */; };
+		36F7BE0C1B5D0DF1008A64A8 /* tfsimple.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36F7BE0A1B5D0DE5008A64A8 /* tfsimple.frag */; };
 		36FDAEF31B43225300A15BA0 /* simple.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36FDAEF11B43214800A15BA0 /* simple.vert */; };
 		36FDAEF41B43225300A15BA0 /* simple.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36FDAEF21B43215F00A15BA0 /* simple.frag */; };
 /* End PBXBuildFile section */
@@ -42,6 +46,8 @@
 			dstPath = shaders;
 			dstSubfolderSpec = 16;
 			files = (
+				36F7BE0B1B5D0DF1008A64A8 /* tfsimple.vert in CopyFiles */,
+				36F7BE0C1B5D0DF1008A64A8 /* tfsimple.frag in CopyFiles */,
 				362C3B851B4D7DE100666F95 /* mouse.vert in CopyFiles */,
 				362C3B861B4D7DE100666F95 /* mouse.geom in CopyFiles */,
 				362C3B871B4D7DE100666F95 /* mouse.frag in CopyFiles */,
@@ -74,6 +80,8 @@
 		366710A71B4C1991004B3EF0 /* tess.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = tess.vert; sourceTree = "<group>"; };
 		36744AA61B56697000B2D49C /* TransformFeedbackApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransformFeedbackApp.cpp; sourceTree = "<group>"; };
 		36744AA71B56697000B2D49C /* TransformFeedbackApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformFeedbackApp.h; sourceTree = "<group>"; };
+		367517611B604E30000643BF /* TransformFeedbackMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransformFeedbackMesh.cpp; sourceTree = "<group>"; };
+		367517621B604E30000643BF /* TransformFeedbackMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformFeedbackMesh.h; sourceTree = "<group>"; };
 		368E60791B2B8D1C00A04AB6 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		368E607A1B2B8D1C00A04AB6 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		368E607C1B2C4CCE00A04AB6 /* Shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shader.cpp; sourceTree = "<group>"; };
@@ -95,6 +103,10 @@
 		369A90481B4D33D9000D94C1 /* mouse.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = mouse.vert; sourceTree = "<group>"; };
 		369A90491B4D33E7000D94C1 /* mouse.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = mouse.frag; sourceTree = "<group>"; };
 		369A904A1B4D33F1000D94C1 /* mouse.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = mouse.geom; sourceTree = "<group>"; };
+		36F7BE051B5CFAB2008A64A8 /* TransformFeedbackTessApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransformFeedbackTessApp.cpp; sourceTree = "<group>"; };
+		36F7BE061B5CFAB2008A64A8 /* TransformFeedbackTessApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformFeedbackTessApp.h; sourceTree = "<group>"; };
+		36F7BE091B5D0DD1008A64A8 /* tfsimple.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tfsimple.vert; sourceTree = "<group>"; };
+		36F7BE0A1B5D0DE5008A64A8 /* tfsimple.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tfsimple.frag; sourceTree = "<group>"; };
 		36FDAEF11B43214800A15BA0 /* simple.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = simple.vert; sourceTree = "<group>"; };
 		36FDAEF21B43215F00A15BA0 /* simple.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = simple.frag; sourceTree = "<group>"; };
 		36FDAEFD1B432CAE00A15BA0 /* example1.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = example1.frag; path = "../../../Library/Developer/Xcode/DerivedData/heatsculpt-frtolbhmmkjpepfrabmcgoonetbu/Build/Products/Debug/shaders/example1.frag"; sourceTree = "<group>"; };
@@ -120,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				36FDAEF01B4320EC00A15BA0 /* shaders */,
+				36F7BE081B5D0D53008A64A8 /* transform feedback simple */,
 				368E60901B2C77AA00A04AB6 /* libglfw.3.1.dylib */,
 				368E60841B2C650300A04AB6 /* libGLEW.a */,
 				360A6F321B2B7C7200A3CEFC /* OpenGL.framework */,
@@ -188,6 +201,8 @@
 			children = (
 				368E60921B2C90EE00A04AB6 /* Mesh.cpp */,
 				368E60931B2C90EE00A04AB6 /* Mesh.h */,
+				367517611B604E30000643BF /* TransformFeedbackMesh.cpp */,
+				367517621B604E30000643BF /* TransformFeedbackMesh.h */,
 			);
 			name = object;
 			sourceTree = "<group>";
@@ -214,6 +229,8 @@
 				3667109B1B4C1788004B3EF0 /* TessMeshApp.h */,
 				36744AA61B56697000B2D49C /* TransformFeedbackApp.cpp */,
 				36744AA71B56697000B2D49C /* TransformFeedbackApp.h */,
+				36F7BE051B5CFAB2008A64A8 /* TransformFeedbackTessApp.cpp */,
+				36F7BE061B5CFAB2008A64A8 /* TransformFeedbackTessApp.h */,
 			);
 			name = test;
 			sourceTree = "<group>";
@@ -239,6 +256,16 @@
 				369A90491B4D33E7000D94C1 /* mouse.frag */,
 			);
 			name = mouse;
+			sourceTree = "<group>";
+		};
+		36F7BE081B5D0D53008A64A8 /* transform feedback simple */ = {
+			isa = PBXGroup;
+			children = (
+				36F7BE091B5D0DD1008A64A8 /* tfsimple.vert */,
+				36F7BE0A1B5D0DE5008A64A8 /* tfsimple.frag */,
+			);
+			name = "transform feedback simple";
+			path = shaders;
 			sourceTree = "<group>";
 		};
 		36FDAEF01B4320EC00A15BA0 /* shaders */ = {
@@ -314,8 +341,10 @@
 				368E60A01B317F2B00A04AB6 /* MeshTestApp.cpp in Sources */,
 				361DA9941B37445500E4B3BB /* MeshUtils.cpp in Sources */,
 				360A6F251B2B76D200A3CEFC /* main.cpp in Sources */,
+				36F7BE071B5CFAB2008A64A8 /* TransformFeedbackTessApp.cpp in Sources */,
 				368E607B1B2B8D1C00A04AB6 /* Camera.cpp in Sources */,
 				36744AA81B56697000B2D49C /* TransformFeedbackApp.cpp in Sources */,
+				367517631B604E30000643BF /* TransformFeedbackMesh.cpp in Sources */,
 				368E60A71B3592BD00A04AB6 /* ColorUtils.cpp in Sources */,
 				368E60811B2C4ED800A04AB6 /* ShaderProgram.cpp in Sources */,
 				360A6F2F1B2B786200A3CEFC /* App.cpp in Sources */,

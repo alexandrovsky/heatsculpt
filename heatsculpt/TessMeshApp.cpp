@@ -98,7 +98,7 @@ void TessMeshApp::initMesh(){
         
         
         
-        mesh->addVBO(vertices, positionAttrib);
+        mesh->addVBO(vertices, positionAttrib, mesh->getVAO());
         meshShaderProgram->use();
         positionAttrib.id = meshShaderProgram->addAttribute(positionAttrib.name);
         glEnableVertexAttribArray(positionAttrib.id);
@@ -117,7 +117,7 @@ void TessMeshApp::initMesh(){
         
         
         
-        mesh->addVBO(colors, colorAttrib);
+        mesh->addVBO(colors, colorAttrib, mesh->getVAO());
         meshShaderProgram->use();
         colorAttrib.id = meshShaderProgram->addAttribute(colorAttrib.name);
         glEnableVertexAttribArray(colorAttrib.id);
@@ -226,7 +226,7 @@ bool TessMeshApp::Init(){
             
             
             
-            mouse->addVBO(vertices, positionAttrib);
+            mouse->addVBO(vertices, positionAttrib, mesh->getVAO());
             mouseShaderProgram->use();
             positionAttrib.id = mouseShaderProgram->addAttribute(positionAttrib.name);
             glEnableVertexAttribArray(positionAttrib.id);
@@ -246,7 +246,7 @@ bool TessMeshApp::Init(){
             
             
             
-            mouse->addVBO(colors, colorAttrib);
+            mouse->addVBO(colors, colorAttrib, mesh->getVAO());
             mouseShaderProgram->use();
             colorAttrib.id = mouseShaderProgram->addAttribute(colorAttrib.name);
             glEnableVertexAttribArray(colorAttrib.id);
@@ -283,7 +283,7 @@ void TessMeshApp::Update(){
     App::Update();
     
     
-    mesh->Update();
+    mesh->Update(glfwGetTime());
     
     meshShaderProgram->use();
     

@@ -33,7 +33,7 @@ Mesh::Mesh(const vector<vec3>& vertices, const vector<GLuint>& indices){
     
     Attribute vertexAttrib;
     
-    addVBO(vertices, vertexAttrib);
+    addVBO(vertices, vertexAttrib, vao);
 
     addIndices(indices);
 
@@ -46,12 +46,17 @@ Mesh::Mesh(const vector<vec3>& vertices, const vector<GLuint>& indices){
 
 Mesh::~Mesh() {
     glDeleteVertexArrays(1, &vao);
+    for (int i = 0; i < attributes.size(); i++) {
+        Attribute attrib = attributes[i];
+        glDeleteBuffers(1, &attrib.vbo);
+        
+    }
 
 }
 
 
-void Mesh::Update(){
-    modelMatrix = glm::rotate( mat4(), glm::radians(0.0f) * (float)glfwGetTime(), glm::vec3(1.0f, 1.0f, 0.0f));
+void Mesh::Update(GLfloat deltaTime){
+    modelMatrix = glm::rotate( mat4(), glm::radians(10.0f) * deltaTime, glm::vec3(1.0f, 1.0f, 0.0f));
     
 }
 
@@ -128,14 +133,14 @@ void Mesh::addIndices(vector<GLuint> indices){
 
 }
 
-template<typename T> GLuint Mesh::addVBO(vector<T> vector, Attribute& attribute){
+template<typename T> GLuint Mesh::addVBO(vector<T> vector, Attribute& attribute, GLuint used_vao){
     
     // check current vao
     GLint current_vao;
     glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &current_vao);
     
-    if(current_vao != vao){
-        glBindVertexArray(vao);
+    if(current_vao != used_vao){
+        glBindVertexArray(used_vao);
     }
     
     
@@ -143,9 +148,16 @@ template<typename T> GLuint Mesh::addVBO(vector<T> vector, Attribute& attribute)
     glGenBuffers(1, &attribute.vbo);
     // add data to vbo
     glBindBufferARB(attribute.buffer_type, attribute.vbo);
-    glBufferData(attribute.buffer_type, attribute.bytes, vector.data(), GL_STATIC_DRAW);
+    glBufferData(attribute.buffer_type, attribute.bytes, vector.data(), GL_DYNAMIC_DRAW);
     
 
     return attribute.vbo;
 }
 
+void Mesh::setupAttribute(GLuint vao, Attribute attribute){
+    glBindVertexArray(vao);
+    glBindBuffer(attribute.buffer_type,  attribute.vbo);
+    glEnableVertexAttribArray(attribute.id);
+    glVertexAttribPointer(attribute.id, attribute.num_of_components, attribute.data_type, GL_FALSE, 0, 0);
+
+}

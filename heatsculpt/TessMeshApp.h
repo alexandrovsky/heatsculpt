@@ -10,7 +10,7 @@
 #define __heatsculpt__TessMeshApp__
 #include "App.h"
 #include "Mesh.h"
-
+#include "ShaderProgram.h"
 class TessMeshApp : public App {
 public:
     TessMeshApp(const std::string& window_title, bool fullscreen);
