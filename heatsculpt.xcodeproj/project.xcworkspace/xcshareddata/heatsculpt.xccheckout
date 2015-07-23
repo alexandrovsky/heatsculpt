@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>29F73E86-48F1-4420-9D46-493D1F22FF0C</string>
+	<key>IDESourceControlProjectName</key>
+	<string>heatsculpt</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>43AF68C7D070850EE102DCB8B69D067E0FC0FE4B</key>
+		<string>https://github.com/alexandrovsky/heatsculpt.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>heatsculpt.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>43AF68C7D070850EE102DCB8B69D067E0FC0FE4B</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/alexandrovsky/heatsculpt.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>43AF68C7D070850EE102DCB8B69D067E0FC0FE4B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>43AF68C7D070850EE102DCB8B69D067E0FC0FE4B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>heatsculpt</string>
+		</dict>
+	</array>
+</dict>
+</plist>
