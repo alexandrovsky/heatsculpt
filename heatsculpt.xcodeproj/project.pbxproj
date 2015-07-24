@@ -22,6 +22,7 @@
 		366710AC1B4C1B2D004B3EF0 /* tess.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 366710A71B4C1991004B3EF0 /* tess.vert */; };
 		36744AA81B56697000B2D49C /* TransformFeedbackApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36744AA61B56697000B2D49C /* TransformFeedbackApp.cpp */; };
 		3678485F1B619ECE00FC3465 /* TransformFeedback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3678485D1B619ECE00FC3465 /* TransformFeedback.cpp */; };
+		367848621B61A0CF00FC3465 /* TransformFeedbackMeshApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 367848601B61A0CF00FC3465 /* TransformFeedbackMeshApp.cpp */; };
 		368E607B1B2B8D1C00A04AB6 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E60791B2B8D1C00A04AB6 /* Camera.cpp */; };
 		368E607E1B2C4CCE00A04AB6 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E607C1B2C4CCE00A04AB6 /* Shader.cpp */; };
 		368E60811B2C4ED800A04AB6 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E607F1B2C4ED800A04AB6 /* ShaderProgram.cpp */; };
@@ -77,6 +78,8 @@
 		36744AA71B56697000B2D49C /* TransformFeedbackApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformFeedbackApp.h; sourceTree = "<group>"; };
 		3678485D1B619ECE00FC3465 /* TransformFeedback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransformFeedback.cpp; sourceTree = "<group>"; };
 		3678485E1B619ECE00FC3465 /* TransformFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformFeedback.h; sourceTree = "<group>"; };
+		367848601B61A0CF00FC3465 /* TransformFeedbackMeshApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransformFeedbackMeshApp.cpp; sourceTree = "<group>"; };
+		367848611B61A0CF00FC3465 /* TransformFeedbackMeshApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformFeedbackMeshApp.h; sourceTree = "<group>"; };
 		368E60791B2B8D1C00A04AB6 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		368E607A1B2B8D1C00A04AB6 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		368E607C1B2C4CCE00A04AB6 /* Shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shader.cpp; sourceTree = "<group>"; };
@@ -144,7 +147,7 @@
 			children = (
 				3678485C1B619EA500FC3465 /* technique */,
 				368E60A11B32364500A04AB6 /* utils */,
-				368E60971B2EC7C400A04AB6 /* test */,
+				368E60971B2EC7C400A04AB6 /* test apps */,
 				368E60961B2EC51000A04AB6 /* rendering */,
 				368E60951B2EC4F300A04AB6 /* object */,
 				360A6F241B2B76D200A3CEFC /* main.cpp */,
@@ -216,7 +219,7 @@
 			name = rendering;
 			sourceTree = "<group>";
 		};
-		368E60971B2EC7C400A04AB6 /* test */ = {
+		368E60971B2EC7C400A04AB6 /* test apps */ = {
 			isa = PBXGroup;
 			children = (
 				368E60981B2EC7E900A04AB6 /* TestApp.cpp */,
@@ -227,8 +230,10 @@
 				3667109B1B4C1788004B3EF0 /* TessMeshApp.h */,
 				36744AA61B56697000B2D49C /* TransformFeedbackApp.cpp */,
 				36744AA71B56697000B2D49C /* TransformFeedbackApp.h */,
+				367848601B61A0CF00FC3465 /* TransformFeedbackMeshApp.cpp */,
+				367848611B61A0CF00FC3465 /* TransformFeedbackMeshApp.h */,
 			);
-			name = test;
+			name = "test apps";
 			sourceTree = "<group>";
 		};
 		368E60A11B32364500A04AB6 /* utils */ = {
@@ -332,6 +337,7 @@
 				368E60A71B3592BD00A04AB6 /* ColorUtils.cpp in Sources */,
 				368E60811B2C4ED800A04AB6 /* ShaderProgram.cpp in Sources */,
 				360A6F2F1B2B786200A3CEFC /* App.cpp in Sources */,
+				367848621B61A0CF00FC3465 /* TransformFeedbackMeshApp.cpp in Sources */,
 				3678485F1B619ECE00FC3465 /* TransformFeedback.cpp in Sources */,
 				368E607E1B2C4CCE00A04AB6 /* Shader.cpp in Sources */,
 				368E609A1B2EC7E900A04AB6 /* TestApp.cpp in Sources */,

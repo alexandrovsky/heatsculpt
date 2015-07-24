@@ -229,8 +229,7 @@ void TransformFeedbackApp::Update(){
 
 }
 void TransformFeedbackApp::Render(){
-    
-    
+    App::Render();
     // define spheres for the particles to bounce off
     const int spheres = 3;
     glm::vec3 center[spheres];
@@ -312,9 +311,6 @@ void TransformFeedbackApp::Render(){
     if(error != GL_NO_ERROR) {
         std::cerr << error << std::endl;
     }
-    
-    // finally swap buffers
-    glfwSwapBuffers(window);
     
     // advance buffer index
     current_buffer = (current_buffer + 1) % buffercount;

@@ -39,6 +39,7 @@ protected:
     virtual void MainLoop();
     
 public:
+    glm::vec4 backgroundColor;
     Camera camera;
     static App* _instance;
     

@@ -52,6 +52,7 @@ App::App(const std::string& window_title, bool fullscreen) {
     this->window_height = 0;
     this->isRunning = true;
     this->isFullScreen = fullscreen;
+    this->backgroundColor = glm::vec4(31.0/255.0f, 147./255.0f, 194/255.0f, 1.0f);
 }
 
 
@@ -239,7 +240,8 @@ void App::Render() {
     glMatrixMode( GL_MODELVIEW );
     
     /* Set the background black */
-    glClearColor( 0.0f, 0.15f, 0.3f, 0.0f );
+    glClearColor(backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a);
+//    glClearColor( 0.0f, 0.15f, 0.3f, 0.0f );
     /* Clear The Screen And The Depth Buffer */
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     

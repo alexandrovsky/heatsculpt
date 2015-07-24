@@ -10,5 +10,24 @@
 #define __heatsculpt__TransformFeedback__
 
 #include <stdio.h>
+#include "ShaderProgram.h"
+
+class TransformFeedback {
+public:
+
+    TransformFeedback();
+    virtual ~TransformFeedback();
+
+    ShaderProgram* shaderProgram;
+    
+    
+    GLuint source_vbo;
+    GLuint destination_vbo;
+    
+    GLuint source_vao;
+    GLuint destination_vao;
+    
+    bool Init();
+};
 
 #endif /* defined(__heatsculpt__TransformFeedback__) */

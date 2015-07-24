@@ -7,3 +7,15 @@
 //
 
 #include "TransformFeedback.h"
+
+TransformFeedback::TransformFeedback(){
+}
+
+TransformFeedback::~TransformFeedback(){
+    delete shaderProgram;
+}
+
+
+bool Init(){
+    return true;
+}
