@@ -24,16 +24,6 @@ using namespace glm;
 
 
 
-struct Attribute{
-    string name;
-    GLuint id;
-    GLuint num_of_components;
-    GLuint data_type;
-    GLuint vbo; // is set by the mesh
-    size_t bytes;
-    GLuint buffer_type;
-};
-
 
 
 

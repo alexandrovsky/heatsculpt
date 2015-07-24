@@ -9,8 +9,11 @@
 #ifndef __heatsculpt__TransformFeedback__
 #define __heatsculpt__TransformFeedback__
 
+#include <vector>
 #include <stdio.h>
 #include "ShaderProgram.h"
+
+using namespace std;
 
 class TransformFeedback {
 public:
@@ -28,6 +31,9 @@ public:
     GLuint destination_vao;
     
     bool Init();
+    void Update();
+    template<typename T> void addBuffer(GLuint& vao, GLuint& vbo, vector<T> data, Attribute& attribute);
+    
 };
 
 #endif /* defined(__heatsculpt__TransformFeedback__) */

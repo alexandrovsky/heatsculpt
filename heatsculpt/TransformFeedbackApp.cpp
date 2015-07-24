@@ -226,10 +226,6 @@ bool TransformFeedbackApp::Init(){
     return true;
 }
 void TransformFeedbackApp::Update(){
-
-}
-void TransformFeedbackApp::Render(){
-    App::Render();
     // define spheres for the particles to bounce off
     const int spheres = 3;
     glm::vec3 center[spheres];
@@ -253,7 +249,7 @@ void TransformFeedbackApp::Render(){
     
     
     
-
+    
     // use the transform shader program
     transformfeedbackShader->use();
     
@@ -280,7 +276,64 @@ void TransformFeedbackApp::Render(){
     
     glDisable(GL_RASTERIZER_DISCARD);
     
+    
+}
+void TransformFeedbackApp::Render(){
+    App::Render();
+    
+//    // define spheres for the particles to bounce off
+//    const int spheres = 3;
+//    glm::vec3 center[spheres];
+//    float radius[spheres];
+//    center[0] = glm::vec3(0,12,1);
+//    radius[0] = 3;
+//    center[1] = glm::vec3(-3,0,0);
+//    radius[1] = 7;
+//    center[2] = glm::vec3(5,-10,0);
+//    radius[2] = 12;
+//    
+//    
+//    float dt = 1.0f/60.0f;
+//    glm::vec3 g(0.0f, -9.81f, 0.0f);
+//    float bounce = 1.2f; // inelastic: 1.0f, elastic: 2.0f
+//    
+//    
+//    
+//    // get the time in seconds
+//    float t = glfwGetTime();
+//    
+//    
+//    
+//
+//    // use the transform shader program
+//    transformfeedbackShader->use();
+//    
+//    // set the uniforms
+//    glUniform3fv(center_location, 3, reinterpret_cast<GLfloat*>(center));
+//    glUniform1fv(radius_location, 3, reinterpret_cast<GLfloat*>(radius));
+//    glUniform3fv(g_location, 1, glm::value_ptr(g));
+//    glUniform1f(dt_location, dt);
+//    glUniform1f(bounce_location, bounce);
+//    glUniform1i(seed_location, std::rand());
+//    
+//    // bind the current vao
+//    glBindVertexArray(vao[(current_buffer+1)%buffercount]);
+//    
+//    // bind transform feedback target
+//    glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, vbo[current_buffer]);
+//    
+//    glEnable(GL_RASTERIZER_DISCARD);
+//    
+//    // perform transform feedback
+//    glBeginTransformFeedback(GL_POINTS);
+//    glDrawArrays(GL_POINTS, 0, particles);
+//    glEndTransformFeedback();
+//    
+//    glDisable(GL_RASTERIZER_DISCARD);
+//
+//------
     // clear first
+    float t = glfwGetTime();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     // use the shader program
@@ -311,6 +364,9 @@ void TransformFeedbackApp::Render(){
     if(error != GL_NO_ERROR) {
         std::cerr << error << std::endl;
     }
+    
+//    // finally swap buffers
+//    glfwSwapBuffers(window);
     
     // advance buffer index
     current_buffer = (current_buffer + 1) % buffercount;

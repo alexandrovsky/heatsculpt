@@ -23,6 +23,8 @@
 		36744AA81B56697000B2D49C /* TransformFeedbackApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36744AA61B56697000B2D49C /* TransformFeedbackApp.cpp */; };
 		3678485F1B619ECE00FC3465 /* TransformFeedback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3678485D1B619ECE00FC3465 /* TransformFeedback.cpp */; };
 		367848621B61A0CF00FC3465 /* TransformFeedbackMeshApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 367848601B61A0CF00FC3465 /* TransformFeedbackMeshApp.cpp */; };
+		36784D7E1B62AF9200FC3465 /* tfSimple.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36784D7C1B62AF7400FC3465 /* tfSimple.vert */; };
+		36784D7F1B62AF9200FC3465 /* tfSimple.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36784D7D1B62AF8200FC3465 /* tfSimple.frag */; };
 		368E607B1B2B8D1C00A04AB6 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E60791B2B8D1C00A04AB6 /* Camera.cpp */; };
 		368E607E1B2C4CCE00A04AB6 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E607C1B2C4CCE00A04AB6 /* Shader.cpp */; };
 		368E60811B2C4ED800A04AB6 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E607F1B2C4ED800A04AB6 /* ShaderProgram.cpp */; };
@@ -44,6 +46,8 @@
 			dstPath = shaders;
 			dstSubfolderSpec = 16;
 			files = (
+				36784D7E1B62AF9200FC3465 /* tfSimple.vert in CopyFiles */,
+				36784D7F1B62AF9200FC3465 /* tfSimple.frag in CopyFiles */,
 				362C3B851B4D7DE100666F95 /* mouse.vert in CopyFiles */,
 				362C3B861B4D7DE100666F95 /* mouse.geom in CopyFiles */,
 				362C3B871B4D7DE100666F95 /* mouse.frag in CopyFiles */,
@@ -80,6 +84,8 @@
 		3678485E1B619ECE00FC3465 /* TransformFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformFeedback.h; sourceTree = "<group>"; };
 		367848601B61A0CF00FC3465 /* TransformFeedbackMeshApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransformFeedbackMeshApp.cpp; sourceTree = "<group>"; };
 		367848611B61A0CF00FC3465 /* TransformFeedbackMeshApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformFeedbackMeshApp.h; sourceTree = "<group>"; };
+		36784D7C1B62AF7400FC3465 /* tfSimple.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tfSimple.vert; sourceTree = "<group>"; };
+		36784D7D1B62AF8200FC3465 /* tfSimple.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tfSimple.frag; sourceTree = "<group>"; };
 		368E60791B2B8D1C00A04AB6 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		368E607A1B2B8D1C00A04AB6 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		368E607C1B2C4CCE00A04AB6 /* Shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shader.cpp; sourceTree = "<group>"; };
@@ -199,6 +205,15 @@
 			name = technique;
 			sourceTree = "<group>";
 		};
+		36784D7B1B62ACBB00FC3465 /* transformFeedback */ = {
+			isa = PBXGroup;
+			children = (
+				36784D7C1B62AF7400FC3465 /* tfSimple.vert */,
+				36784D7D1B62AF8200FC3465 /* tfSimple.frag */,
+			);
+			name = transformFeedback;
+			sourceTree = "<group>";
+		};
 		368E60951B2EC4F300A04AB6 /* object */ = {
 			isa = PBXGroup;
 			children = (
@@ -262,6 +277,7 @@
 		36FDAEF01B4320EC00A15BA0 /* shaders */ = {
 			isa = PBXGroup;
 			children = (
+				36784D7B1B62ACBB00FC3465 /* transformFeedback */,
 				369A90471B4D33C1000D94C1 /* mouse */,
 				3667109D1B4C18F1004B3EF0 /* simpleTess */,
 				366710981B4C0CA7004B3EF0 /* example1 */,
@@ -385,7 +401,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					/usr/local/include,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -426,7 +441,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					/usr/local/include,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;

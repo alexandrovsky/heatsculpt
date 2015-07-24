@@ -19,8 +19,20 @@ TransformFeedbackMeshApp::~TransformFeedbackMeshApp(){
 
 
 bool TransformFeedbackMeshApp::Init(){
+    bool res = App::Init();
+    
+    if (!res) {
+        return false;
+    }
+    
+    transformFeedback.Init();
+    
     
     return true;
 }
-void TransformFeedbackMeshApp::Update(){}
-void TransformFeedbackMeshApp::Render(){}
+void TransformFeedbackMeshApp::Update(){
+    transformFeedback.Update();
+}
+void TransformFeedbackMeshApp::Render(){
+    App::Render();
+}

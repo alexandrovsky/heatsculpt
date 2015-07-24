@@ -101,7 +101,7 @@ bool MeshTestApp::Init(){
         shaderProgram->use();
         colorAttrib.id = shaderProgram->addAttribute(colorAttrib.name);
         glEnableVertexAttribArray(colorAttrib.id);
-        glVertexAttribPointer(colorAttrib.id, colorAttrib.num_of_components, GL_FLOAT, GL_FALSE, 0, 0);
+        glVertexAttribPointer(colorAttrib.id, colorAttrib.num_of_components, colorAttrib.data_type, GL_FALSE, 0, 0);
         shaderProgram->disable();
         mesh->attributes.push_back(colorAttrib);
     }

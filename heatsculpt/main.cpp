@@ -11,8 +11,8 @@
 //#include "TestApp.h"
 //#include "MeshTestApp.h"
 //#include "TessMeshApp.h"
-//#include "TransformFeedbackApp.h"
-#include "TransformFeedbackMeshApp.h"
+#include "TransformFeedbackApp.h"
+//#include "TransformFeedbackMeshApp.h"
 
 
 int main(int argc, char* argv[]) {
@@ -26,13 +26,17 @@ int main(int argc, char* argv[]) {
 //    TessMeshApp tessApp("tess", true);
 //    return tessApp.Start();
     
-//    TransformFeedbackApp tfApp("transform feedback", true);
-//    return tfApp.Start();
+    TransformFeedbackApp tfApp("transform feedback", true);
+    return tfApp.Start();
     
-    TransformFeedbackMeshApp tfmApp("transform feedback mesh", true);
-    return tfmApp.Start();
-    
+//    TransformFeedbackMeshApp tfmApp("transform feedback mesh", true);
+//    return tfmApp.Start();
+//    
 }
+
+
+
+
 
 
 
