@@ -1,15 +1,26 @@
-#version 400 core
+//#version 400 core
+//
+//
+////uniform mat4 model;
+////uniform mat4 view;
+////uniform mat4 projection;
+//
+//in vec3 position;
+////in vec3 color;
+//
+//out vec3 vPosition;
+//
+//void main() {
+//    vPosition = position;
+//}
 
 
-//uniform mat4 model;
-//uniform mat4 view;
-//uniform mat4 projection;
+#version 330
 
-in vec3 position;
-//in vec3 color;
+layout(location = 0) in vec2 position;
 
-out vec3 vPosition;
+out vec2 tPosition;
 
-void main() {
-    vPosition = position;
+void main(){
+    tPosition = position;
 }

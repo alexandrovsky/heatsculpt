@@ -27,16 +27,21 @@ public:
 
     
     GLuint query;
-    
+    GLuint tfo;
     GLuint source_vbo;
     GLuint destination_vbo;
     
-    GLuint source_vao;
-    GLuint destination_vao;
+    Attribute positionAttrib;
+    
+
     
     bool Init();
     void Update();
-    template<typename T> void addBuffer(GLuint& vao, GLuint& vbo, vector<T> data, Attribute& attribute);
+    template<typename T> void addBuffer(GLuint& vbo, vector<T> data, Attribute& attribute);
+    
+private:
+    bool InitShader();
+    bool InitTransformFeedback();
     
 };
 

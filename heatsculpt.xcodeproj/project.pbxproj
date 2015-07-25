@@ -35,6 +35,7 @@
 		368E60A01B317F2B00A04AB6 /* MeshTestApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E609E1B317F2B00A04AB6 /* MeshTestApp.cpp */; };
 		368E60A41B32366400A04AB6 /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E60A21B32366400A04AB6 /* Debug.cpp */; };
 		368E60A71B3592BD00A04AB6 /* ColorUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E60A51B3592BD00A04AB6 /* ColorUtils.cpp */; };
+		36EAEF4F1B643A1B00B3AE77 /* tfSimple.geom in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36EAEF4E1B642DA700B3AE77 /* tfSimple.geom */; };
 		36FDAEF31B43225300A15BA0 /* simple.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36FDAEF11B43214800A15BA0 /* simple.vert */; };
 		36FDAEF41B43225300A15BA0 /* simple.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36FDAEF21B43215F00A15BA0 /* simple.frag */; };
 /* End PBXBuildFile section */
@@ -46,6 +47,7 @@
 			dstPath = shaders;
 			dstSubfolderSpec = 16;
 			files = (
+				36EAEF4F1B643A1B00B3AE77 /* tfSimple.geom in CopyFiles */,
 				36784D7E1B62AF9200FC3465 /* tfSimple.vert in CopyFiles */,
 				36784D7F1B62AF9200FC3465 /* tfSimple.frag in CopyFiles */,
 				362C3B851B4D7DE100666F95 /* mouse.vert in CopyFiles */,

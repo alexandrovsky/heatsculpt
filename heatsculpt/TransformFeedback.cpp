@@ -21,11 +21,15 @@ TransformFeedback::~TransformFeedback(){
     
 }
 
-
 bool TransformFeedback::Init(){
+    InitShader();
+    InitTransformFeedback();
+    return true;
+}
+
+bool TransformFeedback::InitShader(){
     
     
-    glGenQueries(1,&query);
     
     shaderProgram = new ShaderProgram();
     Shader vert(GL_VERTEX_SHADER);
@@ -38,39 +42,56 @@ bool TransformFeedback::Init(){
     geom.compile();
     
     
-    Shader frag(GL_FRAGMENT_SHADER);
-    frag.loadFromFile("shaders/tfSimple.frag");
-    frag.compile();
+//    Shader frag(GL_FRAGMENT_SHADER);
+//    frag.loadFromFile("shaders/tfSimple.frag");
+//    frag.compile();
     
     shaderProgram->attachShader(vert);
-    shaderProgram->attachShader(frag);
+//    shaderProgram->attachShader(frag);
     shaderProgram->attachShader(geom);
     
     // specify transform feedback output
-    const char *varyings[] = {"outposition"};
+    const char *varyings[] = {"outPosition"};
     glTransformFeedbackVaryings(this->shaderProgram->id(), 1, varyings, GL_INTERLEAVED_ATTRIBS);
     
     shaderProgram->linkProgram();
+    PrintProgramInfoLog(shaderProgram->id());
+    
 
-    vector<vec3> verices;
-    vector<GLuint> indices;
-    createIcosahedron(verices, indices);
-    drawCount = verices.size();
 
-    Attribute positionAttrib;
+    
     positionAttrib.name = "position";
-    positionAttrib.num_of_components = 3;
+    positionAttrib.num_of_components = 2;
     positionAttrib.data_type = GL_FLOAT;
     positionAttrib.buffer_type = GL_ARRAY_BUFFER;
     positionAttrib.draw_type = GL_DYNAMIC_DRAW;
 
-    
-    addBuffer(source_vao, source_vbo, verices, positionAttrib);
-    addBuffer(destination_vao, destination_vbo, verices, positionAttrib);
-    
-    
+    positionAttrib.id = shaderProgram->addAttribute(positionAttrib.name);
     
     return true;
+}
+
+
+bool TransformFeedback::InitTransformFeedback(){
+    
+    glGenQueries(1,&query);
+    
+    vector<vec2> verices;
+    float v = 0.0f;
+    for (int i = 0; i < 10; i++) {
+        verices.push_back(vec2(v, v));
+        v += 0.1;
+    }
+    
+    drawCount = (GLsizei)verices.size();
+    
+    glGenBuffers(1, &source_vbo);
+    
+    glGenBuffers(1, &destination_vbo);
+    glBindBuffer(positionAttrib.buffer_type, destination_vbo);
+    
+    
+    
 }
 
 void TransformFeedback::Update(){
@@ -138,7 +159,7 @@ void TransformFeedback::Update(){
 }
 
 
-template<typename T> void TransformFeedback::addBuffer(GLuint& vao, GLuint& vbo, vector<T> data, Attribute& attribute){
+template<typename T> void TransformFeedback::addBuffer(GLuint& vbo, vector<T> data, Attribute& attribute){
     
     shaderProgram->use();
     
@@ -146,12 +167,7 @@ template<typename T> void TransformFeedback::addBuffer(GLuint& vao, GLuint& vbo,
     attribute.bytes = sizeof(T) * data.size();
     
     
-    glGenVertexArrays(1, &vao);
-    glGenBuffers(1, &vbo);
-    
-    glBindVertexArray(vao);
-    
-    glBindBuffer(attribute.buffer_type, attribute.vbo);
+    glBindBuffer(attribute.buffer_type, vbo);
     glBufferData(attribute.buffer_type, attribute.bytes, data.data(), attribute.draw_type);
     
     
