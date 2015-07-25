@@ -33,10 +33,12 @@ public:
     
     Attribute positionAttrib;
     
-
+    vector<glm::vec2> vertices;
+    
     
     bool Init();
     void Update();
+    void Draw();
     template<typename T> void addBuffer(GLuint& vbo, vector<T> data, Attribute& attribute);
     
 private:

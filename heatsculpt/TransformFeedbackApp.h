@@ -29,6 +29,8 @@ private:
     ShaderProgram* drawShader;
     ShaderProgram* transformfeedbackShader;
     
+    GLint inposition_location;
+    GLint invelocity_location;
     GLint center_location;
     GLint radius_location;
     GLint g_location;

@@ -35,4 +35,5 @@ void TransformFeedbackMeshApp::Update(){
 }
 void TransformFeedbackMeshApp::Render(){
     App::Render();
+    transformFeedback.Draw();
 }

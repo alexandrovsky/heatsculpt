@@ -191,6 +191,14 @@ void App::OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int m
         case GLFW_KEY_R:
             camera.Reset();
             break;
+        case GLFW_KEY_O:
+            if (camera.camera_mode == FREE) {
+                camera.SetMode(ORTHO);
+            }else{
+                camera.SetMode(FREE);
+            }
+            
+            break;
             
         case GLFW_KEY_ESCAPE:
             Exit();

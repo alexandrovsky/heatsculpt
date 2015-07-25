@@ -23,7 +23,7 @@ using std::endl;
 
 struct Attribute{
     string name;
-    GLuint id;
+    GLint id;
     GLuint num_of_components;
     GLuint data_type;
     GLuint vbo; // is set by the mesh

@@ -29,9 +29,13 @@ out vec2 outPosition;
 
 void main() {
     vec2 pos = tPosition[0];
-    if(pos.x > -0.5 && pos.x < 0.5 && pos.y > -0.5 && pos.y < 0.5){
-        outPosition = pos;
-        EmitVertex();
-        EndPrimitive();
-    }
+    pos.x *= 2;
+    outPosition = pos;
+    EmitVertex();
+    EndPrimitive();
+    
+    
+//    if(pos.x > -0.5 && pos.x < 0.5 && pos.y > -0.5 && pos.y < 0.5){
+//        
+//    }
 }

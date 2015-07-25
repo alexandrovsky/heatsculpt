@@ -62,8 +62,8 @@ std::string transform_vertex_source =
 "uniform float dt;\n"
 "uniform float bounce;\n"
 "uniform int seed;\n"
-"layout(location = 0) in vec3 inposition;\n"
-"layout(location = 1) in vec3 invelocity;\n"
+"in vec3 inposition;\n"
+"in vec3 invelocity;\n"
 "out vec3 outposition;\n"
 "out vec3 outvelocity;\n"
 
@@ -116,6 +116,10 @@ bool TransformFeedbackApp::Init(){
         return res;
     }
     
+    
+    camera.SetPosition(glm::vec3(0.0f, 0.0f, -30.0f));
+
+    
     // draw shader
     {
         Shader vertexShader(GL_VERTEX_SHADER);
@@ -165,6 +169,9 @@ bool TransformFeedbackApp::Init(){
         transformfeedbackShader->linkProgram();
         
         
+        inposition_location = transformfeedbackShader->addAttribute("inposition");
+        invelocity_location = transformfeedbackShader->addAttribute("invelocity");
+        
         center_location = transformfeedbackShader->addUniform("center");
         radius_location = transformfeedbackShader->addUniform("radius");
         g_location = transformfeedbackShader->addUniform("g");
@@ -203,10 +210,10 @@ bool TransformFeedbackApp::Init(){
         
         // set up generic attrib pointers
         glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6*sizeof(GLfloat), (char*)0 + 0*sizeof(GLfloat));
+        glVertexAttribPointer(inposition_location, 3, GL_FLOAT, GL_FALSE, 6*sizeof(GLfloat), (char*)0 + 0*sizeof(GLfloat));
         // set up generic attrib pointers
         glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6*sizeof(GLfloat), (char*)0 + 3*sizeof(GLfloat));
+        glVertexAttribPointer(invelocity_location, 3, GL_FLOAT, GL_FALSE, 6*sizeof(GLfloat), (char*)0 + 3*sizeof(GLfloat));
     }
     
     // "unbind" vao
@@ -226,6 +233,7 @@ bool TransformFeedbackApp::Init(){
     return true;
 }
 void TransformFeedbackApp::Update(){
+    App::Update();
     // define spheres for the particles to bounce off
     const int spheres = 3;
     glm::vec3 center[spheres];
@@ -270,9 +278,19 @@ void TransformFeedbackApp::Update(){
     glEnable(GL_RASTERIZER_DISCARD);
     
     // perform transform feedback
+    GLuint query;
+    glGenQueries(1, &query);
+    glBeginQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN, query);
     glBeginTransformFeedback(GL_POINTS);
     glDrawArrays(GL_POINTS, 0, particles);
     glEndTransformFeedback();
+    
+    glEndQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN);
+    GLuint primitives_written;
+    glGetQueryObjectuiv( query, GL_QUERY_RESULT, &primitives_written );
+    if(primitives_written > 0 )
+        fprintf( stderr, "Primitives written to TFB: %d !\n", primitives_written );
+    glDeleteQueries(1, &query);
     
     glDisable(GL_RASTERIZER_DISCARD);
     
@@ -281,57 +299,7 @@ void TransformFeedbackApp::Update(){
 void TransformFeedbackApp::Render(){
     App::Render();
     
-//    // define spheres for the particles to bounce off
-//    const int spheres = 3;
-//    glm::vec3 center[spheres];
-//    float radius[spheres];
-//    center[0] = glm::vec3(0,12,1);
-//    radius[0] = 3;
-//    center[1] = glm::vec3(-3,0,0);
-//    radius[1] = 7;
-//    center[2] = glm::vec3(5,-10,0);
-//    radius[2] = 12;
-//    
-//    
-//    float dt = 1.0f/60.0f;
-//    glm::vec3 g(0.0f, -9.81f, 0.0f);
-//    float bounce = 1.2f; // inelastic: 1.0f, elastic: 2.0f
-//    
-//    
-//    
-//    // get the time in seconds
-//    float t = glfwGetTime();
-//    
-//    
-//    
-//
-//    // use the transform shader program
-//    transformfeedbackShader->use();
-//    
-//    // set the uniforms
-//    glUniform3fv(center_location, 3, reinterpret_cast<GLfloat*>(center));
-//    glUniform1fv(radius_location, 3, reinterpret_cast<GLfloat*>(radius));
-//    glUniform3fv(g_location, 1, glm::value_ptr(g));
-//    glUniform1f(dt_location, dt);
-//    glUniform1f(bounce_location, bounce);
-//    glUniform1i(seed_location, std::rand());
-//    
-//    // bind the current vao
-//    glBindVertexArray(vao[(current_buffer+1)%buffercount]);
-//    
-//    // bind transform feedback target
-//    glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, vbo[current_buffer]);
-//    
-//    glEnable(GL_RASTERIZER_DISCARD);
-//    
-//    // perform transform feedback
-//    glBeginTransformFeedback(GL_POINTS);
-//    glDrawArrays(GL_POINTS, 0, particles);
-//    glEndTransformFeedback();
-//    
-//    glDisable(GL_RASTERIZER_DISCARD);
-//
-//------
+
     // clear first
     float t = glfwGetTime();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -340,18 +308,10 @@ void TransformFeedbackApp::Render(){
     drawShader->use();
     
     // calculate ViewProjection matrix
-    glm::mat4 Projection = glm::perspective(90.0f, 4.0f / 3.0f, 0.1f, 100.f);
     
-    // translate the world/view position
-    glm::mat4 View = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -30.0f));
     
-    // make the camera rotate around the origin
-    View = glm::rotate(View, 30.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-    View = glm::rotate(View, -22.5f*t, glm::vec3(0.0f, 1.0f, 0.0f));
-    
-    // set the uniform
-    glUniformMatrix4fv(View_location, 1, GL_FALSE, glm::value_ptr(View));
-    glUniformMatrix4fv(Projection_location, 1, GL_FALSE, glm::value_ptr(Projection));
+    glUniformMatrix4fv(View_location, 1, GL_FALSE, glm::value_ptr(camera.view));
+    glUniformMatrix4fv(Projection_location, 1, GL_FALSE, glm::value_ptr(camera.projection));
     
     // bind the current vao
     glBindVertexArray(vao[current_buffer]);
@@ -359,11 +319,11 @@ void TransformFeedbackApp::Render(){
     // draw
     glDrawArrays(GL_POINTS, 0, particles);
     
-    // check for errors
-    GLenum error = glGetError();
-    if(error != GL_NO_ERROR) {
-        std::cerr << error << std::endl;
-    }
+//    // check for errors
+//    GLenum error = glGetError();
+//    if(error != GL_NO_ERROR) {
+//        std::cerr << error << std::endl;
+//    }
     
 //    // finally swap buffers
 //    glfwSwapBuffers(window);
