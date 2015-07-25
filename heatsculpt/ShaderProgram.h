@@ -29,6 +29,7 @@ struct Attribute{
     GLuint vbo; // is set by the mesh
     size_t bytes;
     GLuint buffer_type;
+    GLuint draw_type;
 };
 
 

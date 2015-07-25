@@ -21,8 +21,12 @@ public:
     TransformFeedback();
     virtual ~TransformFeedback();
 
+    glm::mat4x4 modelMatrix;
     ShaderProgram* shaderProgram;
+    GLsizei drawCount;
+
     
+    GLuint query;
     
     GLuint source_vbo;
     GLuint destination_vbo;

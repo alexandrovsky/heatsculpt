@@ -8,12 +8,8 @@
 in vec3 position;
 //in vec3 color;
 
-out vec3 outposition;
+out vec3 vPosition;
 
 void main() {
-    
-    vec3 p = position;
-    
-    //gl_Position = vec4(position, 1.0);
-    outposition = p;
+    vPosition = position;
 }

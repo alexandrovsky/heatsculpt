@@ -107,6 +107,7 @@
 		369A90481B4D33D9000D94C1 /* mouse.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = mouse.vert; sourceTree = "<group>"; };
 		369A90491B4D33E7000D94C1 /* mouse.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = mouse.frag; sourceTree = "<group>"; };
 		369A904A1B4D33F1000D94C1 /* mouse.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = mouse.geom; sourceTree = "<group>"; };
+		36EAEF4E1B642DA700B3AE77 /* tfSimple.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tfSimple.geom; sourceTree = "<group>"; };
 		36FDAEF11B43214800A15BA0 /* simple.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = simple.vert; sourceTree = "<group>"; };
 		36FDAEF21B43215F00A15BA0 /* simple.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = simple.frag; sourceTree = "<group>"; };
 		36FDAEFD1B432CAE00A15BA0 /* example1.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = example1.frag; path = "../../../Library/Developer/Xcode/DerivedData/heatsculpt-frtolbhmmkjpepfrabmcgoonetbu/Build/Products/Debug/shaders/example1.frag"; sourceTree = "<group>"; };
@@ -209,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				36784D7C1B62AF7400FC3465 /* tfSimple.vert */,
+				36EAEF4E1B642DA700B3AE77 /* tfSimple.geom */,
 				36784D7D1B62AF8200FC3465 /* tfSimple.frag */,
 			);
 			name = transformFeedback;
