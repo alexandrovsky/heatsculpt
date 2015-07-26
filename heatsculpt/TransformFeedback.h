@@ -37,17 +37,14 @@ public:
     GLuint vao;
     
     
-    vector<TransformFeedbackAttribute*> varyingAttributs;
+    vector<TransformFeedbackAttribute*> varyingAttributes;
     
     
     inline void SetDrawCount(GLsizei count){
         drawCount = count;
     }
     
-    bool InitShader(vector<pair<string, GLenum>> shaderSources, vector<const char*> varyings);
-    bool InitTransformFeedback();
-    
-    bool Init();
+    bool InitShader(vector<pair<string, GLenum>> shaderSources, vector<string> varyings);
     void Update();
     void Draw();
     template<typename T> inline void AddBuffer(vector<T>& data, TransformFeedbackAttribute* attribute){

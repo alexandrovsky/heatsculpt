@@ -178,7 +178,16 @@ int ShaderProgram::addUniform(const string &uniformName)
     return uniformLocList[uniformName];
 }
 
-void ShaderProgram::addVaryings(std::vector<const char *> varyings, GLenum bufferMode){
-    glTransformFeedbackVaryings(programId, (GLsizei)varyings.size(), varyings.data(), bufferMode);
+void ShaderProgram::addVaryings(std::vector<string> varyings, GLenum bufferMode){
+    
+    for (int i = 0; i < varyings.size(); i++) {
+        
+        const char* v = varyings[i].c_str();
+        
+        glTransformFeedbackVaryings(programId, 1, &v, bufferMode);
+
+    }
+    
+    
 }
 

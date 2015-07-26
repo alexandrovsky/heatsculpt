@@ -25,6 +25,7 @@ public:
     
 private:
     TransformFeedback* transformFeedback;
+    ShaderProgram* drawShader;
 };
 
 #endif /* defined(__heatsculpt__TransformFeedbackMeshApp__) */
