@@ -80,9 +80,9 @@ bool TransformFeedback::InitTransformFeedback(){
     
 
     for (int i = 0; i < 1000; i++) {
-        float x = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-        float y = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-        float z = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+        float x = 0.5f - static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+        float y = 0.5f - static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+        float z = 0.5f - static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
         vertices.push_back(vec3(x, y, z));
     }
     

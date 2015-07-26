@@ -353,6 +353,7 @@ void TessMeshApp::Update(){
 
 void TessMeshApp::Render(){
     App::Render();
+    
     meshShaderProgram->use();
     mesh->Draw(GL_PATCHES);
     meshShaderProgram->disable();

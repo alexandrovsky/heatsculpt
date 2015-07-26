@@ -17,11 +17,32 @@ mat4 rotationMatrix(vec3 axis, float angle)
                 0.0,                                0.0,                                0.0,                                1.0);
 }
 
+
+
+
+
+vec3 qtransform( vec4 q, vec3 v ){
+    return v + 2.0*cross(cross(v, q.xyz ) + q.w*v, q.xyz);
+}
+
 void main() {
     
+    vec3 p = inposition;
+    p.x = sin(p.x);
     
-    mat4 rot = rotationMatrix(vec3(0.0, 1.0, 0.0), 10);
+    outposition = p;
     
-    vec4 p = rot * vec4(inposition,1);
-    outposition = p.xyz;
+    
+////    mat4 rot = rotationMatrix(vec3(0.0, 1.0, 0.0), 5);
+////    
+////    vec4 p = rot * vec4(inposition, 1);
+////    outposition = p.xyz;
+//    
+//    vec4 q = vec4(0.0, 1.0, 0.0, 1.0);
+//    vec3 v = inposition;
+//    
+//    
+//    
+//    outposition = qtransform(q, v);
+    
 }
