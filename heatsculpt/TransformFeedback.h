@@ -15,6 +15,8 @@
 
 using namespace std;
 
+#define buffer_count 2
+
 class TransformFeedback {
 public:
 
@@ -26,14 +28,19 @@ public:
     GLsizei drawCount;
 
     
-    GLuint query;
-    GLuint tfo;
-    GLuint source_vbo;
-    GLuint destination_vbo;
+    
+    int current_buffer=0;
+    GLuint vao[buffer_count];
+    GLuint vbo[buffer_count];
+    
+//    GLuint query;
+//    GLuint tfo;
+//    GLuint source_vbo;
+//    GLuint destination_vbo;
     
     Attribute positionAttrib;
     
-    vector<glm::vec2> vertices;
+    vector<glm::vec3> vertices;
     
     
     bool Init();
