@@ -14,6 +14,7 @@ TransformFeedbackMeshApp::TransformFeedbackMeshApp(const std::string& window_tit
 
 
 TransformFeedbackMeshApp::~TransformFeedbackMeshApp(){
+    delete transformFeedback;
 }
 
 
@@ -25,15 +26,25 @@ bool TransformFeedbackMeshApp::Init(){
         return false;
     }
     
-    transformFeedback.Init();
+    transformFeedback = new TransformFeedback();
     
+    vector<const char *> varyings;
+    varyings.push_back("outposition");
+    
+    vector<pair<string, GLenum>> shaderSources;
+    shaderSources.push_back(pair<string, GLenum>("shaders/tfSimple.vert", GL_VERTEX_SHADER));
+    shaderSources.push_back(pair<string, GLenum>("shaders/tfSimple.frag", GL_FRAGMENT_SHADER));
+    
+    transformFeedback->InitShader(shaderSources, varyings);
+    transformFeedback->InitTransformFeedback();
+
     
     return true;
 }
 void TransformFeedbackMeshApp::Update(){
-    transformFeedback.Update();
+    transformFeedback->Update();
 }
 void TransformFeedbackMeshApp::Render(){
     App::Render();
-    transformFeedback.Draw();
+    transformFeedback->Draw();
 }

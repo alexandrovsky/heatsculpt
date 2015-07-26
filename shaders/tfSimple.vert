@@ -28,7 +28,12 @@ vec3 qtransform( vec4 q, vec3 v ){
 void main() {
     
     vec3 p = inposition;
-    p.x = sin(p.x);
+//    p.x *= 0.9;
+//    p.y *= 0.9;
+//    p.z *= 0.9;
+    
+    
+    p *= 0.999;
     
     outposition = p;
     

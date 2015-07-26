@@ -24,7 +24,7 @@ public:
     virtual void Render();
     
 private:
-    TransformFeedback transformFeedback;
+    TransformFeedback* transformFeedback;
 };
 
 #endif /* defined(__heatsculpt__TransformFeedbackMeshApp__) */

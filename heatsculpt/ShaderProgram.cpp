@@ -5,7 +5,7 @@
 //  Created by Dmitry Alexandrovsky on 13.06.15.
 //  Copyright (c) 2015 Dmitry Alexandrovsky. All rights reserved.
 //
-
+#include <gl/glew.h>
 #include "ShaderProgram.h"
 
 
@@ -176,5 +176,9 @@ int ShaderProgram::addUniform(const string &uniformName)
     }
     
     return uniformLocList[uniformName];
+}
+
+void ShaderProgram::addVaryings(std::vector<const char *> varyings, GLenum bufferMode){
+    glTransformFeedbackVaryings(programId, (GLsizei)varyings.size(), varyings.data(), bufferMode);
 }
 

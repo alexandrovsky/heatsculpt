@@ -8,7 +8,7 @@
 
 #ifndef __heatsculpt__TransformFeedback__
 #define __heatsculpt__TransformFeedback__
-
+#include <utility>
 #include <vector>
 #include <stdio.h>
 #include "ShaderProgram.h"
@@ -16,6 +16,10 @@
 using namespace std;
 
 #define buffer_count 2
+
+struct TransformFeedbackAttribute : Attribute {
+    GLuint destination_vbo;
+};
 
 class TransformFeedback {
 public:
@@ -28,29 +32,27 @@ public:
     GLsizei drawCount;
 
     
+    GLuint vao;
     
-    int current_buffer=0;
-    GLuint vao[buffer_count];
-    GLuint vbo[buffer_count];
     
-//    GLuint query;
-//    GLuint tfo;
-//    GLuint source_vbo;
-//    GLuint destination_vbo;
-    
-    Attribute positionAttrib;
+    //TransformFeedbackAttribute positionAttrib;
     
     vector<glm::vec3> vertices;
+    vector<TransformFeedbackAttribute*> varyingAttributs;
     
+    
+    
+    
+    bool InitShader(vector<pair<string, GLenum>> shaderSources, vector<const char*> varyings);
+    bool InitTransformFeedback();
     
     bool Init();
     void Update();
     void Draw();
-    template<typename T> void addBuffer(GLuint& vbo, vector<T> data, Attribute& attribute);
+    template<typename T> void AddBuffer(vector<T> data, TransformFeedbackAttribute& attribute);
     
 private:
-    bool InitShader();
-    bool InitTransformFeedback();
+    
     
 };
 
