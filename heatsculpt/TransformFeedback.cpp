@@ -54,7 +54,7 @@ bool TransformFeedback::InitShader(){
     const char *varyings[] = {"outPosition"};
     glTransformFeedbackVaryings(this->shaderProgram->id(), 1, varyings, GL_INTERLEAVED_ATTRIBS);
     PrintProgramInfoLog(shaderProgram->id());
-    
+    CheckGlErrors();
     shaderProgram->linkProgram();
     PrintProgramInfoLog(shaderProgram->id());
     

@@ -7,7 +7,7 @@
 //
 
 #include <vector>
-
+#include <glm/gtx/rotate_vector.hpp>
 #include "TransformFeedbackApp.h"
 
 
@@ -187,7 +187,7 @@ bool TransformFeedbackApp::Init(){
         // initial position
         vertexData[2*i+0] = glm::vec3(
                                       0.5f-float(std::rand())/RAND_MAX,
-                                      0.5f-float(std::rand())/RAND_MAX,
+                                      -1.5f-float(std::rand())/RAND_MAX,
                                       0.5f-float(std::rand())/RAND_MAX
                                       );
         vertexData[2*i+0] = glm::vec3(0.0f,20.0f,0.0f) + 5.0f*vertexData[2*i+0];
@@ -232,6 +232,7 @@ bool TransformFeedbackApp::Init(){
     
     return true;
 }
+
 void TransformFeedbackApp::Update(){
     App::Update();
     // define spheres for the particles to bounce off
@@ -250,11 +251,17 @@ void TransformFeedbackApp::Update(){
     glm::vec3 g(0.0f, -9.81f, 0.0f);
     float bounce = 1.2f; // inelastic: 1.0f, elastic: 2.0f
     
-    
-    
+    static float angle = 0.0f;
+
     // get the time in seconds
     float t = glfwGetTime();
+    angle += 100* t;
     
+    for (int i = 0; i < spheres; i++) {
+        glm::vec3 c = center[i];
+        center[i] = glm::rotate(c, angle, glm::vec3(1, 1, 0));
+
+    }
     
     
     

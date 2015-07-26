@@ -26,8 +26,8 @@ int main(int argc, char* argv[]) {
 //    TessMeshApp tessApp("tess", true);
 //    return tessApp.Start();
     
-    TransformFeedbackApp tfApp("transform feedback", true);
-    return tfApp.Start();
+//    TransformFeedbackApp tfApp("transform feedback", true);
+//    return tfApp.Start();
     
     TransformFeedbackMeshApp tfmApp("transform feedback mesh", false);
     return tfmApp.Start();
