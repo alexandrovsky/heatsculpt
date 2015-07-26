@@ -81,15 +81,6 @@ bool TransformFeedback::InitShader(vector<pair<string, GLenum>> shaderSources, v
     
 
 
-    TransformFeedbackAttribute* positionAttrib = new TransformFeedbackAttribute();
-    positionAttrib->name = "inposition";
-    positionAttrib->num_of_components = 3;
-    positionAttrib->data_type = GL_FLOAT;
-    positionAttrib->buffer_type = GL_ARRAY_BUFFER;
-    positionAttrib->draw_type = GL_DYNAMIC_DRAW;
-
-    positionAttrib->id = shaderProgram->addAttribute(positionAttrib->name);
-    varyingAttributs.push_back(positionAttrib);
     
     return true;
 }
@@ -98,22 +89,13 @@ bool TransformFeedback::InitShader(vector<pair<string, GLenum>> shaderSources, v
 bool TransformFeedback::InitTransformFeedback(){
     
 
-    for (int i = 0; i < 100000; i++) {
-        float x = 0.5f - static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-        float y = 0.5f - static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-        float z = 0.5f - static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-        vertices.push_back(glm::normalize(vec3(x, y, z)) );
-    }
-    
-    drawCount = (GLsizei)vertices.size();
     
     
     
-    
-    for (int i = 0; i < varyingAttributs.size(); i++) {
-        TransformFeedbackAttribute* attr = varyingAttributs[i];
-        AddBuffer(vertices, *attr);
-    }
+//    for (int i = 0; i < varyingAttributs.size(); i++) {
+//        TransformFeedbackAttribute* attr = varyingAttributs[i];
+//        AddBuffer(vertices, *attr);
+//    }
     
     //AddBuffer(vertices, positionAttrib);
     
@@ -169,34 +151,34 @@ void TransformFeedback::Draw(){
 
 }
 
-template<typename T> void TransformFeedback::AddBuffer(vector<T> data, TransformFeedbackAttribute& attribute){
-    
-    shaderProgram->use();
-    
-    attribute.bytes = sizeof(T) * data.size();
-    
-    glGenBuffers(1, &attribute.vbo);
-    glGenBuffers(1, &attribute.destination_vbo);
-    
-    glBindVertexArray(vao);
-    
-    // source buffer
-    {
-        glBindBuffer(attribute.buffer_type, attribute.vbo);
-        glBufferData(GL_ARRAY_BUFFER, attribute.bytes, vertices.data(), attribute.draw_type);
-        glEnableVertexAttribArray(attribute.id);
-        glVertexAttribPointer(attribute.id, attribute.num_of_components, attribute.data_type, GL_FALSE, 0, 0);
-    }
-    // destination buffer
-    {
-        glBindBuffer(attribute.buffer_type, attribute.destination_vbo);
-        
-        glBufferData(GL_ARRAY_BUFFER, attribute.bytes, vertices.data(), attribute.draw_type);
-        glEnableVertexAttribArray(attribute.id);
-        glVertexAttribPointer(attribute.id, attribute.num_of_components, attribute.data_type, GL_FALSE, 0, 0);
-    }
-    
-    glBindVertexArray(0);
-    
-    shaderProgram->disable();
-}
+//template<typename T> void TransformFeedback::AddBuffer(vector<T>& data, TransformFeedbackAttribute* attribute){
+//    
+//    shaderProgram->use();
+//    
+//    attribute->bytes = sizeof(T) * data.size();
+//    
+//    glGenBuffers(1, &attribute->vbo);
+//    glGenBuffers(1, &attribute->destination_vbo);
+//    
+//    glBindVertexArray(vao);
+//    
+//    // source buffer
+//    {
+//        glBindBuffer(attribute->buffer_type, attribute->vbo);
+//        glBufferData(GL_ARRAY_BUFFER, attribute->bytes, data.data(), attribute->draw_type);
+//        glEnableVertexAttribArray(attribute->id);
+//        glVertexAttribPointer(attribute->id, attribute->num_of_components, attribute->data_type, GL_FALSE, 0, 0);
+//    }
+//    // destination buffer
+//    {
+//        glBindBuffer(attribute->buffer_type, attribute->destination_vbo);
+//        
+//        glBufferData(GL_ARRAY_BUFFER, attribute->bytes, data.data(), attribute->draw_type);
+//        glEnableVertexAttribArray(attribute->id);
+//        glVertexAttribPointer(attribute->id, attribute->num_of_components, attribute->data_type, GL_FALSE, 0, 0);
+//    }
+//    
+//    glBindVertexArray(0);
+//    
+//    shaderProgram->disable();
+//}

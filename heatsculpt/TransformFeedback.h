@@ -8,12 +8,14 @@
 
 #ifndef __heatsculpt__TransformFeedback__
 #define __heatsculpt__TransformFeedback__
+#include <glm/glm.hpp>
 #include <utility>
 #include <vector>
 #include <stdio.h>
 #include "ShaderProgram.h"
 
 using namespace std;
+using namespace glm;
 
 #define buffer_count 2
 
@@ -35,13 +37,12 @@ public:
     GLuint vao;
     
     
-    //TransformFeedbackAttribute positionAttrib;
-    
-    vector<glm::vec3> vertices;
     vector<TransformFeedbackAttribute*> varyingAttributs;
     
     
-    
+    inline void SetDrawCount(GLsizei count){
+        drawCount = count;
+    }
     
     bool InitShader(vector<pair<string, GLenum>> shaderSources, vector<const char*> varyings);
     bool InitTransformFeedback();
@@ -49,7 +50,36 @@ public:
     bool Init();
     void Update();
     void Draw();
-    template<typename T> void AddBuffer(vector<T> data, TransformFeedbackAttribute& attribute);
+    template<typename T> inline void AddBuffer(vector<T>& data, TransformFeedbackAttribute* attribute){
+        shaderProgram->use();
+        
+        attribute->bytes = sizeof(T) * data.size();
+        
+        glGenBuffers(1, &attribute->vbo);
+        glGenBuffers(1, &attribute->destination_vbo);
+        
+        glBindVertexArray(vao);
+        
+        // source buffer
+        {
+            glBindBuffer(attribute->buffer_type, attribute->vbo);
+            glBufferData(GL_ARRAY_BUFFER, attribute->bytes, data.data(), attribute->draw_type);
+            glEnableVertexAttribArray(attribute->id);
+            glVertexAttribPointer(attribute->id, attribute->num_of_components, attribute->data_type, GL_FALSE, 0, 0);
+        }
+        // destination buffer
+        {
+            glBindBuffer(attribute->buffer_type, attribute->destination_vbo);
+            
+            glBufferData(GL_ARRAY_BUFFER, attribute->bytes, data.data(), attribute->draw_type);
+            glEnableVertexAttribArray(attribute->id);
+            glVertexAttribPointer(attribute->id, attribute->num_of_components, attribute->data_type, GL_FALSE, 0, 0);
+        }
+        
+        glBindVertexArray(0);
+        
+        shaderProgram->disable();
+    }
     
 private:
     

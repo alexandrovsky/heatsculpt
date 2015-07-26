@@ -36,7 +36,31 @@ bool TransformFeedbackMeshApp::Init(){
     shaderSources.push_back(pair<string, GLenum>("shaders/tfSimple.frag", GL_FRAGMENT_SHADER));
     
     transformFeedback->InitShader(shaderSources, varyings);
-    transformFeedback->InitTransformFeedback();
+    
+    
+    TransformFeedbackAttribute* positionAttrib = new TransformFeedbackAttribute();
+    positionAttrib->name = "inposition";
+    positionAttrib->num_of_components = 3;
+    positionAttrib->data_type = GL_FLOAT;
+    positionAttrib->buffer_type = GL_ARRAY_BUFFER;
+    positionAttrib->draw_type = GL_DYNAMIC_DRAW;
+    
+    positionAttrib->id = transformFeedback->shaderProgram->addAttribute(positionAttrib->name);
+    transformFeedback->varyingAttributs.push_back(positionAttrib);
+    
+    
+    vector<glm::vec3> vertices;
+    for (int i = 0; i < 100000; i++) {
+        float x = 0.5f - static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+        float y = 0.5f - static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+        float z = 0.5f - static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+        vertices.push_back(glm::normalize(glm::vec3(x, y, z)) );
+    }
+    
+    transformFeedback->SetDrawCount((GLsizei)vertices.size());
+    transformFeedback->AddBuffer(vertices, positionAttrib);
+    
+    //transformFeedback->InitTransformFeedback();
 
     
     return true;
