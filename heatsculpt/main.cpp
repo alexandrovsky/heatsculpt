@@ -10,7 +10,7 @@
 
 //#include "TestApp.h"
 //#include "MeshTestApp.h"
-//#include "TessMeshApp.h"
+#include "TessMeshApp.h"
 #include "TransformFeedbackApp.h"
 #include "TransformFeedbackMeshApp.h"
 

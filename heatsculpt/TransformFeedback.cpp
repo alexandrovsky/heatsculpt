@@ -74,6 +74,9 @@ bool TransformFeedback::InitShader(vector<pair<string, GLenum>> shaderSources, v
 void TransformFeedback::Update(){
     
     shaderProgram->use();
+    
+    //glEnable(GL_RASTERIZER_DISCARD);
+    
     // bind the current vao
     glBindVertexArray(vao);
     
@@ -81,36 +84,34 @@ void TransformFeedback::Update(){
         TransformFeedbackAttribute* attr = varyingAttributes[i];
         // bind transform feedback target
         glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, attr->vbo);
-        
-        
-        
-//        glEnable(GL_RASTERIZER_DISCARD);
-        
-        
-        // perform transform feedback
-        GLuint query;
-        glGenQueries(1, &query);
-        glBeginQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN, query);
-        glBeginTransformFeedback(GL_POINTS);
-        glPointSize(5.0f);
-        glDrawArrays(GL_POINTS, 0, drawCount);
-        glEndTransformFeedback();
-        
-        glEndQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN);
-        GLuint primitives_written;
-        glGetQueryObjectuiv( query, GL_QUERY_RESULT, &primitives_written );
-        if(primitives_written > 0 )
-            fprintf( stderr, "Attr: %s Primitives written to TFB: %d !\n", attr->name.c_str(), primitives_written );
-        glDeleteQueries(1, &query);
-        
-//        glDisable(GL_RASTERIZER_DISCARD);
-        
-        std::swap(attr->vbo, attr->destination_vbo);
     }
+    
+    
+    GLuint query;
+    glGenQueries(1, &query);
+    glBeginQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN, query);
+    glBeginTransformFeedback(GL_POINTS);
+    glPointSize(5.0f);
+    glDrawArrays(GL_POINTS, 0, drawCount);
+    glEndTransformFeedback();
+    
+    glEndQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN);
+    GLuint primitives_written;
+    glGetQueryObjectuiv( query, GL_QUERY_RESULT, &primitives_written );
+    if(primitives_written > 0 )
+        fprintf( stderr, "Attr: Primitives written to TFB: %d !\n", primitives_written );
+    glDeleteQueries(1, &query);
+
+    glDisable(GL_RASTERIZER_DISCARD);
+    
     shaderProgram->disable();
     
+    for (int i = 0; i < varyingAttributes.size(); i++) {
+        TransformFeedbackAttribute* attr = varyingAttributes[i];
+        std::swap(attr->vbo, attr->destination_vbo);
+    }
 
-
+    //glBindVertexArray(0);
     
 }
 

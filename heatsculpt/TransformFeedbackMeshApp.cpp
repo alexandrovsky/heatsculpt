@@ -85,34 +85,38 @@ bool TransformFeedbackMeshApp::Init(){
 
     }
     
-//    // draw shader;
-//    {
-//        drawShader = new ShaderProgram();
-//        Shader vert(GL_VERTEX_SHADER);
-//        vert.loadFromFile("shaders/simple.vert");
-//        vert.compile();
-//        
-//        Shader frag(GL_FRAGMENT_SHADER);
-//        frag.loadFromFile("shaders/simple.frag");
-//        frag.compile();
-//        
-//        drawShader->attachShader(vert);
-//        drawShader->attachShader(frag);
-//        
-//        drawShader->linkProgram();
-//        
-//        
-//        drawShader->use();
-//        
-//        GLuint model = drawShader->addUniform("model");
-//        glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(transformFeedback->modelMatrix));
-//        GLuint view = drawShader->addUniform("view");
-//        glUniformMatrix4fv(view, 1, GL_FALSE, glm::value_ptr(camera.view));
-//        GLuint projection = drawShader->addUniform("projection");
-//        glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(camera.projection));
-//    
-//        drawShader->disable();
-//    }
+    // draw shader;
+    {
+        drawShader = new ShaderProgram();
+        Shader vert(GL_VERTEX_SHADER);
+        vert.loadFromFile("shaders/simple.vert");
+        vert.compile();
+        
+        Shader frag(GL_FRAGMENT_SHADER);
+        frag.loadFromFile("shaders/simple.frag");
+        frag.compile();
+        
+        drawShader->attachShader(vert);
+        drawShader->attachShader(frag);
+        
+        drawShader->linkProgram();
+        
+        
+        drawShader->use();
+        
+        drawShader->addAttribute("position");
+        drawShader->addAttribute("color");
+        
+        
+        GLuint model = drawShader->addUniform("model");
+        glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(transformFeedback->modelMatrix));
+        GLuint view = drawShader->addUniform("view");
+        glUniformMatrix4fv(view, 1, GL_FALSE, glm::value_ptr(camera.view));
+        GLuint projection = drawShader->addUniform("projection");
+        glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(camera.projection));
+    
+        drawShader->disable();
+    }
     
     
     
@@ -120,6 +124,7 @@ bool TransformFeedbackMeshApp::Init(){
     return true;
 }
 void TransformFeedbackMeshApp::Update(){
+    App::Update();
     transformFeedback->Update();
 }
 void TransformFeedbackMeshApp::Render(){
@@ -128,30 +133,27 @@ void TransformFeedbackMeshApp::Render(){
     
     
     
-//    drawShader->use();
-//    
-//    
-//    GLuint model = drawShader->addUniform("model");
-//    glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(transformFeedback->modelMatrix));
-//    GLuint view = drawShader->addUniform("view");
-//    glUniformMatrix4fv(view, 1, GL_FALSE, glm::value_ptr(camera.view));
-//    GLuint projection = drawShader->addUniform("projection");
-//    glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(camera.projection));
-//    
-//    
-//    
-//    GLuint m = drawShader->uniform("model");
-//    glUniformMatrix4fv(m, 1, GL_FALSE, glm::value_ptr(transformFeedback->modelMatrix));
-//    
-//    GLuint v = drawShader->uniform("view");
-//    glUniformMatrix4fv(v, 1, GL_FALSE, glm::value_ptr(camera.view));
-//    
-//    GLuint p = drawShader->uniform("projection");
-//    glUniformMatrix4fv(p, 1, GL_FALSE, glm::value_ptr(camera.projection));
-//    
-//    
+    drawShader->use();
+    
+    
+    
+    
+    GLuint m = drawShader->uniform("model");
+    glUniformMatrix4fv(m, 1, GL_FALSE, glm::value_ptr(transformFeedback->modelMatrix));
+    
+    GLuint v = drawShader->uniform("view");
+    glUniformMatrix4fv(v, 1, GL_FALSE, glm::value_ptr(camera.view));
+    
+    GLuint p = drawShader->uniform("projection");
+    glUniformMatrix4fv(p, 1, GL_FALSE, glm::value_ptr(camera.projection));
+    
+    
+    glBindVertexArray(transformFeedback->vao);
+    glDrawArrays(GL_POINTS, 0, transformFeedback->drawCount);
+    
+    
 //    transformFeedback->Draw();
-//    drawShader->disable();
+    drawShader->disable();
     
 }
 

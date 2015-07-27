@@ -183,7 +183,7 @@ void ShaderProgram::addVaryings(std::vector<string> varyings, GLenum bufferMode)
     for (int i = 0; i < varyings.size(); i++) {
         
         const char* v = varyings[i].c_str();
-        
+
         glTransformFeedbackVaryings(programId, 1, &v, bufferMode);
 
     }

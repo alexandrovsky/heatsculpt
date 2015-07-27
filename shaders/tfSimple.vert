@@ -17,12 +17,12 @@ vec3 qtransform( vec4 q, vec3 v ){
 void main() {
     
     vec3 p = inPosition;
-    //p *= 0.999;
+    p *= 0.999;
     vPosition = p;
     
     vec3 c = inColor;
     
-    //c *= 0.999;
+    c *= 0.999;
     vColor = c;
     
     
