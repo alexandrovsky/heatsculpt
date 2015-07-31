@@ -47,8 +47,8 @@ void ShaderProgram::attachShader(Shader shader)
     // Method to link the shader program and display the link status
 bool ShaderProgram::linkProgram()
 {
-    // If we have at least two shaders (like a vertex shader and a fragment shader)...
-    if (shaders.size() >= 2)
+    // If we have at least one shader (like a vertex shader and a fragment shader)...
+    if (shaders.size() >= 1)
     {
         // Perform the linking process
         glLinkProgram(programId);
@@ -70,7 +70,7 @@ bool ShaderProgram::linkProgram()
     }
     else
     {
-        cout << "Can't link shaders - you need at least 2, but attached shader count is only: " << shaders.size() << endl;
+        cout << "Can't link shaders - you need at least 1, but attached shader count is only: " << shaders.size() << endl;
         return false;
     }
     return true;
@@ -180,6 +180,7 @@ int ShaderProgram::addUniform(const string &uniformName)
 
 void ShaderProgram::addVaryings(std::vector<string> varyings, GLenum bufferMode){
     
+    
     for (int i = 0; i < varyings.size(); i++) {
         
         const char* v = varyings[i].c_str();
@@ -187,6 +188,9 @@ void ShaderProgram::addVaryings(std::vector<string> varyings, GLenum bufferMode)
         glTransformFeedbackVaryings(programId, 1, &v, bufferMode);
 
     }
+    
+    
+    
     
     
 }

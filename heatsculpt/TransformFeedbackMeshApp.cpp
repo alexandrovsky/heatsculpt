@@ -65,6 +65,7 @@ bool TransformFeedbackMeshApp::Init(){
         transformFeedback->AddBuffer(vertices, positionAttrib);
     }
     
+
     // color
     {
         TransformFeedbackAttribute* colorAttrib = new TransformFeedbackAttribute();
@@ -80,7 +81,6 @@ bool TransformFeedbackMeshApp::Init(){
         
         vector<glm::vec3> colors;
         generateSingleColor(transformFeedback->drawCount, colors, vec3(0, 1, 0));
-        
         transformFeedback->AddBuffer(colors, colorAttrib);
 
     }
@@ -133,27 +133,27 @@ void TransformFeedbackMeshApp::Render(){
     
     
     
-    drawShader->use();
-    
-    
-    
-    
-    GLuint m = drawShader->uniform("model");
-    glUniformMatrix4fv(m, 1, GL_FALSE, glm::value_ptr(transformFeedback->modelMatrix));
-    
-    GLuint v = drawShader->uniform("view");
-    glUniformMatrix4fv(v, 1, GL_FALSE, glm::value_ptr(camera.view));
-    
-    GLuint p = drawShader->uniform("projection");
-    glUniformMatrix4fv(p, 1, GL_FALSE, glm::value_ptr(camera.projection));
-    
-    
-    glBindVertexArray(transformFeedback->vao);
-    glDrawArrays(GL_POINTS, 0, transformFeedback->drawCount);
-    
-    
-//    transformFeedback->Draw();
-    drawShader->disable();
+//    drawShader->use();
+//    
+//    
+//    
+//    
+//    GLuint m = drawShader->uniform("model");
+//    glUniformMatrix4fv(m, 1, GL_FALSE, glm::value_ptr(transformFeedback->modelMatrix));
+//    
+//    GLuint v = drawShader->uniform("view");
+//    glUniformMatrix4fv(v, 1, GL_FALSE, glm::value_ptr(camera.view));
+//    
+//    GLuint p = drawShader->uniform("projection");
+//    glUniformMatrix4fv(p, 1, GL_FALSE, glm::value_ptr(camera.projection));
+//    
+//    
+////    glBindVertexArray(transformFeedback->vao);
+////    glDrawArrays(GL_POINTS, 0, transformFeedback->drawCount);
+////    
+//    
+////    transformFeedback->Draw();
+//    drawShader->disable();
     
 }
 

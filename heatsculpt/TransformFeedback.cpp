@@ -14,12 +14,14 @@
 TransformFeedback::TransformFeedback():modelMatrix(1){
     
     glGenVertexArrays(1, &vao);
+    glGenVertexArrays(1, &destination_vao);
 }
 
 TransformFeedback::~TransformFeedback(){
     delete shaderProgram;
     
     glDeleteVertexArrays(1, &vao);
+    glDeleteVertexArrays(1, &destination_vao);
     
     for (int i = 0; i < varyingAttributes.size(); i++) {
         
@@ -56,7 +58,7 @@ bool TransformFeedback::InitShader(vector<pair<string, GLenum>> shaderSources, v
     // specify transform feedback output
     
     
-    shaderProgram->addVaryings(varyings, GL_SEPARATE_ATTRIBS);
+    shaderProgram->addVaryings(varyings, GL_INTERLEAVED_ATTRIBS);
     PrintProgramInfoLog(shaderProgram->id());
     CheckGlErrors();
     
@@ -83,7 +85,7 @@ void TransformFeedback::Update(){
     for (int i = 0; i < varyingAttributes.size(); i++) {
         TransformFeedbackAttribute* attr = varyingAttributes[i];
         // bind transform feedback target
-        glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, attr->vbo);
+        glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, i, attr->destination_vbo);
     }
     
     
@@ -111,7 +113,9 @@ void TransformFeedback::Update(){
         std::swap(attr->vbo, attr->destination_vbo);
     }
 
-    //glBindVertexArray(0);
+    glBindVertexArray(0);
+    
+    std::swap(vao, destination_vao);
     
 }
 

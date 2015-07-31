@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		360954571B6ABE5B000A6A57 /* feedback.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 360954541B6ABE48000A6A57 /* feedback.frag */; };
+		360954581B6ABE5B000A6A57 /* feedback.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 360954551B6ABE48000A6A57 /* feedback.vert */; };
+		360954591B6ABE5B000A6A57 /* transform.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 360954561B6ABE48000A6A57 /* transform.vert */; };
 		360A6F251B2B76D200A3CEFC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 360A6F241B2B76D200A3CEFC /* main.cpp */; };
 		360A6F2F1B2B786200A3CEFC /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 360A6F2D1B2B786200A3CEFC /* App.cpp */; };
 		360A6F331B2B7C7200A3CEFC /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 360A6F321B2B7C7200A3CEFC /* OpenGL.framework */; };
@@ -35,6 +38,14 @@
 		368E60A01B317F2B00A04AB6 /* MeshTestApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E609E1B317F2B00A04AB6 /* MeshTestApp.cpp */; };
 		368E60A41B32366400A04AB6 /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E60A21B32366400A04AB6 /* Debug.cpp */; };
 		368E60A71B3592BD00A04AB6 /* ColorUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E60A51B3592BD00A04AB6 /* ColorUtils.cpp */; };
+		36E66ACA1B6BD1BA00570108 /* transform-feedback-feedback.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36E66AC71B6BD1AF00570108 /* transform-feedback-feedback.frag */; };
+		36E66ACB1B6BD1BA00570108 /* transform-feedback-feedback.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36E66AC81B6BD1AF00570108 /* transform-feedback-feedback.vert */; };
+		36E66ACC1B6BD1BA00570108 /* transform-feedback-transform.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36E66AC91B6BD1AF00570108 /* transform-feedback-transform.vert */; };
+		36E66ACF1B6C0A9400570108 /* HeatSculptApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36E66ACD1B6C0A9400570108 /* HeatSculptApp.cpp */; };
+		36E66AD21B6C0BA900570108 /* Clay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36E66AD01B6C0BA900570108 /* Clay.cpp */; };
+		36E66AD71B6C115300570108 /* clay.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36E66AD41B6C112400570108 /* clay.vert */; };
+		36E66AD81B6C115300570108 /* clay.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36E66AD51B6C113500570108 /* clay.frag */; };
+		36E66AD91B6C115300570108 /* clay-transform.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36E66AD61B6C114700570108 /* clay-transform.vert */; };
 		36EAEF4F1B643A1B00B3AE77 /* tfSimple.geom in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36EAEF4E1B642DA700B3AE77 /* tfSimple.geom */; };
 		36FDAEF31B43225300A15BA0 /* simple.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36FDAEF11B43214800A15BA0 /* simple.vert */; };
 		36FDAEF41B43225300A15BA0 /* simple.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36FDAEF21B43215F00A15BA0 /* simple.frag */; };
@@ -47,6 +58,15 @@
 			dstPath = shaders;
 			dstSubfolderSpec = 16;
 			files = (
+				36E66AD71B6C115300570108 /* clay.vert in CopyFiles */,
+				36E66AD81B6C115300570108 /* clay.frag in CopyFiles */,
+				36E66AD91B6C115300570108 /* clay-transform.vert in CopyFiles */,
+				36E66ACA1B6BD1BA00570108 /* transform-feedback-feedback.frag in CopyFiles */,
+				36E66ACB1B6BD1BA00570108 /* transform-feedback-feedback.vert in CopyFiles */,
+				36E66ACC1B6BD1BA00570108 /* transform-feedback-transform.vert in CopyFiles */,
+				360954571B6ABE5B000A6A57 /* feedback.frag in CopyFiles */,
+				360954581B6ABE5B000A6A57 /* feedback.vert in CopyFiles */,
+				360954591B6ABE5B000A6A57 /* transform.vert in CopyFiles */,
 				36EAEF4F1B643A1B00B3AE77 /* tfSimple.geom in CopyFiles */,
 				36784D7E1B62AF9200FC3465 /* tfSimple.vert in CopyFiles */,
 				36784D7F1B62AF9200FC3465 /* tfSimple.frag in CopyFiles */,
@@ -66,6 +86,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		360954541B6ABE48000A6A57 /* feedback.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = feedback.frag; sourceTree = "<group>"; };
+		360954551B6ABE48000A6A57 /* feedback.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = feedback.vert; sourceTree = "<group>"; };
+		360954561B6ABE48000A6A57 /* transform.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = transform.vert; sourceTree = "<group>"; };
 		360A6F211B2B76D200A3CEFC /* heatsculpt */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = heatsculpt; sourceTree = BUILT_PRODUCTS_DIR; };
 		360A6F241B2B76D200A3CEFC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		360A6F2D1B2B786200A3CEFC /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
@@ -109,6 +132,16 @@
 		369A90481B4D33D9000D94C1 /* mouse.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = mouse.vert; sourceTree = "<group>"; };
 		369A90491B4D33E7000D94C1 /* mouse.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = mouse.frag; sourceTree = "<group>"; };
 		369A904A1B4D33F1000D94C1 /* mouse.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = mouse.geom; sourceTree = "<group>"; };
+		36E66AC71B6BD1AF00570108 /* transform-feedback-feedback.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = "transform-feedback-feedback.frag"; sourceTree = "<group>"; };
+		36E66AC81B6BD1AF00570108 /* transform-feedback-feedback.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = "transform-feedback-feedback.vert"; sourceTree = "<group>"; };
+		36E66AC91B6BD1AF00570108 /* transform-feedback-transform.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = "transform-feedback-transform.vert"; sourceTree = "<group>"; };
+		36E66ACD1B6C0A9400570108 /* HeatSculptApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HeatSculptApp.cpp; sourceTree = "<group>"; };
+		36E66ACE1B6C0A9400570108 /* HeatSculptApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeatSculptApp.h; sourceTree = "<group>"; };
+		36E66AD01B6C0BA900570108 /* Clay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Clay.cpp; sourceTree = "<group>"; };
+		36E66AD11B6C0BA900570108 /* Clay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clay.h; sourceTree = "<group>"; };
+		36E66AD41B6C112400570108 /* clay.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = clay.vert; sourceTree = "<group>"; };
+		36E66AD51B6C113500570108 /* clay.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = clay.frag; sourceTree = "<group>"; };
+		36E66AD61B6C114700570108 /* clay-transform.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = "clay-transform.vert"; sourceTree = "<group>"; };
 		36EAEF4E1B642DA700B3AE77 /* tfSimple.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tfSimple.geom; sourceTree = "<group>"; };
 		36FDAEF11B43214800A15BA0 /* simple.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = simple.vert; sourceTree = "<group>"; };
 		36FDAEF21B43215F00A15BA0 /* simple.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = simple.frag; sourceTree = "<group>"; };
@@ -160,6 +193,8 @@
 				368E60961B2EC51000A04AB6 /* rendering */,
 				368E60951B2EC4F300A04AB6 /* object */,
 				360A6F241B2B76D200A3CEFC /* main.cpp */,
+				36E66ACD1B6C0A9400570108 /* HeatSculptApp.cpp */,
+				36E66ACE1B6C0A9400570108 /* HeatSculptApp.h */,
 				360A6F2D1B2B786200A3CEFC /* App.cpp */,
 				360A6F2E1B2B786200A3CEFC /* App.h */,
 				368E60791B2B8D1C00A04AB6 /* Camera.cpp */,
@@ -211,6 +246,12 @@
 		36784D7B1B62ACBB00FC3465 /* transformFeedback */ = {
 			isa = PBXGroup;
 			children = (
+				36E66AC71B6BD1AF00570108 /* transform-feedback-feedback.frag */,
+				36E66AC81B6BD1AF00570108 /* transform-feedback-feedback.vert */,
+				36E66AC91B6BD1AF00570108 /* transform-feedback-transform.vert */,
+				360954541B6ABE48000A6A57 /* feedback.frag */,
+				360954551B6ABE48000A6A57 /* feedback.vert */,
+				360954561B6ABE48000A6A57 /* transform.vert */,
 				36784D7C1B62AF7400FC3465 /* tfSimple.vert */,
 				36EAEF4E1B642DA700B3AE77 /* tfSimple.geom */,
 				36784D7D1B62AF8200FC3465 /* tfSimple.frag */,
@@ -223,6 +264,8 @@
 			children = (
 				368E60921B2C90EE00A04AB6 /* Mesh.cpp */,
 				368E60931B2C90EE00A04AB6 /* Mesh.h */,
+				36E66AD01B6C0BA900570108 /* Clay.cpp */,
+				36E66AD11B6C0BA900570108 /* Clay.h */,
 			);
 			name = object;
 			sourceTree = "<group>";
@@ -278,9 +321,20 @@
 			name = mouse;
 			sourceTree = "<group>";
 		};
+		36E66AD31B6C10FA00570108 /* clay */ = {
+			isa = PBXGroup;
+			children = (
+				36E66AD41B6C112400570108 /* clay.vert */,
+				36E66AD51B6C113500570108 /* clay.frag */,
+				36E66AD61B6C114700570108 /* clay-transform.vert */,
+			);
+			name = clay;
+			sourceTree = "<group>";
+		};
 		36FDAEF01B4320EC00A15BA0 /* shaders */ = {
 			isa = PBXGroup;
 			children = (
+				36E66AD31B6C10FA00570108 /* clay */,
 				36784D7B1B62ACBB00FC3465 /* transformFeedback */,
 				369A90471B4D33C1000D94C1 /* mouse */,
 				3667109D1B4C18F1004B3EF0 /* simpleTess */,
@@ -346,9 +400,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36E66ACF1B6C0A9400570108 /* HeatSculptApp.cpp in Sources */,
 				368E60941B2C90EE00A04AB6 /* Mesh.cpp in Sources */,
 				3667109C1B4C1788004B3EF0 /* TessMeshApp.cpp in Sources */,
 				368E60A41B32366400A04AB6 /* Debug.cpp in Sources */,
+				36E66AD21B6C0BA900570108 /* Clay.cpp in Sources */,
 				368E60A01B317F2B00A04AB6 /* MeshTestApp.cpp in Sources */,
 				361DA9941B37445500E4B3BB /* MeshUtils.cpp in Sources */,
 				360A6F251B2B76D200A3CEFC /* main.cpp in Sources */,

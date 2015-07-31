@@ -89,6 +89,7 @@ public:
     // Method to add a uniform to the shader and return the bound location
     int addUniform(const string &uniformName);
     void addVaryings(std::vector<string> varyings, GLenum bufferMode);
+
     
 };
 

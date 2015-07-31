@@ -26,6 +26,7 @@ public:
     virtual void Render();
 
 private:
+    
     ShaderProgram* drawShader;
     ShaderProgram* transformfeedbackShader;
     

@@ -35,6 +35,7 @@ public:
 
     
     GLuint vao;
+    GLuint destination_vao;
     
     
     vector<TransformFeedbackAttribute*> varyingAttributes;
@@ -64,6 +65,7 @@ public:
             glEnableVertexAttribArray(attribute->id);
             glVertexAttribPointer(attribute->id, attribute->num_of_components, attribute->data_type, GL_FALSE, 0, 0);
         }
+        glBindVertexArray(destination_vao);
         // destination buffer
         {
             glBindBuffer(attribute->buffer_type, attribute->destination_vbo);

@@ -10,10 +10,12 @@
 
 //#include "TestApp.h"
 //#include "MeshTestApp.h"
-#include "TessMeshApp.h"
-#include "TransformFeedbackApp.h"
-#include "TransformFeedbackMeshApp.h"
+//#include "TessMeshApp.h"
+//#include "TransformFeedbackApp.h"
+//#include "TransformFeedbackMeshApp.h"
 
+
+#include "HeatSculptApp.h"
 
 int main(int argc, char* argv[]) {
     
@@ -29,8 +31,11 @@ int main(int argc, char* argv[]) {
 //    TransformFeedbackApp tfApp("transform feedback", true);
 //    return tfApp.Start();
     
-    TransformFeedbackMeshApp tfmApp("transform feedback mesh", false);
-    return tfmApp.Start();
+//    TransformFeedbackMeshApp tfmApp("transform feedback mesh", false);
+//    return tfmApp.Start();
+    
+    HeatSculptApp app("heatsculpt", false);
+    return app.Start();
     
 }
 
