@@ -180,7 +180,7 @@ bool TransformFeedbackApp::Init(){
         seed_location = transformfeedbackShader->addUniform("seed");
         
     }
-    
+
     // randomly place particles in a cube
     std::vector<glm::vec3> vertexData(2*particles);
     for(int i = 0;i<particles;++i) {
