@@ -9,10 +9,25 @@
 #include <gl/glew.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <glm/gtx/rotate_vector.hpp>
 #include "Clay.h"
 
-bool Clay::Init(){
+#include "ColorUtils.h"
+
+Clay::Clay(){
+}
+Clay::~Clay(){
     
+    delete drawShader;
+    delete transformfeedbackShader;
+    
+    glDeleteVertexArrays(2, vao);
+    glDeleteBuffers(2,vbo);
+    glDeleteQueries(1, &query);
+}
+
+bool Clay::Init(){
+    glGenQueries(1, &query);
     initProgram();
     initVertexArray();
     
@@ -33,21 +48,19 @@ void Clay::Update(){
     radius[2] = 12;
     
     
-    float dt = 1.0f/60.0f;
+
     glm::vec3 g(0.0f, -9.81f, 0.0f);
-    float bounce = 1.2f; // inelastic: 1.0f, elastic: 2.0f
-    
     static float angle = 0.0f;
     
     // get the time in seconds
     float t = glfwGetTime();
     angle += 100* t;
     
-//    for (int i = 0; i < spheres; i++) {
-//        glm::vec3 c = center[i];
-//        center[i] = glm::rotate(c, angle, glm::vec3(1, 1, 0));
-//        
-//    }
+    for (int i = 0; i < spheres; i++) {
+        glm::vec3 c = center[i];
+        center[i] = glm::rotate(c, angle*t, glm::vec3(-1, 1, 0));
+        
+    }
     
     
     
@@ -55,12 +68,7 @@ void Clay::Update(){
     transformfeedbackShader->use();
     
     // set the uniforms
-    glUniform3fv(transformfeedbackShader->uniform("center"), 3, reinterpret_cast<GLfloat*>(center));
-    glUniform1fv(transformfeedbackShader->uniform("radius"), 3, reinterpret_cast<GLfloat*>(radius));
-    glUniform3fv(transformfeedbackShader->uniform("g"), 1, glm::value_ptr(g));
-    glUniform1f(transformfeedbackShader->uniform("dt"), dt);
-    glUniform1f(transformfeedbackShader->uniform("bounce"), bounce);
-    glUniform1i(transformfeedbackShader->uniform("seed"), std::rand());
+    glUniform1f(transformfeedbackShader->uniform("t"), t);
     
     // bind the current vao
     glBindVertexArray(vao[(current_buffer+1)%2]);
@@ -71,8 +79,8 @@ void Clay::Update(){
     glEnable(GL_RASTERIZER_DISCARD);
     
     // perform transform feedback
-    GLuint query;
-    glGenQueries(1, &query);
+
+
     glBeginQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN, query);
     glBeginTransformFeedback(GL_POINTS);
     glDrawArrays(GL_POINTS, 0, num_of_paritcles);
@@ -83,7 +91,7 @@ void Clay::Update(){
     glGetQueryObjectuiv( query, GL_QUERY_RESULT, &primitives_written );
     if(primitives_written > 0 )
         fprintf( stderr, "Primitives written to TFB: %d !\n", primitives_written );
-    glDeleteQueries(1, &query);
+    
     
     glDisable(GL_RASTERIZER_DISCARD);
 }
@@ -100,9 +108,10 @@ void Clay::Render(glm::mat4 view, glm::mat4 projection){
     
     // calculate ViewProjection matrix
     
-    
-    glUniformMatrix4fv(drawShader->uniform("View"), 1, GL_FALSE, glm::value_ptr(view));
-    glUniformMatrix4fv(drawShader->uniform("Projection"), 1, GL_FALSE, glm::value_ptr(projection));
+    glm::mat4 model(1);
+    glUniformMatrix4fv(drawShader->uniform("model"), 1, GL_FALSE, glm::value_ptr(model));
+    glUniformMatrix4fv(drawShader->uniform("view"), 1, GL_FALSE, glm::value_ptr(view));
+    glUniformMatrix4fv(drawShader->uniform("projection"), 1, GL_FALSE, glm::value_ptr(projection));
     
     // bind the current vao
     glBindVertexArray(vao[current_buffer]);
@@ -121,9 +130,9 @@ bool Clay::initProgram(){
         vertexShader.loadFromFile("shaders/clay.vert");
         vertexShader.compile();
         
-        Shader geometryShader(GL_GEOMETRY_SHADER);
-        geometryShader.loadFromFile("shaders/clay.geom");
-        geometryShader.compile();
+//        Shader geometryShader(GL_GEOMETRY_SHADER);
+//        geometryShader.loadFromFile("shaders/clay.geom");
+//        geometryShader.compile();
         
         Shader fragmetShader(GL_FRAGMENT_SHADER);
         fragmetShader.loadFromFile("shaders/clay.frag");
@@ -131,13 +140,15 @@ bool Clay::initProgram(){
         
         drawShader = new ShaderProgram();
         drawShader->attachShader(vertexShader);
-        drawShader->attachShader(geometryShader);
+//        drawShader->attachShader(geometryShader);
         drawShader->attachShader(fragmetShader);
         drawShader->linkProgram();
         
+        drawShader->addUniform("model");
+        drawShader->addUniform("view");
+        drawShader->addUniform("projection");
         
-        drawShader->addUniform("View");
-        drawShader->addUniform("Projection");
+
         
     }
     
@@ -167,12 +178,7 @@ bool Clay::initProgram(){
         transformfeedbackShader->addAttribute("inposition");
         transformfeedbackShader->addAttribute("invelocity");
         
-        transformfeedbackShader->addUniform("center");
-        transformfeedbackShader->addUniform("radius");
-        transformfeedbackShader->addUniform("g");
-        transformfeedbackShader->addUniform("dt");
-        transformfeedbackShader->addUniform("bounce");
-        transformfeedbackShader->addUniform("seed");
+        transformfeedbackShader->addUniform("t");
         
     }
     return true;
@@ -183,18 +189,21 @@ bool Clay::initVertexArray(){
     
     // randomly place particles in a cube
     std::vector<ClayElement> vertexData(num_of_paritcles);
+    std::vector<glm::vec3> colors;
+    generateColors(num_of_paritcles, colors);
+    
     for(int i = 0;i<num_of_paritcles;++i) {
         
         // initial position
-        vertexData[i].position = glm::vec3(
+        vertexData[i].position = glm::normalize( glm::vec3(
                                       0.5f-float(std::rand())/RAND_MAX,
-                                      -1.5f-float(std::rand())/RAND_MAX,
+                                      0.5f-float(std::rand())/RAND_MAX,
                                       0.5f-float(std::rand())/RAND_MAX
-                                      );
-        vertexData[i].position = glm::vec3(0.0f,20.0f,0.0f) + 5.0f*vertexData[i].position;
+                                      ));
+        vertexData[i].position *= 5.0f;
         
         // initial velocity
-        vertexData[i].color = glm::vec3(0,0,0);
+        vertexData[i].color = colors[i];
     }
     
     
@@ -214,15 +223,15 @@ bool Clay::initVertexArray(){
         glVertexAttribPointer(transformfeedbackShader->attribute("inposition"),
                               3, GL_FLOAT,
                               GL_FALSE,
-                              6*sizeof(GLfloat),
-                              (char*)0 + 0*sizeof(GLfloat));
+                              sizeof(ClayElement), // 6*sizeof(GLfloat),
+                              (void*)offsetof(struct ClayElement, position)); //(char*)0 + 0*sizeof(GLfloat));
         // set up generic attrib pointers
         glEnableVertexAttribArray(1);
         glVertexAttribPointer(transformfeedbackShader->attribute("invelocity"),
                               3, GL_FLOAT,
                               GL_FALSE,
-                              6*sizeof(GLfloat),
-                              (char*)0 + 3*sizeof(GLfloat));
+                              sizeof(ClayElement), //6*sizeof(GLfloat),
+                              (void*)offsetof(struct ClayElement, color)); //(char*)0 + 0*sizeof(GLfloat));(char*)0 + 3*sizeof(GLfloat));
     }
     
     // "unbind" vao

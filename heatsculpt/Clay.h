@@ -10,7 +10,7 @@
 #define __heatsculpt__Clay__
 
 #define kClayElementNumOfComponents 2
-#define num_of_paritcles 10000
+#define num_of_paritcles 100000
 #include "ShaderProgram.h"
 #include <glm/glm.hpp>
 
@@ -24,6 +24,9 @@ struct ClayElement{
 class Clay{
     
 public:
+    
+    Clay();
+    virtual ~Clay();
     bool Init();
     void Update();
     void Render(glm::mat4 view, glm::mat4 projection);
@@ -43,7 +46,7 @@ private:
     GLuint vbo[2];
     int current_buffer = 0;
     
-    
+    GLuint query;
     
 };
 

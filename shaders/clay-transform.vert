@@ -1,37 +1,36 @@
 #version 400 core
 
-uniform vec3 center[3];
-uniform float radius[3];
-uniform vec3 g;
-uniform float dt;
-uniform float bounce;
-uniform int seed;
+uniform float t;
+
 in vec3 inposition;
 in vec3 invelocity;
+
 out vec3 outposition;
 out vec3 outvelocity;
 
-float hash(int x) {
-   x = x*1235167 + gl_VertexID*948737 + seed*9284365;
-   x = (x >> 13) ^ x;
-   return ((x * (x * x * 60493 + 19990303) + 1376312589) & 0x7fffffff)/float(0x7fffffff-1);
+
+
+mat4 rotationMatrix(vec3 axis, float angle)
+{
+    axis = normalize(axis);
+    float s = sin(angle);
+    float c = cos(angle);
+    float oc = 1.0 - c;
+    
+    return mat4(oc * axis.x * axis.x + c,           oc * axis.x * axis.y - axis.z * s,  oc * axis.z * axis.x + axis.y * s,  0.0,
+                oc * axis.x * axis.y + axis.z * s,  oc * axis.y * axis.y + c,           oc * axis.y * axis.z - axis.x * s,  0.0,
+                oc * axis.z * axis.x - axis.y * s,  oc * axis.y * axis.z + axis.x * s,  oc * axis.z * axis.z + c,           0.0,
+                0.0,                                0.0,                                0.0,                                1.0);
 }
 
+
 void main() {
-   outvelocity = invelocity;
-   for(int j = 0;j<3;++j) {
-       vec3 diff = inposition-center[j];
-       float dist = length(diff);
-       float vdot = dot(diff, invelocity);
-       if(dist<radius[j] && vdot<0.0)
-           outvelocity -= bounce*diff*vdot/(dist*dist);
-   }
-   outvelocity += dt*g;
-   outposition = inposition + dt*outvelocity;
-   if(outposition.y < -30.0)
-   {
-       outvelocity = vec3(0,0,0);
-       outposition = 0.5-vec3(hash(3*gl_VertexID+0),hash(3*gl_VertexID+1),hash(3*gl_VertexID+2));
-       outposition = vec3(0,20,0) + 5.0*outposition;
-   }
+    float speed = 0.01;
+    float _t = (t * speed);
+    vec3 axis = vec3(0.0, 1.0, 0.0);
+    mat4 rot = rotationMatrix(axis, _t);
+//
+    vec4 rotPos = rot * vec4(inposition, 1.0);
+    outposition = rotPos.xyz;
+    outvelocity = invelocity;
 }
