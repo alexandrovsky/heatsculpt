@@ -47,6 +47,7 @@
 		36E66AD81B6C115300570108 /* clay.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36E66AD51B6C113500570108 /* clay.frag */; };
 		36E66AD91B6C115300570108 /* clay-transform.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36E66AD61B6C114700570108 /* clay-transform.vert */; };
 		36E66ADB1B6C1D1500570108 /* clay.geom in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36E66ADA1B6C11E700570108 /* clay.geom */; };
+		36E66ADD1B6C31C500570108 /* clay-transform.geom in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36E66ADC1B6C2DFC00570108 /* clay-transform.geom */; };
 		36EAEF4F1B643A1B00B3AE77 /* tfSimple.geom in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36EAEF4E1B642DA700B3AE77 /* tfSimple.geom */; };
 		36FDAEF31B43225300A15BA0 /* simple.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36FDAEF11B43214800A15BA0 /* simple.vert */; };
 		36FDAEF41B43225300A15BA0 /* simple.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36FDAEF21B43215F00A15BA0 /* simple.frag */; };
@@ -59,6 +60,7 @@
 			dstPath = shaders;
 			dstSubfolderSpec = 16;
 			files = (
+				36E66ADD1B6C31C500570108 /* clay-transform.geom in CopyFiles */,
 				36E66ADB1B6C1D1500570108 /* clay.geom in CopyFiles */,
 				36E66AD71B6C115300570108 /* clay.vert in CopyFiles */,
 				36E66AD81B6C115300570108 /* clay.frag in CopyFiles */,
@@ -145,6 +147,7 @@
 		36E66AD51B6C113500570108 /* clay.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = clay.frag; sourceTree = "<group>"; };
 		36E66AD61B6C114700570108 /* clay-transform.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = "clay-transform.vert"; sourceTree = "<group>"; };
 		36E66ADA1B6C11E700570108 /* clay.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = clay.geom; sourceTree = "<group>"; };
+		36E66ADC1B6C2DFC00570108 /* clay-transform.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = "clay-transform.geom"; sourceTree = "<group>"; };
 		36EAEF4E1B642DA700B3AE77 /* tfSimple.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tfSimple.geom; sourceTree = "<group>"; };
 		36FDAEF11B43214800A15BA0 /* simple.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = simple.vert; sourceTree = "<group>"; };
 		36FDAEF21B43215F00A15BA0 /* simple.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = simple.frag; sourceTree = "<group>"; };
@@ -331,6 +334,7 @@
 				36E66ADA1B6C11E700570108 /* clay.geom */,
 				36E66AD51B6C113500570108 /* clay.frag */,
 				36E66AD61B6C114700570108 /* clay-transform.vert */,
+				36E66ADC1B6C2DFC00570108 /* clay-transform.geom */,
 			);
 			name = clay;
 			sourceTree = "<group>";

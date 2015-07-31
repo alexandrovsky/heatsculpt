@@ -80,7 +80,7 @@ void Clay::Update(){
     
     // perform transform feedback
 
-
+    
     glBeginQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN, query);
     glBeginTransformFeedback(GL_POINTS);
     glDrawArrays(GL_POINTS, 0, num_of_paritcles);
@@ -159,13 +159,13 @@ bool Clay::initProgram(){
         vertexShader.compile();
         
         
-//        Shader fragmentShader(GL_FRAGMENT_SHADER);
-//        fragmentShader.loadFromString(transform_fragment_source);
-//        fragmentShader.compile();
+        Shader geometryShader(GL_GEOMETRY_SHADER);
+        geometryShader.loadFromFile("shaders/clay-transform.geom");
+        geometryShader.compile();
         
         transformfeedbackShader = new ShaderProgram();
         transformfeedbackShader->attachShader(vertexShader);
-//        transformfeedbackShader->attachShader(fragmentShader);
+        transformfeedbackShader->attachShader(geometryShader);
         
         
         // specify transform feedback output
@@ -192,7 +192,7 @@ bool Clay::initVertexArray(){
     std::vector<glm::vec3> colors;
     generateColors(num_of_paritcles, colors);
     
-    for(int i = 0;i<num_of_paritcles;++i) {
+    for(int i = 0; i<num_of_paritcles; i++) {
         
         // initial position
         vertexData[i].position = glm::normalize( glm::vec3(
@@ -200,6 +200,7 @@ bool Clay::initVertexArray(){
                                       0.5f-float(std::rand())/RAND_MAX,
                                       0.5f-float(std::rand())/RAND_MAX
                                       ));
+        
         vertexData[i].position *= 5.0f;
         
         // initial velocity
@@ -216,7 +217,7 @@ bool Clay::initVertexArray(){
         glBindBuffer(GL_ARRAY_BUFFER, vbo[i]);
         
         // fill with initial data
-        glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3)*vertexData.size(), &vertexData[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(ClayElement)*vertexData.size(), &vertexData[0], GL_STATIC_DRAW);
         
         // set up generic attrib pointers
         glEnableVertexAttribArray(0);

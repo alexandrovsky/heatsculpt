@@ -10,7 +10,7 @@
 #define __heatsculpt__Clay__
 
 #define kClayElementNumOfComponents 2
-#define num_of_paritcles 100000
+#define num_of_paritcles 10000
 #include "ShaderProgram.h"
 #include <glm/glm.hpp>
 

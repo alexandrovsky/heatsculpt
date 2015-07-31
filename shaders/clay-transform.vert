@@ -5,8 +5,8 @@ uniform float t;
 in vec3 inposition;
 in vec3 invelocity;
 
-out vec3 outposition;
-out vec3 outvelocity;
+out vec3 vPosition;
+out vec3 vVelocity;
 
 
 
@@ -31,6 +31,6 @@ void main() {
     mat4 rot = rotationMatrix(axis, _t);
 //
     vec4 rotPos = rot * vec4(inposition, 1.0);
-    outposition = rotPos.xyz;
-    outvelocity = invelocity;
+    vPosition = rotPos.xyz;
+    vVelocity = invelocity;
 }
