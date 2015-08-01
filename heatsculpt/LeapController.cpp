@@ -7,25 +7,212 @@
 //
 
 #include "LeapController.h"
+#include "ColorUtils.h"
+#include <vector>
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 
 
 const std::string fingerNames[] = {"Thumb", "Index", "Middle", "Ring", "Pinky"};
 const std::string boneNames[] = {"Metacarpal", "Proximal", "Middle", "Distal"};
 const std::string stateNames[] = {"STATE_INVALID", "STATE_START", "STATE_UPDATE", "STATE_END"};
 
-LeapController::LeapController():Listener(){
+LeapController::LeapController():Listener(),
+hands(NULL), modelMatrix(1),fingerVertices(num_of_finger_points){
 }
 LeapController::~LeapController(){
-    
+    delete [] hands;
+    delete handsDrawShader;
 }
 
 void LeapController::Init(){
     controller.addListener(*this);
+    
+    // drawHandsShader
+    {
+        Shader vertexShader(GL_VERTEX_SHADER);
+        vertexShader.loadFromFile("shaders/simple.vert");
+        vertexShader.compile();
+        
+        Shader fragmentShader(GL_FRAGMENT_SHADER);
+        fragmentShader.loadFromFile("shaders/simple.frag");
+        fragmentShader.compile();
+        
+//        Shader geometryShader(GL_GEOMETRY_SHADER);
+//        geometryShader.loadFromFile("shaders/tess.geom");
+//        geometryShader.compile();
+//        
+//        Shader tesselationControlShader(GL_TESS_CONTROL_SHADER);
+//        tesselationControlShader.loadFromFile("shaders/tess.tcs");
+//        tesselationControlShader.compile();
+//        
+//        Shader tesselationEvaluationShader(GL_TESS_EVALUATION_SHADER);
+//        tesselationEvaluationShader.loadFromFile("shaders/tess.tes");
+//        tesselationEvaluationShader.compile();
+        
+        handsDrawShader = new ShaderProgram();
+        handsDrawShader->attachShader(vertexShader);
+        handsDrawShader->attachShader(fragmentShader);
+//        handsDrawShader->attachShader(geometryShader);
+//        handsDrawShader->attachShader(tesselationControlShader);
+//        handsDrawShader->attachShader(tesselationEvaluationShader);
+        handsDrawShader->linkProgram();
+
+    }
+    
+    
+    hands = new Mesh[2];
+    
+//    fingerVertices(3 * 5);
+    
+    
+    for(int i = 0; i< num_of_finger_points; i++) {
+        
+        // initial position
+        fingerVertices[i] = glm::normalize( glm::vec3(0.5f-float(std::rand())/RAND_MAX,
+                                                      0.5f-float(std::rand())/RAND_MAX,
+                                                      0.5f-float(std::rand())/RAND_MAX
+                                                     ));
+        
+        //fingerVertices[i] += vec3(10, 0, 0);
+        fingerVertices[i] *= 25.0f;
+    }
+    
+    
+    vector<GLuint> fingerIndices(3 * 5);
+    vector<vec3> fingerColors(3 * 5);
+    
+    // position
+    {
+        
+        positionAttrib.name = "position";
+        positionAttrib.num_of_components = 3;
+        positionAttrib.data_type = GL_FLOAT;
+        positionAttrib.buffer_type = GL_ARRAY_BUFFER;
+        
+        generateSingleColor((unsigned int)fingerColors.size(), fingerColors, vec3(1.0));
+        
+        hands[0].addVBO(fingerVertices, positionAttrib);
+        hands[1].addVBO(fingerVertices, positionAttrib);
+        
+        
+        handsDrawShader->use();
+        positionAttrib.id = handsDrawShader->addAttribute(positionAttrib.name);
+        glEnableVertexAttribArray(positionAttrib.id);
+        glVertexAttribPointer(positionAttrib.id, positionAttrib.num_of_components, GL_FLOAT, GL_FALSE, 0, 0);
+        handsDrawShader->disable();
+        
+        hands[0].attributes.push_back(positionAttrib);
+        hands[1].attributes.push_back(positionAttrib);
+    }
+    
+    
+    // color:
+    {
+        
+        colorAttrib.name = "color";
+        colorAttrib.num_of_components = 3;
+        colorAttrib.data_type = GL_FLOAT;
+        colorAttrib.buffer_type = GL_ARRAY_BUFFER;
+        
+        
+        
+        hands[0].addVBO(fingerColors, colorAttrib);
+        hands[1].addVBO(fingerColors, colorAttrib);
+        handsDrawShader->use();
+        colorAttrib.id = handsDrawShader->addAttribute(colorAttrib.name);
+        glEnableVertexAttribArray(colorAttrib.id);
+        glVertexAttribPointer(colorAttrib.id, colorAttrib.num_of_components, GL_FLOAT, GL_FALSE, 0, 0);
+        handsDrawShader->disable();
+        
+        hands[0].attributes.push_back(colorAttrib);
+        hands[1].attributes.push_back(colorAttrib);
+        
+        
+        // indices:
+        {
+            for (int i = 0; i < num_of_finger_points; i++) {
+                fingerIndices[i] = i;
+            }
+            
+            hands[0].addIndices(fingerIndices);
+            hands[1].addIndices(fingerIndices);
+        }
+        
+        
+        
+        // uniforms:
+        {
+            handsDrawShader->use();
+            handsDrawShader->addUniform("model");
+            handsDrawShader->addUniform("view");
+            handsDrawShader->addUniform("projection");
+            
+            
+            
+            handsDrawShader->disable();
+            
+        }
+    }
 }
 
 void LeapController::Destroy(){
     controller.removeListener(*this);
 
+}
+
+
+void LeapController::Render(mat4 view, mat4 projection){
+    handsDrawShader->use();
+
+    
+    GLuint m = handsDrawShader->uniform("model");
+    glUniformMatrix4fv(m, 1, GL_FALSE, glm::value_ptr(modelMatrix));
+    
+    GLuint v = handsDrawShader->uniform("view");
+    glUniformMatrix4fv(v, 1, GL_FALSE, glm::value_ptr(view));
+    
+    GLuint p = handsDrawShader->uniform("projection");
+    glUniformMatrix4fv(p, 1, GL_FALSE, glm::value_ptr(projection));
+    
+    
+    HandList leapHands = frame.hands();
+    for (int i = 0; i < leapHands.count(); i++) {
+        
+        FingerList leapFingers = leapHands[i].fingers();
+        
+        
+        
+        if(leapHands[i].isLeft()){
+            
+            for (int j = 0; j < leapFingers.count(); j++) {
+                Leap::Vector tip = leapFingers[j].tipPosition();
+                fingerVertices[j] =  0.2f * vec3(tip.x, tip.y, tip.z);
+            }
+            
+            hands[0].setBufferData(fingerVertices, positionAttrib);
+        }else{
+            for (int j = 0; j < leapFingers.count(); j++) {
+                Leap::Vector tip = leapFingers[j].tipPosition();
+                fingerVertices[j+num_of_finger_points/2-1] =  0.2f * vec3(tip.x, tip.y, tip.z);
+            }
+            hands[1].setBufferData(fingerVertices, positionAttrib);
+        }
+    }
+    
+    
+    hands[0].Draw(GL_POINTS);
+    hands[1].Draw(GL_POINTS);
+    
+    
+
+    
+
+    
+    
+    handsDrawShader->disable();
+    
 }
 
 void LeapController::onInit(const Controller& controller) {
@@ -51,7 +238,7 @@ void LeapController::onExit(const Controller& controller) {
 
 void LeapController::onFrame(const Controller& controller) {
     // Get the most recent frame and report some basic information
-    const Frame frame = controller.frame();
+    frame = controller.frame();
     std::cout << "Frame id: " << frame.id()
     << ", timestamp: " << frame.timestamp()
     << ", hands: " << frame.hands().count()

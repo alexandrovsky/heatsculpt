@@ -44,6 +44,21 @@ public:
     void addIndices(vector<GLuint> indices);
     template<typename T> GLuint addVBO(vector<T> vector, Attribute& attribute);
     
+    template<typename T>  void setBufferData(vector<T> vector, Attribute& attribute){
+        // check current vao
+        GLint current_vao;
+        glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &current_vao);
+        
+        if(current_vao != vao){
+            glBindVertexArray(vao);
+        }
+        
+        
+        attribute.bytes = sizeof(T) * vector.size();
+        // add data to vbo
+        glBindBufferARB(attribute.buffer_type, attribute.vbo);
+        glBufferData(attribute.buffer_type, attribute.bytes, vector.data(), GL_STATIC_DRAW);
+    }
     
 
     vector<Attribute> attributes;

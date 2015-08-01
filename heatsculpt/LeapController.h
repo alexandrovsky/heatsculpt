@@ -12,6 +12,11 @@
 #include <stdio.h>
 #include "Leap.h"
 
+#include "Mesh.h"
+#include "ShaderProgram.h"
+
+#define num_of_finger_points 10 // 5 fingers * 4 * bonese * 2 hands
+
 using namespace Leap;
 
 class LeapController : public Listener {
@@ -20,6 +25,8 @@ public:
     ~LeapController();
     void Init();
     void Destroy();
+    void Render(mat4 view, mat4 projection);
+    
     virtual void onInit(const Controller&);
     virtual void onConnect(const Controller&);
     virtual void onDisconnect(const Controller&);
@@ -32,6 +39,17 @@ public:
     virtual void onServiceDisconnect(const Controller&);
     
 private:
+    Frame frame;
+    
+    mat4 modelMatrix;
     Controller controller;
+    Mesh* hands;
+    ShaderProgram* handsDrawShader;
+    
+    vector<vec3> fingerVertices;
+    Attribute positionAttrib;
+    Attribute colorAttrib;
+    
+    
 };
 #endif /* defined(__heatsculpt__LeapController__) */

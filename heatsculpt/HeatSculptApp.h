@@ -13,7 +13,8 @@
 #include "App.h"
 #include "Clay.h"
 #include "LeapController.h"
-#include "Mesh.h"
+
+
 class HeatSculptApp : public App {
 
 
@@ -31,9 +32,9 @@ public:
    
     
 private:
-    Mesh* hands;
+
     Clay* clay;
-    LeapController leap;
+    LeapController* leap;
 };
 
 #endif /* defined(__heatsculpt__HeatSculptApp__) */

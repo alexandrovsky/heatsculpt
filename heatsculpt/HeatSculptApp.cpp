@@ -11,16 +11,15 @@
 
 
 HeatSculptApp::HeatSculptApp(const std::string& window_title, bool fullscreen)
-:App(window_title, fullscreen),
-hands(NULL){
+:App(window_title, fullscreen){
     
     clay = new Clay();
     
 }
 HeatSculptApp::~HeatSculptApp(){
-    leap.Destroy();
+    leap->Destroy();
+    delete leap;
     delete clay;
-    delete [] hands;
 }
 
 
@@ -39,25 +38,12 @@ bool HeatSculptApp::Init(){
     camera.SetPosition(glm::vec3(0.0f, 0.0f, -130.0f));
     
     clay->Init();
-    leap.Init();
+    
+    leap = new LeapController();
+    leap->Init();
     
     
-    hands = new Mesh[2];
-    
-    
-    
-    
-    Attribute positionAttrib;
-    positionAttrib.name = "position";
-    positionAttrib.num_of_components = 3;
-    positionAttrib.data_type = GL_FLOAT;
-    positionAttrib.buffer_type = GL_ARRAY_BUFFER;
-    
-    vector<vec3> fingerVertices(3 * 5);
-    vector<vec3> fingerColors(3 * 5);
-    
-    hands[0].addVBO(fingerVertices, positionAttrib);
-    
+
     
     return true;
 }
@@ -70,7 +56,7 @@ void HeatSculptApp::Update(){
 void HeatSculptApp::Render(){
     App::Render();
     clay->Render(camera.view, camera.projection);
-
+    leap->Render(camera.view, camera.projection);
 }
 
 

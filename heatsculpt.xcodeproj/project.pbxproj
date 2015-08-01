@@ -51,6 +51,8 @@
 		36E66AE11B6C47C500570108 /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E66ADF1B6C47C500570108 /* libLeap.dylib */; };
 		36E66AE51B6C483800570108 /* LeapController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36E66AE31B6C483800570108 /* LeapController.cpp */; };
 		36E66AE91B6C4ADB00570108 /* libLeap.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36E66ADF1B6C47C500570108 /* libLeap.dylib */; };
+		36E66AEE1B6C54CB00570108 /* LeapUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36E66AEA1B6C54CB00570108 /* LeapUtil.cpp */; };
+		36E66AEF1B6C54CB00570108 /* LeapUtilGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36E66AEC1B6C54CB00570108 /* LeapUtilGL.cpp */; };
 		36EAEF4F1B643A1B00B3AE77 /* tfSimple.geom in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36EAEF4E1B642DA700B3AE77 /* tfSimple.geom */; };
 		36FDAEF31B43225300A15BA0 /* simple.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36FDAEF11B43214800A15BA0 /* simple.vert */; };
 		36FDAEF41B43225300A15BA0 /* simple.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36FDAEF21B43215F00A15BA0 /* simple.frag */; };
@@ -166,6 +168,10 @@
 		36E66AE31B6C483800570108 /* LeapController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LeapController.cpp; sourceTree = "<group>"; };
 		36E66AE41B6C483800570108 /* LeapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeapController.h; sourceTree = "<group>"; };
 		36E66AE61B6C496200570108 /* LeapMath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeapMath.h; sourceTree = "<group>"; };
+		36E66AEA1B6C54CB00570108 /* LeapUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LeapUtil.cpp; sourceTree = "<group>"; };
+		36E66AEB1B6C54CB00570108 /* LeapUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeapUtil.h; sourceTree = "<group>"; };
+		36E66AEC1B6C54CB00570108 /* LeapUtilGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LeapUtilGL.cpp; sourceTree = "<group>"; };
+		36E66AED1B6C54CB00570108 /* LeapUtilGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeapUtilGL.h; sourceTree = "<group>"; };
 		36EAEF4E1B642DA700B3AE77 /* tfSimple.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tfSimple.geom; sourceTree = "<group>"; };
 		36FDAEF11B43214800A15BA0 /* simple.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = simple.vert; sourceTree = "<group>"; };
 		36FDAEF21B43215F00A15BA0 /* simple.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = simple.frag; sourceTree = "<group>"; };
@@ -363,6 +369,10 @@
 		36E66ADE1B6C47B600570108 /* leap */ = {
 			isa = PBXGroup;
 			children = (
+				36E66AEA1B6C54CB00570108 /* LeapUtil.cpp */,
+				36E66AEB1B6C54CB00570108 /* LeapUtil.h */,
+				36E66AEC1B6C54CB00570108 /* LeapUtilGL.cpp */,
+				36E66AED1B6C54CB00570108 /* LeapUtilGL.h */,
 				36E66ADF1B6C47C500570108 /* libLeap.dylib */,
 				36E66AE61B6C496200570108 /* LeapMath.h */,
 				36E66AE01B6C47C500570108 /* Leap.h */,
@@ -463,10 +473,12 @@
 				368E60811B2C4ED800A04AB6 /* ShaderProgram.cpp in Sources */,
 				360A6F2F1B2B786200A3CEFC /* App.cpp in Sources */,
 				367848621B61A0CF00FC3465 /* TransformFeedbackMeshApp.cpp in Sources */,
+				36E66AEF1B6C54CB00570108 /* LeapUtilGL.cpp in Sources */,
 				3678485F1B619ECE00FC3465 /* TransformFeedback.cpp in Sources */,
 				36E66AE51B6C483800570108 /* LeapController.cpp in Sources */,
 				368E607E1B2C4CCE00A04AB6 /* Shader.cpp in Sources */,
 				368E609A1B2EC7E900A04AB6 /* TestApp.cpp in Sources */,
+				36E66AEE1B6C54CB00570108 /* LeapUtil.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
