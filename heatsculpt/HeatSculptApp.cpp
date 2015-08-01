@@ -17,14 +17,14 @@ HeatSculptApp::HeatSculptApp(const std::string& window_title, bool fullscreen)
     
 }
 HeatSculptApp::~HeatSculptApp(){
-    leap->Destroy();
-    delete leap;
-    delete clay;
+    
 }
 
 
 bool HeatSculptApp::Init(){
     App::Init();
+    
+    controller.addListener(leap);
     
     // we ar blending so no depth testing
 //    glDisable(GL_DEPTH_TEST);
@@ -35,12 +35,9 @@ bool HeatSculptApp::Init(){
 //    glBlendFunc(GL_ONE, GL_ONE);
 //    
 
-    camera.SetPosition(glm::vec3(0.0f, 0.0f, -130.0f));
+    camera.SetPosition(glm::vec3(0.0f, 20.0f, 130.0f));
     
     clay->Init();
-    
-    leap = new LeapController();
-    leap->Init();
     
     
 
@@ -56,18 +53,25 @@ void HeatSculptApp::Update(){
 void HeatSculptApp::Render(){
     App::Render();
     clay->Render(camera.view, camera.projection);
-    leap->Render(camera.view, camera.projection);
+    leap.Render(camera.view, camera.projection);
 }
 
+void HeatSculptApp::Exit(){
+    App::Exit();
+    controller.removeListener(leap);
+    leap.Destroy();
+    delete clay;
 
-void HeatSculptApp::OnKeyUp(GLFWwindow* window, int key, int scancode, int action, int mods){
-    App::OnKeyUp(window, key, scancode, action, mods);
-    
-    switch (key) {
-        case GLFW_KEY_X:
-            clay->click = 1;
-            break;
-        default:
-            break;
-    }
 }
+
+//void HeatSculptApp::OnKeyUp(GLFWwindow* window, int key, int scancode, int action, int mods){
+//    
+//    
+//    switch (key) {
+//        case GLFW_KEY_X:
+//            clay->click = 1;
+//            break;
+//        default:
+//            break;
+//    }
+//}

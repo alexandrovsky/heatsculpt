@@ -10,7 +10,7 @@
 #define __heatsculpt__Clay__
 
 #define kClayElementNumOfComponents 2
-#define num_of_paritcles 1000
+#define num_of_paritcles 100
 #define kMaxBufferSize 65536
 
 

@@ -15,15 +15,15 @@
 #include "Mesh.h"
 #include "ShaderProgram.h"
 
-#define num_of_finger_points 10 // 5 fingers * 4 * bonese * 2 hands
+#define num_of_finger_points 20 // 5 fingers * 4 * bonese
 
 using namespace Leap;
 
 class LeapController : public Listener {
 public:
     LeapController();
-    ~LeapController();
-    void Init();
+    virtual ~LeapController();
+    
     void Destroy();
     void Render(mat4 view, mat4 projection);
     
@@ -39,14 +39,22 @@ public:
     virtual void onServiceDisconnect(const Controller&);
     
 private:
-    Frame frame;
+
+    void initDrawing();
+    
+    bool initialized;
     
     mat4 modelMatrix;
     Controller controller;
-    Mesh* hands;
+    Mesh* drawHands;
     ShaderProgram* handsDrawShader;
     
-    vector<vec3> fingerVertices;
+    vector<vec3> leftFingerVertices;
+    vector<vec3> rightFingerVertices;
+    
+    vector<GLuint> fingerIndices;
+    vector<vec3> fingerColors;
+    
     Attribute positionAttrib;
     Attribute colorAttrib;
     

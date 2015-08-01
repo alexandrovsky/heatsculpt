@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "App.h"
 #include "Clay.h"
+#include "Leap.h"
 #include "LeapController.h"
 
 
@@ -27,14 +28,16 @@ public:
     bool Init();
     void Update();
     void Render();
-
-    void OnKeyUp(GLFWwindow* window, int key, int scancode, int action, int mods);
+    void Exit();
+    
+//    void OnKeyUp(GLFWwindow* window, int key, int scancode, int action, int mods);
    
     
 private:
 
     Clay* clay;
-    LeapController* leap;
+    LeapController leap;
+    Controller controller;
 };
 
 #endif /* defined(__heatsculpt__HeatSculptApp__) */
