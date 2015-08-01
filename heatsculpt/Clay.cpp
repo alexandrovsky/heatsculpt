@@ -15,6 +15,7 @@
 #include "ColorUtils.h"
 
 Clay::Clay(){
+
 }
 Clay::~Clay(){
     
@@ -69,6 +70,7 @@ void Clay::Update(){
     
     // set the uniforms
     glUniform1f(transformfeedbackShader->uniform("t"), t);
+    glUniform1i(transformfeedbackShader->uniform("click"), click);
     
     // bind the current vao
     glBindVertexArray(vao[(current_buffer+1)%2]);
@@ -83,15 +85,18 @@ void Clay::Update(){
     
     glBeginQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN, query);
     glBeginTransformFeedback(GL_POINTS);
-    glDrawArrays(GL_POINTS, 0, num_of_paritcles);
+    glDrawArrays(GL_POINTS, 0, drawCount);
     glEndTransformFeedback();
     
     glEndQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN);
     GLuint primitives_written;
     glGetQueryObjectuiv( query, GL_QUERY_RESULT, &primitives_written );
-    if(primitives_written > 0 )
-        fprintf( stderr, "Primitives written to TFB: %d !\n", primitives_written );
+//    if(primitives_written > 0 )
+//        fprintf( stderr, "Primitives written to TFB: %d !\n", primitives_written );
+    drawCount = primitives_written;
     
+    drawCount = drawCount > 500 ? 500 : drawCount;
+    click = 0;
     
     glDisable(GL_RASTERIZER_DISCARD);
 }
@@ -116,8 +121,9 @@ void Clay::Render(glm::mat4 view, glm::mat4 projection){
     // bind the current vao
     glBindVertexArray(vao[current_buffer]);
     
+    glPointSize(5.0);
     // draw
-    glDrawArrays(GL_POINTS, 0, num_of_paritcles);
+    glDrawArrays(GL_POINTS, 0, drawCount);
     
 
     current_buffer = (current_buffer + 1) % 2;
@@ -179,6 +185,7 @@ bool Clay::initProgram(){
         transformfeedbackShader->addAttribute("invelocity");
         
         transformfeedbackShader->addUniform("t");
+        transformfeedbackShader->addUniform("click");
         
     }
     return true;
@@ -188,7 +195,7 @@ bool Clay::initVertexArray(){
     
     
     // randomly place particles in a cube
-    std::vector<ClayElement> vertexData(num_of_paritcles);
+    std::vector<ClayElement> vertexData(kMaxBufferSize);
     std::vector<glm::vec3> colors;
     generateColors(num_of_paritcles, colors);
     
@@ -201,7 +208,7 @@ bool Clay::initVertexArray(){
                                       0.5f-float(std::rand())/RAND_MAX
                                       ));
         
-        vertexData[i].position *= 5.0f;
+        vertexData[i].position *= 25.0f;
         
         // initial velocity
         vertexData[i].color = colors[i];

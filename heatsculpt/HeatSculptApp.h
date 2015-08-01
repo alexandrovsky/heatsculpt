@@ -12,7 +12,8 @@
 #include <stdio.h>
 #include "App.h"
 #include "Clay.h"
-
+#include "LeapController.h"
+#include "Mesh.h"
 class HeatSculptApp : public App {
 
 
@@ -26,10 +27,13 @@ public:
     void Update();
     void Render();
 
+    void OnKeyUp(GLFWwindow* window, int key, int scancode, int action, int mods);
    
     
 private:
+    Mesh* hands;
     Clay* clay;
+    LeapController leap;
 };
 
 #endif /* defined(__heatsculpt__HeatSculptApp__) */

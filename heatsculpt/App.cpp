@@ -211,6 +211,8 @@ void App::OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int m
 
 
 void App::OnKeyUp(GLFWwindow* window, int key, int scancode, int action, int mods){
+    
+    
 }
 
 void App::OnMouseMove(double mX, double mY){

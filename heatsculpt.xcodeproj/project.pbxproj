@@ -48,6 +48,9 @@
 		36E66AD91B6C115300570108 /* clay-transform.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36E66AD61B6C114700570108 /* clay-transform.vert */; };
 		36E66ADB1B6C1D1500570108 /* clay.geom in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36E66ADA1B6C11E700570108 /* clay.geom */; };
 		36E66ADD1B6C31C500570108 /* clay-transform.geom in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36E66ADC1B6C2DFC00570108 /* clay-transform.geom */; };
+		36E66AE11B6C47C500570108 /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E66ADF1B6C47C500570108 /* libLeap.dylib */; };
+		36E66AE51B6C483800570108 /* LeapController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36E66AE31B6C483800570108 /* LeapController.cpp */; };
+		36E66AE91B6C4ADB00570108 /* libLeap.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36E66ADF1B6C47C500570108 /* libLeap.dylib */; };
 		36EAEF4F1B643A1B00B3AE77 /* tfSimple.geom in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36EAEF4E1B642DA700B3AE77 /* tfSimple.geom */; };
 		36FDAEF31B43225300A15BA0 /* simple.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36FDAEF11B43214800A15BA0 /* simple.vert */; };
 		36FDAEF41B43225300A15BA0 /* simple.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36FDAEF21B43215F00A15BA0 /* simple.frag */; };
@@ -84,6 +87,16 @@
 				366710AC1B4C1B2D004B3EF0 /* tess.vert in CopyFiles */,
 				36FDAEF31B43225300A15BA0 /* simple.vert in CopyFiles */,
 				36FDAEF41B43225300A15BA0 /* simple.frag in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		36E66AE81B6C4ACE00570108 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				36E66AE91B6C4ADB00570108 /* libLeap.dylib in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +161,11 @@
 		36E66AD61B6C114700570108 /* clay-transform.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = "clay-transform.vert"; sourceTree = "<group>"; };
 		36E66ADA1B6C11E700570108 /* clay.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = clay.geom; sourceTree = "<group>"; };
 		36E66ADC1B6C2DFC00570108 /* clay-transform.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = "clay-transform.geom"; sourceTree = "<group>"; };
+		36E66ADF1B6C47C500570108 /* libLeap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libLeap.dylib; sourceTree = "<group>"; };
+		36E66AE01B6C47C500570108 /* Leap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Leap.h; sourceTree = "<group>"; };
+		36E66AE31B6C483800570108 /* LeapController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LeapController.cpp; sourceTree = "<group>"; };
+		36E66AE41B6C483800570108 /* LeapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeapController.h; sourceTree = "<group>"; };
+		36E66AE61B6C496200570108 /* LeapMath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeapMath.h; sourceTree = "<group>"; };
 		36EAEF4E1B642DA700B3AE77 /* tfSimple.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tfSimple.geom; sourceTree = "<group>"; };
 		36FDAEF11B43214800A15BA0 /* simple.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = simple.vert; sourceTree = "<group>"; };
 		36FDAEF21B43215F00A15BA0 /* simple.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = simple.frag; sourceTree = "<group>"; };
@@ -161,6 +179,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36E66AE11B6C47C500570108 /* libLeap.dylib in Frameworks */,
 				368E60911B2C77AA00A04AB6 /* libglfw.3.1.dylib in Frameworks */,
 				368E60851B2C650300A04AB6 /* libGLEW.a in Frameworks */,
 				360A6F331B2B7C7200A3CEFC /* OpenGL.framework in Frameworks */,
@@ -173,6 +192,7 @@
 		360A6F181B2B76D200A3CEFC = {
 			isa = PBXGroup;
 			children = (
+				36E66ADE1B6C47B600570108 /* leap */,
 				36FDAEF01B4320EC00A15BA0 /* shaders */,
 				368E60901B2C77AA00A04AB6 /* libglfw.3.1.dylib */,
 				368E60841B2C650300A04AB6 /* libGLEW.a */,
@@ -193,6 +213,7 @@
 		360A6F231B2B76D200A3CEFC /* heatsculpt */ = {
 			isa = PBXGroup;
 			children = (
+				36E66AE21B6C481400570108 /* leap */,
 				3678485C1B619EA500FC3465 /* technique */,
 				368E60A11B32364500A04AB6 /* utils */,
 				368E60971B2EC7C400A04AB6 /* test apps */,
@@ -339,6 +360,25 @@
 			name = clay;
 			sourceTree = "<group>";
 		};
+		36E66ADE1B6C47B600570108 /* leap */ = {
+			isa = PBXGroup;
+			children = (
+				36E66ADF1B6C47C500570108 /* libLeap.dylib */,
+				36E66AE61B6C496200570108 /* LeapMath.h */,
+				36E66AE01B6C47C500570108 /* Leap.h */,
+			);
+			name = leap;
+			sourceTree = "<group>";
+		};
+		36E66AE21B6C481400570108 /* leap */ = {
+			isa = PBXGroup;
+			children = (
+				36E66AE31B6C483800570108 /* LeapController.cpp */,
+				36E66AE41B6C483800570108 /* LeapController.h */,
+			);
+			name = leap;
+			sourceTree = "<group>";
+		};
 		36FDAEF01B4320EC00A15BA0 /* shaders */ = {
 			isa = PBXGroup;
 			children = (
@@ -362,6 +402,7 @@
 				360A6F1D1B2B76D200A3CEFC /* Sources */,
 				360A6F1E1B2B76D200A3CEFC /* Frameworks */,
 				360A6F1F1B2B76D200A3CEFC /* CopyFiles */,
+				36E66AE81B6C4ACE00570108 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -423,6 +464,7 @@
 				360A6F2F1B2B786200A3CEFC /* App.cpp in Sources */,
 				367848621B61A0CF00FC3465 /* TransformFeedbackMeshApp.cpp in Sources */,
 				3678485F1B619ECE00FC3465 /* TransformFeedback.cpp in Sources */,
+				36E66AE51B6C483800570108 /* LeapController.cpp in Sources */,
 				368E607E1B2C4CCE00A04AB6 /* Shader.cpp in Sources */,
 				368E609A1B2EC7E900A04AB6 /* TestApp.cpp in Sources */,
 			);

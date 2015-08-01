@@ -10,7 +10,10 @@
 #define __heatsculpt__Clay__
 
 #define kClayElementNumOfComponents 2
-#define num_of_paritcles 10000
+#define num_of_paritcles 1000
+#define kMaxBufferSize 65536
+
+
 #include "ShaderProgram.h"
 #include <glm/glm.hpp>
 
@@ -24,6 +27,8 @@ struct ClayElement{
 class Clay{
     
 public:
+    
+    int click = 0;
     
     Clay();
     virtual ~Clay();
@@ -47,6 +52,8 @@ private:
     int current_buffer = 0;
     
     GLuint query;
+    
+    GLuint drawCount = num_of_paritcles;
     
 };
 
