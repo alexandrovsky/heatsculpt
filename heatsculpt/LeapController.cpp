@@ -258,7 +258,10 @@ void LeapController::onFrame(const Controller& controller) {
                 Bone bone = finger.bone(boneType);
                 
                 Leap::Vector joint = finger.bone(boneType).prevJoint();
-                vec3 p = 0.2f * vec3(joint.x, joint.y, -joint.z);
+                
+                vec3 p = leapVector2glmVector(joint);
+                
+//                vec3 p = 0.2f * vec3(joint.x, joint.y, -joint.z);
                 
                 uint idx = finger.type()*4+b;
                 if(hand.isLeft()){

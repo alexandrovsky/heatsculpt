@@ -187,6 +187,10 @@ bool Clay::initProgram(){
         transformfeedbackShader->addUniform("t");
         transformfeedbackShader->addUniform("click");
         
+        transformfeedbackShader->addUniform("interaction0_enabled");
+        transformfeedbackShader->addUniform("interaction0_pos");
+        transformfeedbackShader->addUniform("interaction0_normal");
+        
     }
     return true;
 }
@@ -247,4 +251,19 @@ bool Clay::initVertexArray(){
     
     
     return true;
+}
+
+
+void Clay::setInteractionPoint(string point_name, int enabled, glm::vec3 pos, glm::vec3 normal){
+    transformfeedbackShader->use();
+    
+    // set the uniforms
+    string position_name_enabled = point_name + "_enabled";
+    glUniform1i(transformfeedbackShader->uniform(position_name_enabled), enabled);
+    
+    string position_name_pos = point_name + "_pos";
+    string position_name_normal = point_name + "_normal";
+    glUniform3fv(transformfeedbackShader->uniform(position_name_pos),   1, glm::value_ptr(pos));
+    glUniform3fv(transformfeedbackShader->uniform(position_name_normal),1, glm::value_ptr(normal));
+    transformfeedbackShader->disable();
 }

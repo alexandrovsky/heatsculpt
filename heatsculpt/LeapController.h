@@ -16,6 +16,7 @@
 #include "ShaderProgram.h"
 
 #define num_of_finger_points 20 // 5 fingers * 4 * bonese
+#define leapVector2glmVector(v) (0.2f * glm::vec3(v.x, v.y, -v.z))
 
 using namespace Leap;
 

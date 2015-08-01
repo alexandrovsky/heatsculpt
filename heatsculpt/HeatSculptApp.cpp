@@ -44,8 +44,26 @@ bool HeatSculptApp::Init(){
     return true;
 }
 
+
+
 void HeatSculptApp::Update(){
     App::Update();
+    
+    Leap::Frame frame = controller.frame();
+    
+    if (frame.hands().count() > 0) {
+        Leap::Vector leapPos = frame.hands()[0].fingers()[0].tipPosition();
+        Leap::Vector leapNormal = frame.hands()[0].fingers()[0].direction();
+        vec3 pos = leapVector2glmVector(leapPos);
+        vec3 normal = leapVector2glmVector(leapNormal);
+        
+        clay->setInteractionPoint("interaction0", 1, pos, normal);
+    }else{
+        clay->setInteractionPoint("interaction0", 0, vec3(0), vec3(0));
+    }
+    
+    
+
     clay->Update();
 }
 

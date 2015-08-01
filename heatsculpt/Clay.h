@@ -10,7 +10,7 @@
 #define __heatsculpt__Clay__
 
 #define kClayElementNumOfComponents 2
-#define num_of_paritcles 100
+#define num_of_paritcles 1000
 #define kMaxBufferSize 65536
 
 
@@ -35,6 +35,9 @@ public:
     bool Init();
     void Update();
     void Render(glm::mat4 view, glm::mat4 projection);
+    
+    void setInteractionPoint(string point_name,int enabled, glm::vec3 pos, glm::vec3 normal);
+    
 private:
     
     bool initProgram();
