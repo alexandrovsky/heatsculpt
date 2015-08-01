@@ -25,7 +25,6 @@ bool HeatSculptApp::Init(){
     App::Init();
     
     controller.addListener(leap);
-    
     // we ar blending so no depth testing
 //    glDisable(GL_DEPTH_TEST);
     
