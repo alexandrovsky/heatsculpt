@@ -55,8 +55,8 @@ private:
     vector<GLuint> fingerIndices;
     vector<vec3> fingerColors;
     
-    Attribute positionAttrib;
-    Attribute colorAttrib;
+    Attribute positionAttrib[2];
+    Attribute colorAttrib[2];
     
     
 };

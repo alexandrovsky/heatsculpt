@@ -75,15 +75,15 @@ void LeapController::initDrawing(){
         
         // initial position
         leftFingerVertices[i] = glm::normalize( glm::vec3(1.5f-float(std::rand())/RAND_MAX,
-                                                      0.5f-float(std::rand())/RAND_MAX,
-                                                      0.5f-float(std::rand())/RAND_MAX
+                                                          0.5f-float(std::rand())/RAND_MAX,
+                                                          0.5f-float(std::rand())/RAND_MAX
                                                      ));
         leftFingerVertices[i] *= 25.0f;
         
         rightFingerVertices[i] = glm::normalize( glm::vec3(1.5f+float(std::rand())/RAND_MAX,
                                                            0.5f-float(std::rand())/RAND_MAX,
                                                            0.5f-float(std::rand())/RAND_MAX
-                                                           ));
+                                                    ));
         
         rightFingerVertices[i] *= 25.0f;
     }
@@ -91,73 +91,87 @@ void LeapController::initDrawing(){
     
     // position
     {
+        for (int i = 0; i < 2; i++) {
+            positionAttrib[i].name = "position";
+            positionAttrib[i].num_of_components = 3;
+            positionAttrib[i].data_type = GL_FLOAT;
+            positionAttrib[i].buffer_type = GL_ARRAY_BUFFER;
+            
+            
+            if (i % 2 == 0) {
+                drawHands[i].addVBO(leftFingerVertices, positionAttrib[i]);
+            }else{
+                drawHands[i].addVBO(rightFingerVertices, positionAttrib[i]);
+            }
+            
+            
+            
+            
+            handsDrawShader->use();
+            positionAttrib[i].id = handsDrawShader->addAttribute(positionAttrib[i].name);
+            glEnableVertexAttribArray(positionAttrib[i].id);
+            glVertexAttribPointer(positionAttrib[i].id, positionAttrib[i].num_of_components, GL_FLOAT, GL_FALSE, 0, 0);
+            handsDrawShader->disable();
+            
+            drawHands[i].attributes.push_back(positionAttrib[i]);
+            
+        }
         
-        positionAttrib.name = "position";
-        positionAttrib.num_of_components = 3;
-        positionAttrib.data_type = GL_FLOAT;
-        positionAttrib.buffer_type = GL_ARRAY_BUFFER;
         
-        generateSingleColor((unsigned int)fingerColors.size(), fingerColors, vec3(1.0));
-        
-        drawHands[0].addVBO(leftFingerVertices, positionAttrib);
-        drawHands[1].addVBO(rightFingerVertices, positionAttrib);
-        
-        
-        handsDrawShader->use();
-        positionAttrib.id = handsDrawShader->addAttribute(positionAttrib.name);
-        glEnableVertexAttribArray(positionAttrib.id);
-        glVertexAttribPointer(positionAttrib.id, positionAttrib.num_of_components, GL_FLOAT, GL_FALSE, 0, 0);
-        handsDrawShader->disable();
-        
-        drawHands[0].attributes.push_back(positionAttrib);
-        drawHands[1].attributes.push_back(positionAttrib);
     }
     
     
     // color:
     {
         
-        colorAttrib.name = "color";
-        colorAttrib.num_of_components = 3;
-        colorAttrib.data_type = GL_FLOAT;
-        colorAttrib.buffer_type = GL_ARRAY_BUFFER;
-        
-        
-        
-        drawHands[0].addVBO(fingerColors, colorAttrib);
-        drawHands[1].addVBO(fingerColors, colorAttrib);
-        handsDrawShader->use();
-        colorAttrib.id = handsDrawShader->addAttribute(colorAttrib.name);
-        glEnableVertexAttribArray(colorAttrib.id);
-        glVertexAttribPointer(colorAttrib.id, colorAttrib.num_of_components, GL_FLOAT, GL_FALSE, 0, 0);
-        handsDrawShader->disable();
-        
-        drawHands[0].attributes.push_back(colorAttrib);
-        drawHands[1].attributes.push_back(colorAttrib);
-        
-        
-        // indices:
-        {
-            for (int i = 0; i < num_of_finger_points; i++) {
-                fingerIndices[i] = i;
-            }
+        generateSingleColor((unsigned int)fingerColors.size(), fingerColors, vec3(1.0));
+        for(int i = 0; i < 2; i++){
             
-            drawHands[0].addIndices(fingerIndices);
-            drawHands[1].addIndices(fingerIndices);
-        }
-        
-        
-        
-        // uniforms:
-        {
+            colorAttrib[i].name = "color";
+            colorAttrib[i].num_of_components = 3;
+            colorAttrib[i].data_type = GL_FLOAT;
+            colorAttrib[i].buffer_type = GL_ARRAY_BUFFER;
+            
+            drawHands[i].addVBO(fingerColors, colorAttrib[i]);
+            
             handsDrawShader->use();
-            handsDrawShader->addUniform("model");
-            handsDrawShader->addUniform("view");
-            handsDrawShader->addUniform("projection");
+            colorAttrib[i].id = handsDrawShader->addAttribute(colorAttrib[i].name);
+            glEnableVertexAttribArray(colorAttrib[i].id);
+            glVertexAttribPointer(colorAttrib[i].id, colorAttrib[i].num_of_components, GL_FLOAT, GL_FALSE, 0, 0);
             handsDrawShader->disable();
             
+            drawHands[0].attributes.push_back(colorAttrib[i]);
+            drawHands[1].attributes.push_back(colorAttrib[i]);
         }
+        
+        
     }
+    
+    // indices:
+    {
+        for (int i = 0; i < num_of_finger_points; i++) {
+            fingerIndices[i] = i;
+        }
+        drawHands[0].addIndices(fingerIndices);
+        drawHands[1].addIndices(fingerIndices);
+    }
+    
+    
+    
+    // uniforms:
+    {
+        handsDrawShader->use();
+        handsDrawShader->addUniform("model");
+        handsDrawShader->addUniform("view");
+        handsDrawShader->addUniform("projection");
+        handsDrawShader->disable();
+        
+    }
+
+    
+    
+    
+    
 }
 
 void LeapController::Destroy(){
@@ -186,10 +200,10 @@ void LeapController::Render(mat4 view, mat4 projection){
         glUniformMatrix4fv(p, 1, GL_FALSE, glm::value_ptr(projection));
         
         
-        if (i %2 == 0) {
-            
+        if (i % 2 == 0) {
+            drawHands[i].setBufferData(leftFingerVertices, positionAttrib[i]);
         }else{
-            drawHands[i].setBufferData(rightFingerVertices, positionAttrib);
+            drawHands[i].setBufferData(rightFingerVertices, positionAttrib[i]);
         }
         
         
