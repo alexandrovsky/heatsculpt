@@ -24,39 +24,38 @@ using namespace glm;
 
 
 
-struct Attribute{
-    string name;
-    GLuint num_of_components;
-    GLuint type;
-    GLuint vbo; // is set by the mesh
-    GLuint buffertype;
-};
 
 
-struct Uniform{
-    string name;
-    GLuint num_of_components;
-    GLuint type;
-};
 
 
 class Mesh{
 public:
-    Mesh(ShaderProgram* shader, const vector<vec3>& vertices, const vector<GLuint>& indices);
-    Mesh(ShaderProgram* shader, vector<Attribute> attributes, const vector<vec3>& vertices, const vector<GLuint>& indices);
+    Mesh();
+    Mesh(const vector<vec3>& vertices, const vector<GLuint>& indices);
+
     virtual ~Mesh();
     
     mat4x4 modelMatrix;
-    mat4x4 viewMatrix;
-    mat4x4 projectionMatrix;
-    
-    void Update();
-    void Draw();
-    
-    template<typename T> GLuint addVBO(vector<T> vector, GLuint vbo, string attributeName, GLuint type=GL_ARRAY_BUFFER);
 
     
-    ShaderProgram* shaderProgram;
+    void Update();
+    void Draw(GLuint type);
+    
+    void addIndices(vector<GLuint> indices);
+    template<typename T> GLuint addVBO(vector<T> vector, Attribute& attribute);
+    
+    template<typename T>  void setBufferData(vector<T> vector, Attribute& attribute){
+
+        glBindVertexArray(vao);
+        
+        
+        attribute.bytes = sizeof(T) * vector.size();
+        // add data to vbo
+        glBindBufferARB(attribute.buffer_type, attribute.vbo);
+        glBufferData(attribute.buffer_type, attribute.bytes, vector.data(), GL_STATIC_DRAW);
+    }
+    
+
     vector<Attribute> attributes;
 
     inline GLsizei getDrawCount(){
@@ -66,22 +65,10 @@ public:
 private:
     
     
-    
-    
-    enum {
-        POSITION_VERTEX_BUFFER,
-        COLOR_VERTEX_BUFFER,
-        ELEMENT_ARRAY_BUFFER,
-        NUM_BUFFERS // must be last element in enum
-    };
-    
     GLuint vao;
-    GLuint vbos[NUM_BUFFERS];
-
+    
     Attribute indicesAttrib;
     GLsizei drawCount;
-    
-    bool use_vbo_array; 
     
 
     

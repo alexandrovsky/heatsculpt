@@ -45,12 +45,14 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 
 
 
-App::App(const std::string& window_title, int width, int height) {
+App::App(const std::string& window_title, bool fullscreen) {
     
     _instance = this;
-    this->window_width = width;
-    this->window_height = height;
+    this->window_width = 0;
+    this->window_height = 0;
     this->isRunning = true;
+    this->isFullScreen = fullscreen;
+    this->backgroundColor = glm::vec4(31.0/255.0f, 147./255.0f, 194/255.0f, 1.0f);
 }
 
 
@@ -128,11 +130,19 @@ bool App::Init() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     
-    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-
+    glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
     
+    //fullscreen
+    GLFWmonitor* monitor =  glfwGetPrimaryMonitor();
+    const GLFWvidmode* mode = glfwGetVideoMode(monitor);
+    this->window_width = mode->width;
+    this->window_height = mode->height;
 
-    this->window = glfwCreateWindow(window_width, window_height, window_title.c_str(), NULL, NULL);
+    this->window = glfwCreateWindow(window_width,
+                                    window_height,
+                                    window_title.c_str(),
+                                    isFullScreen ? monitor : NULL,
+                                    NULL);
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1);
     
@@ -146,7 +156,6 @@ bool App::Init() {
     if (!InitOpenGL()) {
         return false;
     }
-    
     
     glfwSetKeyCallback(window, key_callback);
     glfwSetCursorPosCallback(window, cursor_position_callback);
@@ -178,8 +187,23 @@ void App::OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int m
             break;
         case GLFW_KEY_P:
             drawWireFrame = !drawWireFrame;
+            break;
         case GLFW_KEY_R:
             camera.Reset();
+            break;
+        case GLFW_KEY_O:
+            if (camera.camera_mode == FREE) {
+                camera.SetMode(ORTHO);
+            }else{
+                camera.SetMode(FREE);
+            }
+            
+            break;
+            
+        case GLFW_KEY_ESCAPE:
+            Exit();
+            break;
+        
         default:
             break;
     }
@@ -187,6 +211,8 @@ void App::OnKeyDown(GLFWwindow* window, int key, int scancode, int action, int m
 
 
 void App::OnKeyUp(GLFWwindow* window, int key, int scancode, int action, int mods){
+    
+    
 }
 
 void App::OnMouseMove(double mX, double mY){
@@ -206,6 +232,7 @@ void App::OnMouseUp(int mouse_btn, int mode){
 
 void App::Exit(){
     isRunning = false;
+    glfwDestroyWindow(window);
 }
 
 
@@ -223,13 +250,13 @@ void App::Render() {
     glMatrixMode( GL_MODELVIEW );
     
     /* Set the background black */
-    glClearColor( 0.0f, 0.15f, 0.3f, 0.0f );
+    glClearColor(backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a);
+//    glClearColor( 0.0f, 0.15f, 0.3f, 0.0f );
     /* Clear The Screen And The Depth Buffer */
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
     
     /* Move Left 1.5 Units And Into The Screen 6.0 */
     glLoadIdentity();
-    
     
     if (drawWireFrame) {
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -240,7 +267,6 @@ void App::Render() {
 }
 
 void App::Cleanup() {
-    glfwDestroyWindow(window);
     glfwTerminate();
 }
 

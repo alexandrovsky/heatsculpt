@@ -32,17 +32,18 @@ protected:
     std::string window_title;
     int window_width;
     int window_height;
-
+    bool isFullScreen;
     GLFWwindow* window;
     
 
     virtual void MainLoop();
     
 public:
+    glm::vec4 backgroundColor;
     Camera camera;
     static App* _instance;
     
-    App(const std::string& window_title, int window_width, int window_height);
+    App(const std::string& window_title, bool fullscreen);
     virtual ~App();
 
 

@@ -16,7 +16,7 @@
 
 
 TestApp::TestApp(const std::string& window_title, int window_width, int window_height):
-    App::App(window_title, window_width, window_height)
+    App::App(window_title, true)
 {
 
 }

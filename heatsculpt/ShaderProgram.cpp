@@ -5,7 +5,7 @@
 //  Created by Dmitry Alexandrovsky on 13.06.15.
 //  Copyright (c) 2015 Dmitry Alexandrovsky. All rights reserved.
 //
-
+#include <gl/glew.h>
 #include "ShaderProgram.h"
 
 
@@ -47,8 +47,8 @@ void ShaderProgram::attachShader(Shader shader)
     // Method to link the shader program and display the link status
 bool ShaderProgram::linkProgram()
 {
-    // If we have at least two shaders (like a vertex shader and a fragment shader)...
-    if (shaders.size() >= 2)
+    // If we have at least one shader (like a vertex shader and a fragment shader)...
+    if (shaders.size() >= 1)
     {
         // Perform the linking process
         glLinkProgram(programId);
@@ -64,13 +64,13 @@ bool ShaderProgram::linkProgram()
         }
         
         for (int i = 0; i < shaders.size(); i++) {
-            glDeleteShader(shaders[i].getId());
+            shaders[i].deleteShader();
         }
         
     }
     else
     {
-        cout << "Can't link shaders - you need at least 2, but attached shader count is only: " << shaders.size() << endl;
+        cout << "Can't link shaders - you need at least 1, but attached shader count is only: " << shaders.size() << endl;
         return false;
     }
     return true;
@@ -176,5 +176,22 @@ int ShaderProgram::addUniform(const string &uniformName)
     }
     
     return uniformLocList[uniformName];
+}
+
+void ShaderProgram::addVaryings(std::vector<string> varyings, GLenum bufferMode){
+    
+    
+    for (int i = 0; i < varyings.size(); i++) {
+        
+        const char* v = varyings[i].c_str();
+
+        glTransformFeedbackVaryings(programId, 1, &v, bufferMode);
+
+    }
+    
+    
+    
+    
+    
 }
 

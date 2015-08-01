@@ -7,11 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		360954571B6ABE5B000A6A57 /* feedback.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 360954541B6ABE48000A6A57 /* feedback.frag */; };
+		360954581B6ABE5B000A6A57 /* feedback.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 360954551B6ABE48000A6A57 /* feedback.vert */; };
+		360954591B6ABE5B000A6A57 /* transform.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 360954561B6ABE48000A6A57 /* transform.vert */; };
 		360A6F251B2B76D200A3CEFC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 360A6F241B2B76D200A3CEFC /* main.cpp */; };
 		360A6F2F1B2B786200A3CEFC /* App.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 360A6F2D1B2B786200A3CEFC /* App.cpp */; };
 		360A6F331B2B7C7200A3CEFC /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 360A6F321B2B7C7200A3CEFC /* OpenGL.framework */; };
 		361DA9941B37445500E4B3BB /* MeshUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 361DA9921B37445500E4B3BB /* MeshUtils.cpp */; };
-		361DA9971B3749CA00E4B3BB /* TessMeshTestApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 361DA9951B3749CA00E4B3BB /* TessMeshTestApp.cpp */; };
+		362C3B851B4D7DE100666F95 /* mouse.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 369A90481B4D33D9000D94C1 /* mouse.vert */; };
+		362C3B861B4D7DE100666F95 /* mouse.geom in CopyFiles */ = {isa = PBXBuildFile; fileRef = 369A904A1B4D33F1000D94C1 /* mouse.geom */; };
+		362C3B871B4D7DE100666F95 /* mouse.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 369A90491B4D33E7000D94C1 /* mouse.frag */; };
+		3667109C1B4C1788004B3EF0 /* TessMeshApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3667109A1B4C1788004B3EF0 /* TessMeshApp.cpp */; };
+		366710A81B4C1B2D004B3EF0 /* tess.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 366710A31B4C1991004B3EF0 /* tess.frag */; };
+		366710A91B4C1B2D004B3EF0 /* tess.geom in CopyFiles */ = {isa = PBXBuildFile; fileRef = 366710A41B4C1991004B3EF0 /* tess.geom */; };
+		366710AA1B4C1B2D004B3EF0 /* tess.tcs in CopyFiles */ = {isa = PBXBuildFile; fileRef = 366710A51B4C1991004B3EF0 /* tess.tcs */; };
+		366710AB1B4C1B2D004B3EF0 /* tess.tes in CopyFiles */ = {isa = PBXBuildFile; fileRef = 366710A61B4C1991004B3EF0 /* tess.tes */; };
+		366710AC1B4C1B2D004B3EF0 /* tess.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 366710A71B4C1991004B3EF0 /* tess.vert */; };
+		36744AA81B56697000B2D49C /* TransformFeedbackApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36744AA61B56697000B2D49C /* TransformFeedbackApp.cpp */; };
+		3678485F1B619ECE00FC3465 /* TransformFeedback.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3678485D1B619ECE00FC3465 /* TransformFeedback.cpp */; };
+		367848621B61A0CF00FC3465 /* TransformFeedbackMeshApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 367848601B61A0CF00FC3465 /* TransformFeedbackMeshApp.cpp */; };
+		36784D7E1B62AF9200FC3465 /* tfSimple.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36784D7C1B62AF7400FC3465 /* tfSimple.vert */; };
+		36784D7F1B62AF9200FC3465 /* tfSimple.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36784D7D1B62AF8200FC3465 /* tfSimple.frag */; };
 		368E607B1B2B8D1C00A04AB6 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E60791B2B8D1C00A04AB6 /* Camera.cpp */; };
 		368E607E1B2C4CCE00A04AB6 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E607C1B2C4CCE00A04AB6 /* Shader.cpp */; };
 		368E60811B2C4ED800A04AB6 /* ShaderProgram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E607F1B2C4ED800A04AB6 /* ShaderProgram.cpp */; };
@@ -22,21 +38,76 @@
 		368E60A01B317F2B00A04AB6 /* MeshTestApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E609E1B317F2B00A04AB6 /* MeshTestApp.cpp */; };
 		368E60A41B32366400A04AB6 /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E60A21B32366400A04AB6 /* Debug.cpp */; };
 		368E60A71B3592BD00A04AB6 /* ColorUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 368E60A51B3592BD00A04AB6 /* ColorUtils.cpp */; };
+		36E66ACA1B6BD1BA00570108 /* transform-feedback-feedback.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36E66AC71B6BD1AF00570108 /* transform-feedback-feedback.frag */; };
+		36E66ACB1B6BD1BA00570108 /* transform-feedback-feedback.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36E66AC81B6BD1AF00570108 /* transform-feedback-feedback.vert */; };
+		36E66ACC1B6BD1BA00570108 /* transform-feedback-transform.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36E66AC91B6BD1AF00570108 /* transform-feedback-transform.vert */; };
+		36E66ACF1B6C0A9400570108 /* HeatSculptApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36E66ACD1B6C0A9400570108 /* HeatSculptApp.cpp */; };
+		36E66AD21B6C0BA900570108 /* Clay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36E66AD01B6C0BA900570108 /* Clay.cpp */; };
+		36E66AD71B6C115300570108 /* clay.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36E66AD41B6C112400570108 /* clay.vert */; };
+		36E66AD81B6C115300570108 /* clay.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36E66AD51B6C113500570108 /* clay.frag */; };
+		36E66AD91B6C115300570108 /* clay-transform.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36E66AD61B6C114700570108 /* clay-transform.vert */; };
+		36E66ADB1B6C1D1500570108 /* clay.geom in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36E66ADA1B6C11E700570108 /* clay.geom */; };
+		36E66ADD1B6C31C500570108 /* clay-transform.geom in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36E66ADC1B6C2DFC00570108 /* clay-transform.geom */; };
+		36E66AE11B6C47C500570108 /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E66ADF1B6C47C500570108 /* libLeap.dylib */; };
+		36E66AE51B6C483800570108 /* LeapController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36E66AE31B6C483800570108 /* LeapController.cpp */; };
+		36E66AE91B6C4ADB00570108 /* libLeap.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36E66ADF1B6C47C500570108 /* libLeap.dylib */; };
+		36E66AEE1B6C54CB00570108 /* LeapUtil.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36E66AEA1B6C54CB00570108 /* LeapUtil.cpp */; };
+		36E66AEF1B6C54CB00570108 /* LeapUtilGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36E66AEC1B6C54CB00570108 /* LeapUtilGL.cpp */; };
+		36EAEF4F1B643A1B00B3AE77 /* tfSimple.geom in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36EAEF4E1B642DA700B3AE77 /* tfSimple.geom */; };
+		36FDAEF31B43225300A15BA0 /* simple.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36FDAEF11B43214800A15BA0 /* simple.vert */; };
+		36FDAEF41B43225300A15BA0 /* simple.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 36FDAEF21B43215F00A15BA0 /* simple.frag */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		360A6F1F1B2B76D200A3CEFC /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = shaders;
+			dstSubfolderSpec = 16;
 			files = (
+				36E66ADD1B6C31C500570108 /* clay-transform.geom in CopyFiles */,
+				36E66ADB1B6C1D1500570108 /* clay.geom in CopyFiles */,
+				36E66AD71B6C115300570108 /* clay.vert in CopyFiles */,
+				36E66AD81B6C115300570108 /* clay.frag in CopyFiles */,
+				36E66AD91B6C115300570108 /* clay-transform.vert in CopyFiles */,
+				36E66ACA1B6BD1BA00570108 /* transform-feedback-feedback.frag in CopyFiles */,
+				36E66ACB1B6BD1BA00570108 /* transform-feedback-feedback.vert in CopyFiles */,
+				36E66ACC1B6BD1BA00570108 /* transform-feedback-transform.vert in CopyFiles */,
+				360954571B6ABE5B000A6A57 /* feedback.frag in CopyFiles */,
+				360954581B6ABE5B000A6A57 /* feedback.vert in CopyFiles */,
+				360954591B6ABE5B000A6A57 /* transform.vert in CopyFiles */,
+				36EAEF4F1B643A1B00B3AE77 /* tfSimple.geom in CopyFiles */,
+				36784D7E1B62AF9200FC3465 /* tfSimple.vert in CopyFiles */,
+				36784D7F1B62AF9200FC3465 /* tfSimple.frag in CopyFiles */,
+				362C3B851B4D7DE100666F95 /* mouse.vert in CopyFiles */,
+				362C3B861B4D7DE100666F95 /* mouse.geom in CopyFiles */,
+				362C3B871B4D7DE100666F95 /* mouse.frag in CopyFiles */,
+				366710A81B4C1B2D004B3EF0 /* tess.frag in CopyFiles */,
+				366710A91B4C1B2D004B3EF0 /* tess.geom in CopyFiles */,
+				366710AA1B4C1B2D004B3EF0 /* tess.tcs in CopyFiles */,
+				366710AB1B4C1B2D004B3EF0 /* tess.tes in CopyFiles */,
+				366710AC1B4C1B2D004B3EF0 /* tess.vert in CopyFiles */,
+				36FDAEF31B43225300A15BA0 /* simple.vert in CopyFiles */,
+				36FDAEF41B43225300A15BA0 /* simple.frag in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		36E66AE81B6C4ACE00570108 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				36E66AE91B6C4ADB00570108 /* libLeap.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		360954541B6ABE48000A6A57 /* feedback.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = feedback.frag; sourceTree = "<group>"; };
+		360954551B6ABE48000A6A57 /* feedback.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = feedback.vert; sourceTree = "<group>"; };
+		360954561B6ABE48000A6A57 /* transform.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = transform.vert; sourceTree = "<group>"; };
 		360A6F211B2B76D200A3CEFC /* heatsculpt */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = heatsculpt; sourceTree = BUILT_PRODUCTS_DIR; };
 		360A6F241B2B76D200A3CEFC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		360A6F2D1B2B786200A3CEFC /* App.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = App.cpp; sourceTree = "<group>"; };
@@ -44,8 +115,21 @@
 		360A6F321B2B7C7200A3CEFC /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		361DA9921B37445500E4B3BB /* MeshUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MeshUtils.cpp; sourceTree = "<group>"; };
 		361DA9931B37445500E4B3BB /* MeshUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeshUtils.h; sourceTree = "<group>"; };
-		361DA9951B3749CA00E4B3BB /* TessMeshTestApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TessMeshTestApp.cpp; sourceTree = "<group>"; };
-		361DA9961B3749CA00E4B3BB /* TessMeshTestApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TessMeshTestApp.h; sourceTree = "<group>"; };
+		3667109A1B4C1788004B3EF0 /* TessMeshApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TessMeshApp.cpp; sourceTree = "<group>"; };
+		3667109B1B4C1788004B3EF0 /* TessMeshApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TessMeshApp.h; sourceTree = "<group>"; };
+		366710A31B4C1991004B3EF0 /* tess.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = tess.frag; sourceTree = "<group>"; };
+		366710A41B4C1991004B3EF0 /* tess.geom */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = tess.geom; sourceTree = "<group>"; };
+		366710A51B4C1991004B3EF0 /* tess.tcs */ = {isa = PBXFileReference; lastKnownFileType = text; path = tess.tcs; sourceTree = "<group>"; };
+		366710A61B4C1991004B3EF0 /* tess.tes */ = {isa = PBXFileReference; lastKnownFileType = text; path = tess.tes; sourceTree = "<group>"; };
+		366710A71B4C1991004B3EF0 /* tess.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = tess.vert; sourceTree = "<group>"; };
+		36744AA61B56697000B2D49C /* TransformFeedbackApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransformFeedbackApp.cpp; sourceTree = "<group>"; };
+		36744AA71B56697000B2D49C /* TransformFeedbackApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformFeedbackApp.h; sourceTree = "<group>"; };
+		3678485D1B619ECE00FC3465 /* TransformFeedback.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransformFeedback.cpp; sourceTree = "<group>"; };
+		3678485E1B619ECE00FC3465 /* TransformFeedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformFeedback.h; sourceTree = "<group>"; };
+		367848601B61A0CF00FC3465 /* TransformFeedbackMeshApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TransformFeedbackMeshApp.cpp; sourceTree = "<group>"; };
+		367848611B61A0CF00FC3465 /* TransformFeedbackMeshApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformFeedbackMeshApp.h; sourceTree = "<group>"; };
+		36784D7C1B62AF7400FC3465 /* tfSimple.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tfSimple.vert; sourceTree = "<group>"; };
+		36784D7D1B62AF8200FC3465 /* tfSimple.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tfSimple.frag; sourceTree = "<group>"; };
 		368E60791B2B8D1C00A04AB6 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		368E607A1B2B8D1C00A04AB6 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		368E607C1B2C4CCE00A04AB6 /* Shader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shader.cpp; sourceTree = "<group>"; };
@@ -64,6 +148,36 @@
 		368E60A31B32366400A04AB6 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Debug.h; sourceTree = "<group>"; };
 		368E60A51B3592BD00A04AB6 /* ColorUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColorUtils.cpp; sourceTree = "<group>"; };
 		368E60A61B3592BD00A04AB6 /* ColorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorUtils.h; sourceTree = "<group>"; };
+		369A90481B4D33D9000D94C1 /* mouse.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = mouse.vert; sourceTree = "<group>"; };
+		369A90491B4D33E7000D94C1 /* mouse.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = mouse.frag; sourceTree = "<group>"; };
+		369A904A1B4D33F1000D94C1 /* mouse.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = mouse.geom; sourceTree = "<group>"; };
+		36E66AC71B6BD1AF00570108 /* transform-feedback-feedback.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = "transform-feedback-feedback.frag"; sourceTree = "<group>"; };
+		36E66AC81B6BD1AF00570108 /* transform-feedback-feedback.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = "transform-feedback-feedback.vert"; sourceTree = "<group>"; };
+		36E66AC91B6BD1AF00570108 /* transform-feedback-transform.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = "transform-feedback-transform.vert"; sourceTree = "<group>"; };
+		36E66ACD1B6C0A9400570108 /* HeatSculptApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HeatSculptApp.cpp; sourceTree = "<group>"; };
+		36E66ACE1B6C0A9400570108 /* HeatSculptApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeatSculptApp.h; sourceTree = "<group>"; };
+		36E66AD01B6C0BA900570108 /* Clay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Clay.cpp; sourceTree = "<group>"; };
+		36E66AD11B6C0BA900570108 /* Clay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clay.h; sourceTree = "<group>"; };
+		36E66AD41B6C112400570108 /* clay.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = clay.vert; sourceTree = "<group>"; };
+		36E66AD51B6C113500570108 /* clay.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = clay.frag; sourceTree = "<group>"; };
+		36E66AD61B6C114700570108 /* clay-transform.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = "clay-transform.vert"; sourceTree = "<group>"; };
+		36E66ADA1B6C11E700570108 /* clay.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = clay.geom; sourceTree = "<group>"; };
+		36E66ADC1B6C2DFC00570108 /* clay-transform.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = "clay-transform.geom"; sourceTree = "<group>"; };
+		36E66ADF1B6C47C500570108 /* libLeap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libLeap.dylib; sourceTree = "<group>"; };
+		36E66AE01B6C47C500570108 /* Leap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Leap.h; sourceTree = "<group>"; };
+		36E66AE31B6C483800570108 /* LeapController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LeapController.cpp; sourceTree = "<group>"; };
+		36E66AE41B6C483800570108 /* LeapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeapController.h; sourceTree = "<group>"; };
+		36E66AE61B6C496200570108 /* LeapMath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeapMath.h; sourceTree = "<group>"; };
+		36E66AEA1B6C54CB00570108 /* LeapUtil.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LeapUtil.cpp; sourceTree = "<group>"; };
+		36E66AEB1B6C54CB00570108 /* LeapUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeapUtil.h; sourceTree = "<group>"; };
+		36E66AEC1B6C54CB00570108 /* LeapUtilGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LeapUtilGL.cpp; sourceTree = "<group>"; };
+		36E66AED1B6C54CB00570108 /* LeapUtilGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeapUtilGL.h; sourceTree = "<group>"; };
+		36EAEF4E1B642DA700B3AE77 /* tfSimple.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = tfSimple.geom; sourceTree = "<group>"; };
+		36FDAEF11B43214800A15BA0 /* simple.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = simple.vert; sourceTree = "<group>"; };
+		36FDAEF21B43215F00A15BA0 /* simple.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = simple.frag; sourceTree = "<group>"; };
+		36FDAEFD1B432CAE00A15BA0 /* example1.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = example1.frag; path = "../../../Library/Developer/Xcode/DerivedData/heatsculpt-frtolbhmmkjpepfrabmcgoonetbu/Build/Products/Debug/shaders/example1.frag"; sourceTree = "<group>"; };
+		36FDAEFE1B432CAE00A15BA0 /* example1.geom */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = example1.geom; path = "../../../Library/Developer/Xcode/DerivedData/heatsculpt-frtolbhmmkjpepfrabmcgoonetbu/Build/Products/Debug/shaders/example1.geom"; sourceTree = "<group>"; };
+		36FDAEFF1B432CAE00A15BA0 /* example1.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = example1.vert; path = "../../../Library/Developer/Xcode/DerivedData/heatsculpt-frtolbhmmkjpepfrabmcgoonetbu/Build/Products/Debug/shaders/example1.vert"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +185,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36E66AE11B6C47C500570108 /* libLeap.dylib in Frameworks */,
 				368E60911B2C77AA00A04AB6 /* libglfw.3.1.dylib in Frameworks */,
 				368E60851B2C650300A04AB6 /* libGLEW.a in Frameworks */,
 				360A6F331B2B7C7200A3CEFC /* OpenGL.framework in Frameworks */,
@@ -83,6 +198,8 @@
 		360A6F181B2B76D200A3CEFC = {
 			isa = PBXGroup;
 			children = (
+				36E66ADE1B6C47B600570108 /* leap */,
+				36FDAEF01B4320EC00A15BA0 /* shaders */,
 				368E60901B2C77AA00A04AB6 /* libglfw.3.1.dylib */,
 				368E60841B2C650300A04AB6 /* libGLEW.a */,
 				360A6F321B2B7C7200A3CEFC /* OpenGL.framework */,
@@ -102,11 +219,15 @@
 		360A6F231B2B76D200A3CEFC /* heatsculpt */ = {
 			isa = PBXGroup;
 			children = (
+				36E66AE21B6C481400570108 /* leap */,
+				3678485C1B619EA500FC3465 /* technique */,
 				368E60A11B32364500A04AB6 /* utils */,
-				368E60971B2EC7C400A04AB6 /* test */,
+				368E60971B2EC7C400A04AB6 /* test apps */,
 				368E60961B2EC51000A04AB6 /* rendering */,
 				368E60951B2EC4F300A04AB6 /* object */,
 				360A6F241B2B76D200A3CEFC /* main.cpp */,
+				36E66ACD1B6C0A9400570108 /* HeatSculptApp.cpp */,
+				36E66ACE1B6C0A9400570108 /* HeatSculptApp.h */,
 				360A6F2D1B2B786200A3CEFC /* App.cpp */,
 				360A6F2E1B2B786200A3CEFC /* App.h */,
 				368E60791B2B8D1C00A04AB6 /* Camera.cpp */,
@@ -115,11 +236,69 @@
 			path = heatsculpt;
 			sourceTree = "<group>";
 		};
+		366710981B4C0CA7004B3EF0 /* example1 */ = {
+			isa = PBXGroup;
+			children = (
+				36FDAEFF1B432CAE00A15BA0 /* example1.vert */,
+				36FDAEFE1B432CAE00A15BA0 /* example1.geom */,
+				36FDAEFD1B432CAE00A15BA0 /* example1.frag */,
+			);
+			name = example1;
+			sourceTree = "<group>";
+		};
+		366710991B4C0CB2004B3EF0 /* simple */ = {
+			isa = PBXGroup;
+			children = (
+				36FDAEF11B43214800A15BA0 /* simple.vert */,
+				36FDAEF21B43215F00A15BA0 /* simple.frag */,
+			);
+			name = simple;
+			sourceTree = "<group>";
+		};
+		3667109D1B4C18F1004B3EF0 /* simpleTess */ = {
+			isa = PBXGroup;
+			children = (
+				366710A71B4C1991004B3EF0 /* tess.vert */,
+				366710A51B4C1991004B3EF0 /* tess.tcs */,
+				366710A61B4C1991004B3EF0 /* tess.tes */,
+				366710A41B4C1991004B3EF0 /* tess.geom */,
+				366710A31B4C1991004B3EF0 /* tess.frag */,
+			);
+			name = simpleTess;
+			sourceTree = "<group>";
+		};
+		3678485C1B619EA500FC3465 /* technique */ = {
+			isa = PBXGroup;
+			children = (
+				3678485D1B619ECE00FC3465 /* TransformFeedback.cpp */,
+				3678485E1B619ECE00FC3465 /* TransformFeedback.h */,
+			);
+			name = technique;
+			sourceTree = "<group>";
+		};
+		36784D7B1B62ACBB00FC3465 /* transformFeedback */ = {
+			isa = PBXGroup;
+			children = (
+				36E66AC71B6BD1AF00570108 /* transform-feedback-feedback.frag */,
+				36E66AC81B6BD1AF00570108 /* transform-feedback-feedback.vert */,
+				36E66AC91B6BD1AF00570108 /* transform-feedback-transform.vert */,
+				360954541B6ABE48000A6A57 /* feedback.frag */,
+				360954551B6ABE48000A6A57 /* feedback.vert */,
+				360954561B6ABE48000A6A57 /* transform.vert */,
+				36784D7C1B62AF7400FC3465 /* tfSimple.vert */,
+				36EAEF4E1B642DA700B3AE77 /* tfSimple.geom */,
+				36784D7D1B62AF8200FC3465 /* tfSimple.frag */,
+			);
+			name = transformFeedback;
+			sourceTree = "<group>";
+		};
 		368E60951B2EC4F300A04AB6 /* object */ = {
 			isa = PBXGroup;
 			children = (
 				368E60921B2C90EE00A04AB6 /* Mesh.cpp */,
 				368E60931B2C90EE00A04AB6 /* Mesh.h */,
+				36E66AD01B6C0BA900570108 /* Clay.cpp */,
+				36E66AD11B6C0BA900570108 /* Clay.h */,
 			);
 			name = object;
 			sourceTree = "<group>";
@@ -135,17 +314,21 @@
 			name = rendering;
 			sourceTree = "<group>";
 		};
-		368E60971B2EC7C400A04AB6 /* test */ = {
+		368E60971B2EC7C400A04AB6 /* test apps */ = {
 			isa = PBXGroup;
 			children = (
 				368E60981B2EC7E900A04AB6 /* TestApp.cpp */,
 				368E60991B2EC7E900A04AB6 /* TestApp.h */,
 				368E609E1B317F2B00A04AB6 /* MeshTestApp.cpp */,
 				368E609F1B317F2B00A04AB6 /* MeshTestApp.h */,
-				361DA9951B3749CA00E4B3BB /* TessMeshTestApp.cpp */,
-				361DA9961B3749CA00E4B3BB /* TessMeshTestApp.h */,
+				3667109A1B4C1788004B3EF0 /* TessMeshApp.cpp */,
+				3667109B1B4C1788004B3EF0 /* TessMeshApp.h */,
+				36744AA61B56697000B2D49C /* TransformFeedbackApp.cpp */,
+				36744AA71B56697000B2D49C /* TransformFeedbackApp.h */,
+				367848601B61A0CF00FC3465 /* TransformFeedbackMeshApp.cpp */,
+				367848611B61A0CF00FC3465 /* TransformFeedbackMeshApp.h */,
 			);
-			name = test;
+			name = "test apps";
 			sourceTree = "<group>";
 		};
 		368E60A11B32364500A04AB6 /* utils */ = {
@@ -161,6 +344,64 @@
 			name = utils;
 			sourceTree = "<group>";
 		};
+		369A90471B4D33C1000D94C1 /* mouse */ = {
+			isa = PBXGroup;
+			children = (
+				369A90481B4D33D9000D94C1 /* mouse.vert */,
+				369A904A1B4D33F1000D94C1 /* mouse.geom */,
+				369A90491B4D33E7000D94C1 /* mouse.frag */,
+			);
+			name = mouse;
+			sourceTree = "<group>";
+		};
+		36E66AD31B6C10FA00570108 /* clay */ = {
+			isa = PBXGroup;
+			children = (
+				36E66AD41B6C112400570108 /* clay.vert */,
+				36E66ADA1B6C11E700570108 /* clay.geom */,
+				36E66AD51B6C113500570108 /* clay.frag */,
+				36E66AD61B6C114700570108 /* clay-transform.vert */,
+				36E66ADC1B6C2DFC00570108 /* clay-transform.geom */,
+			);
+			name = clay;
+			sourceTree = "<group>";
+		};
+		36E66ADE1B6C47B600570108 /* leap */ = {
+			isa = PBXGroup;
+			children = (
+				36E66AEA1B6C54CB00570108 /* LeapUtil.cpp */,
+				36E66AEB1B6C54CB00570108 /* LeapUtil.h */,
+				36E66AEC1B6C54CB00570108 /* LeapUtilGL.cpp */,
+				36E66AED1B6C54CB00570108 /* LeapUtilGL.h */,
+				36E66ADF1B6C47C500570108 /* libLeap.dylib */,
+				36E66AE61B6C496200570108 /* LeapMath.h */,
+				36E66AE01B6C47C500570108 /* Leap.h */,
+			);
+			name = leap;
+			sourceTree = "<group>";
+		};
+		36E66AE21B6C481400570108 /* leap */ = {
+			isa = PBXGroup;
+			children = (
+				36E66AE31B6C483800570108 /* LeapController.cpp */,
+				36E66AE41B6C483800570108 /* LeapController.h */,
+			);
+			name = leap;
+			sourceTree = "<group>";
+		};
+		36FDAEF01B4320EC00A15BA0 /* shaders */ = {
+			isa = PBXGroup;
+			children = (
+				36E66AD31B6C10FA00570108 /* clay */,
+				36784D7B1B62ACBB00FC3465 /* transformFeedback */,
+				369A90471B4D33C1000D94C1 /* mouse */,
+				3667109D1B4C18F1004B3EF0 /* simpleTess */,
+				366710981B4C0CA7004B3EF0 /* example1 */,
+				366710991B4C0CB2004B3EF0 /* simple */,
+			);
+			path = shaders;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -171,6 +412,7 @@
 				360A6F1D1B2B76D200A3CEFC /* Sources */,
 				360A6F1E1B2B76D200A3CEFC /* Frameworks */,
 				360A6F1F1B2B76D200A3CEFC /* CopyFiles */,
+				36E66AE81B6C4ACE00570108 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -217,18 +459,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36E66ACF1B6C0A9400570108 /* HeatSculptApp.cpp in Sources */,
 				368E60941B2C90EE00A04AB6 /* Mesh.cpp in Sources */,
-				361DA9971B3749CA00E4B3BB /* TessMeshTestApp.cpp in Sources */,
+				3667109C1B4C1788004B3EF0 /* TessMeshApp.cpp in Sources */,
 				368E60A41B32366400A04AB6 /* Debug.cpp in Sources */,
+				36E66AD21B6C0BA900570108 /* Clay.cpp in Sources */,
 				368E60A01B317F2B00A04AB6 /* MeshTestApp.cpp in Sources */,
 				361DA9941B37445500E4B3BB /* MeshUtils.cpp in Sources */,
 				360A6F251B2B76D200A3CEFC /* main.cpp in Sources */,
 				368E607B1B2B8D1C00A04AB6 /* Camera.cpp in Sources */,
+				36744AA81B56697000B2D49C /* TransformFeedbackApp.cpp in Sources */,
 				368E60A71B3592BD00A04AB6 /* ColorUtils.cpp in Sources */,
 				368E60811B2C4ED800A04AB6 /* ShaderProgram.cpp in Sources */,
 				360A6F2F1B2B786200A3CEFC /* App.cpp in Sources */,
+				367848621B61A0CF00FC3465 /* TransformFeedbackMeshApp.cpp in Sources */,
+				36E66AEF1B6C54CB00570108 /* LeapUtilGL.cpp in Sources */,
+				3678485F1B619ECE00FC3465 /* TransformFeedback.cpp in Sources */,
+				36E66AE51B6C483800570108 /* LeapController.cpp in Sources */,
 				368E607E1B2C4CCE00A04AB6 /* Shader.cpp in Sources */,
 				368E609A1B2EC7E900A04AB6 /* TestApp.cpp in Sources */,
+				36E66AEE1B6C54CB00570108 /* LeapUtil.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,7 +523,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					/usr/local/include,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -314,7 +563,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					/usr/local/include,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;

@@ -61,6 +61,11 @@ void hsv2rgb(unsigned int hue, unsigned int sat, unsigned int val, \
     *b = *b * maxBrightness/255;
 }
 
+void generateSingleColor(unsigned int num_of_colors, vector<vec3>& colors, vec3 color){
+    for (int i = 0; i < num_of_colors; i++) {
+        colors.push_back(color);
+    }
+}
 
 void generateColors(unsigned int num_of_colors, vector<vec3>& colors){
     

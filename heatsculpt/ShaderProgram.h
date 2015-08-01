@@ -21,6 +21,17 @@ using std::string;
 using std::cout;
 using std::endl;
 
+struct Attribute{
+    string name;
+    GLint id;
+    GLuint num_of_components;
+    GLuint data_type;
+    GLuint vbo; // is set by the mesh
+    size_t bytes;
+    GLuint buffer_type;
+    GLuint draw_type;
+};
+
 
 class ShaderProgram
 {
@@ -77,6 +88,8 @@ public:
     
     // Method to add a uniform to the shader and return the bound location
     int addUniform(const string &uniformName);
+    void addVaryings(std::vector<string> varyings, GLenum bufferMode);
+
     
 };
 

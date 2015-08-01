@@ -8,11 +8,11 @@
 
 #include "MeshTestApp.h"
 #include "MeshUtils.h"
+#include "ColorUtils.h"
 
 
-
-MeshTestApp::MeshTestApp(const std::string& window_title, int window_width, int window_height):
-App::App(window_title, window_width, window_height)
+MeshTestApp::MeshTestApp(const std::string& window_title):
+App::App(window_title, true)
 {
     
 }
@@ -31,53 +31,105 @@ bool MeshTestApp::Init(){
     if (!res) { return res; }
     
     vertexShader = new Shader(GL_VERTEX_SHADER);
-    vertexShader->loadFromString(vertexShaderSrc);
+    vertexShader->loadFromFile("shaders/example1.vert");
     vertexShader->compile();
     
     fragmentShader = new Shader(GL_FRAGMENT_SHADER);
-    fragmentShader->loadFromString(fragmentShaderSrc);
+    fragmentShader->loadFromFile("shaders/example1.frag");
     fragmentShader->compile();
     
+    geometryShader = new Shader(GL_GEOMETRY_SHADER);
+    geometryShader->loadFromFile("shaders/example1.geom");
+    geometryShader->compile();
     
     shaderProgram = new ShaderProgram();
     shaderProgram->attachShader(*vertexShader);
     shaderProgram->attachShader(*fragmentShader);
+    shaderProgram->attachShader(*geometryShader);
     shaderProgram->linkProgram();
     shaderProgram->use();
     
+    
     vector<vec3> vertices;
+    vector<vec3> colors;
     vector<GLuint> indices;
-    vector<Attribute>attributes;
+//    vector<Attribute>attributes;
     
-    Attribute positionAttrib;
-    positionAttrib.name = "Position";
-    positionAttrib.num_of_components = 3;
-    positionAttrib.type = GL_FLOAT;
-    positionAttrib.buffertype = GL_ARRAY_BUFFER;
-    attributes.push_back(positionAttrib);
-    
-    Attribute colorAttrib;
-    colorAttrib.name = "Color";
-    colorAttrib.num_of_components = 3;
-    colorAttrib.type = GL_FLOAT;
-    colorAttrib.buffertype = GL_ARRAY_BUFFER;
-    attributes.push_back(colorAttrib);
     
     
     //createTetraedron(vertices, indices);
     createIcosphere(vertices, indices);
     
-    mesh = new Mesh(shaderProgram, attributes,  vertices, indices);
-//    mesh = new Mesh(shaderProgram, vertices, indices);
     
-    shaderProgram->use();
-    GLuint model = shaderProgram->addUniform("model");
-    glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(mesh->modelMatrix));
-    GLuint view = shaderProgram->addUniform("view");
-    glUniformMatrix4fv(view, 1, GL_FALSE, glm::value_ptr(mesh->viewMatrix));
-    GLuint projection = shaderProgram->addUniform("projection");
-    glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(mesh->projectionMatrix));
-    shaderProgram->disable();
+    unsigned int num_of_colors = (unsigned int)vertices.size();
+
+    colors.reserve(num_of_colors);
+    generateColors(num_of_colors, colors);
+    
+    
+    mesh = new Mesh();
+    // position:
+    {
+        Attribute positionAttrib;
+        positionAttrib.name = "position";
+        positionAttrib.num_of_components = 3;
+        positionAttrib.data_type = GL_FLOAT;
+        positionAttrib.buffer_type = GL_ARRAY_BUFFER;
+
+        
+        
+        mesh->addVBO(vertices, positionAttrib);
+        shaderProgram->use();
+        positionAttrib.id = shaderProgram->addAttribute(positionAttrib.name);
+        glEnableVertexAttribArray(positionAttrib.id);
+        glVertexAttribPointer(positionAttrib.id, positionAttrib.num_of_components, GL_FLOAT, GL_FALSE, 0, 0);
+        shaderProgram->disable();
+        mesh->attributes.push_back(positionAttrib);
+    }
+    
+    // color:
+    {
+        Attribute colorAttrib;
+        colorAttrib.name = "color";
+        colorAttrib.num_of_components = 3;
+        colorAttrib.data_type = GL_FLOAT;
+        colorAttrib.buffer_type = GL_ARRAY_BUFFER;
+
+        
+        
+        mesh->addVBO(colors, colorAttrib);
+        shaderProgram->use();
+        colorAttrib.id = shaderProgram->addAttribute(colorAttrib.name);
+        glEnableVertexAttribArray(colorAttrib.id);
+        glVertexAttribPointer(colorAttrib.id, colorAttrib.num_of_components, colorAttrib.data_type, GL_FALSE, 0, 0);
+        shaderProgram->disable();
+        mesh->attributes.push_back(colorAttrib);
+    }
+    
+    
+    
+    // indices:
+    {
+        mesh->addIndices(indices);
+    }
+    
+    
+    
+    
+    
+    // uniforms:
+    {
+        shaderProgram->use();
+        GLuint model = shaderProgram->addUniform("model");
+        glUniformMatrix4fv(model, 1, GL_FALSE, glm::value_ptr(mesh->modelMatrix));
+        GLuint view = shaderProgram->addUniform("view");
+        glUniformMatrix4fv(view, 1, GL_FALSE, glm::value_ptr(camera.view));
+        GLuint projection = shaderProgram->addUniform("projection");
+        glUniformMatrix4fv(projection, 1, GL_FALSE, glm::value_ptr(camera.projection));
+        shaderProgram->disable();
+    }
+    
+    
         
 
     
@@ -87,23 +139,29 @@ bool MeshTestApp::Init(){
 
 void MeshTestApp::Update(){
     App::Update();
-    glm::mat4 model;
-    model = glm::rotate(model, glm::radians(0.0f) * (float)glfwGetTime(), glm::vec3(1.0f, 1.0f, 0.0f));
+
     
-    //model = glm::translate(model, vec3(0.5f, 0.0f, 0.0f));
-    
-    mesh->modelMatrix = model;
-    
-    
-    
-    mesh->viewMatrix = camera.view;
-    mesh->projectionMatrix = camera.projection;
     mesh->Update();
+    
+    shaderProgram->use();
+    
+            GLuint m = shaderProgram->uniform("model");
+            glUniformMatrix4fv(m, 1, GL_FALSE, glm::value_ptr(mesh->modelMatrix));
+    
+            GLuint v = shaderProgram->uniform("view");
+            glUniformMatrix4fv(v, 1, GL_FALSE, glm::value_ptr(camera.view));
+    
+            GLuint p = shaderProgram->uniform("projection");
+            glUniformMatrix4fv(p, 1, GL_FALSE, glm::value_ptr(camera.projection));
+
+    
+    shaderProgram->disable();
     
 }
 
 void MeshTestApp::Render(){
     App::Render();
-    
-    mesh->Draw();
+    shaderProgram->use();
+    mesh->Draw(GL_TRIANGLES);
+    shaderProgram->disable();
 }

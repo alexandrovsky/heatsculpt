@@ -17,6 +17,7 @@ using namespace glm;
 void hsv2rgb(unsigned int hue, unsigned int sat, unsigned int val, \
              unsigned char * r, unsigned char * g, unsigned char * b, unsigned char maxBrightness );
 
+void generateSingleColor(unsigned int num_of_colors, vector<vec3>& colors, vec3 color);
 void generateColors(unsigned int num_of_colors, vector<vec3>& colors);
 
 
